@@ -1,0 +1,30 @@
+.navigation {
+   display: flex;
+   justify-content: flex-end;
+}
+
+.navItem {
+   margin-right: var(--medium);
+}
+
+.navItem:last-of-type {
+   margin-right: 0;
+}
+
+.notificationIcon {
+   width: 30px;
+   padding-bottom: var(--tiny);
+}
+
+.notificationAlert {
+   border-radius: 100%;
+   background: var(--red);
+   position: absolute;
+   transform: translate(-12px, 3px);
+   width: 10px;
+   height: 10px;
+}
+
+.navItem:hover .notifications {
+   display: flex;
+}

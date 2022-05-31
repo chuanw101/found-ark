@@ -1,0 +1,26 @@
+.notifications {
+   display: none;
+   flex-direction: column;
+   position: absolute;
+   background: var(--dark50);
+   box-shadow: var(--shadow);
+   transform: translateX(-15px);
+   width: 200px;
+   max-height: 250px;
+   overflow: scroll;
+   padding: var(--small);
+}
+
+.notifications:hover {
+   display: flex;
+}
+
+.notificationItem {
+   user-select: none;
+   font-size: 0.8em;
+   margin-bottom: var(--small);
+}
+
+.notificationItem:last-of-type {
+   margin-bottom: 0;
+}

@@ -1,0 +1,15 @@
+header {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   padding: var(--large);
+}
+
+.siteTitle {
+   display: flex;
+}
+
+.lostArkIcon {
+   width: 50px;
+   margin-right: var(--small);
+}
