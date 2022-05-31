@@ -18,6 +18,42 @@ function Notifications() {
           <p>Notification 3</p>
         </li>
 
+        <li className="notificationItem">
+          <p>Notification 4</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 5</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 6</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 7</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 8</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 9</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 10</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 11</p>
+        </li>
+
+        <li className="notificationItem">
+          <p>Notification 12</p>
+        </li>
+
       </ul>
 
    )

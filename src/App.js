@@ -22,7 +22,7 @@ function App() {
 
    const renderPage = () => {
 
-      if (currentPage === 'AllGroups') {
+      if (currentPage === 'Groups') {
          return <AllGroups />;
       }
       if (currentPage === 'MyGroups') {
@@ -47,9 +47,11 @@ function App() {
 
    };
 
+   console.log(currentPage)
+
    return (
 
-      <div className="App">
+      <div className={"App " + currentPage}>
          <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
          {renderPage()}
          <Footer />

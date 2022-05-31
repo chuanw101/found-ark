@@ -8,8 +8,11 @@ function Header({ currentPage, setCurrentPage }) {
 
       <header>
 
-         <div className="site-title">
+         <div className="siteTitle">
+
+            <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
             <h1>Found Ark</h1>
+
          </div>
 
          <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage}/>

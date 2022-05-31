@@ -1,7 +1,6 @@
 .navigation {
    display: flex;
    justify-content: flex-end;
-   align-items: center;
 }
 
 .navItem {
@@ -14,6 +13,7 @@
 
 .notificationIcon {
    width: 30px;
+   padding-bottom: var(--tiny);
 }
 
 .notificationAlert {
@@ -26,5 +26,5 @@
 }
 
 .navItem:hover .notifications {
-   display: block;
+   display: flex;
 }
