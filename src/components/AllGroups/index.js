@@ -1,4 +1,5 @@
 import React from 'react';
+import CreateGroup from '../CreateGroup';
 import './style.css';
 
 function AllGroups() {
@@ -8,6 +9,7 @@ function AllGroups() {
       <div className="page">
 
          <h1>All Groups</h1>
+         <CreateGroup />
          
       </div>
       

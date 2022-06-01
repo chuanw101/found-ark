@@ -1,0 +1,11 @@
+#tags:invalid ~ span:after {
+    content: '✖';
+    padding-left: 5px;
+    position: absolute;
+}
+
+#tags:valid ~ span:after {
+    content: '✓';
+    padding-left: 5px;
+    position: absolute;
+}
