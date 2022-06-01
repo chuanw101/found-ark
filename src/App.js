@@ -18,7 +18,7 @@ import './styles/style.css';
 
 function App() {
 
-   const [currentPage, setCurrentPage] = useState('AllGroups');
+   const [currentPage, setCurrentPage] = useState('Groups');
 
    const renderPage = () => {
 
