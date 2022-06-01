@@ -38,3 +38,39 @@
    background-repeat: no-repeat;
    background-size: cover;
 }
+
+/* global styles */
+form {
+    border: 3px solid var(--accent);
+    margin: var(--small);
+    padding: var(--small);
+}
+
+label {
+    margin-top: var(--small);
+}
+
+input[type=text],
+input[type=password],
+input[type=url] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--dark75);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
