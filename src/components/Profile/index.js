@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import './style.css';
 
 import CharacterDetails from '../CharacterDetails';
+import AllCharacters from '../AllCharacters';
 
 function Profile() {
    const [charName, setCharName] = useState('');
@@ -13,9 +14,31 @@ function Profile() {
    const [charLvl, setCharLvl] = useState('');
    const [engravings, setEngravings] = useState('');
    const [jsonData, setJsonData] = useState('');
+   const [allChars, setAllChars] = useState('');
 
    const token = localStorage.getItem('foundArkJwt');
    const tokenData = jwtDecode(token);
+
+   const getAllChars = async () => {
+      try {
+         const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/characters/owner/${tokenData.id}`)
+         setAllChars(res.data)
+      } catch (err) {
+         console.log(err);
+      }
+   }
+
+   useEffect(() => {
+      getAllChars();
+    }, []);
+
+   //getAllChars();
+   console.log(allChars)
+   const displayAllChars = () => {
+      if (allChars) {
+         return <AllCharacters allChars={allChars} />;
+      }
+   }
 
    const handleInputChange = (e) => {
       // Getting the value and name of the input which triggered the change
@@ -42,11 +65,11 @@ function Profile() {
       }
    }
 
-   const pullCharInfo = async(e) => {
+   const pullCharInfo = async (e) => {
       e.preventDefault();
       try {
          const res = await axios.get(`https://lostark-lookup.herokuapp.com/api/query?pcName=${charName}`)
-         if(res.data?.length) {
+         if (res.data?.length) {
             const charData = res.data[0];
             setClassName(charData.pcClassName);
             setILvl(charData.maxItemLevel);
@@ -63,7 +86,7 @@ function Profile() {
       }
    }
 
-   const addCharacter = async(e) => {
+   const addCharacter = async (e) => {
       e.preventDefault();
       try {
          const res = await axios.post('https://found-ark-backend.herokuapp.com/api/characters', {
@@ -76,7 +99,7 @@ function Profile() {
             json_data: jsonData,
          }, {
             headers: {
-               'Authorization': `token ${token}` 
+               'Authorization': `token ${token}`
             }
          })
          console.log(res);
@@ -91,9 +114,7 @@ function Profile() {
          <h2>Welcome {tokenData.user_name}</h2>
          <h2>Region: {tokenData.region}</h2>
 
-         <div className="charContainer">
-            {/* Display char info */}
-         </div>
+         {displayAllChars()}
 
          <form method="post">
             <div className="container">
@@ -123,7 +144,7 @@ function Profile() {
          {displayCharInfo()}
       </div>
    );
-   
+
 };
 
 export default Profile;
