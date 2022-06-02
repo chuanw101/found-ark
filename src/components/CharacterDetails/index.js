@@ -21,16 +21,13 @@ function getItemBg(grade) {
     }
 }
 
-function CharacterDetails({ advCharData }) {
-    console.log(advCharData)
-    if (!advCharData) {
+function CharacterDetails({ jsonData }) {
+    if (!jsonData) {
         return;
     }
-
-    console.log("char info")
+    const advCharData = JSON.parse(jsonData);
     const rootImgUrl = 'https://cdn.lostark.games.aws.dev/';
     let allGears = [];
-    console.log(advCharData)
     for (let i = 0; i < 12; i++) {
         const curGear = advCharData.equipList[i];
         // gear equip

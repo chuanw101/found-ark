@@ -12,7 +12,7 @@ function Profile() {
    const [rosterLvl, setRosterLvl] = useState('');
    const [charLvl, setCharLvl] = useState('');
    const [engravings, setEngravings] = useState('');
-   const [newChar, setNewChar] = useState('');
+   const [jsonData, setJsonData] = useState('');
 
    const token = localStorage.getItem('foundArkJwt');
    const tokenData = jwtDecode(token);
@@ -37,9 +37,8 @@ function Profile() {
    };
 
    const displayCharInfo = () => {
-      if (newChar) {
-         console.log(newChar)
-         return <CharacterDetails advCharData={newChar} />;
+      if (jsonData) {
+         return <CharacterDetails jsonData={jsonData} />;
       }
    }
 
@@ -54,12 +53,34 @@ function Profile() {
             setRosterLvl(charData.expeditionLvl);
             setCharLvl(charData.pcLevel);
 
-            setNewChar(JSON.parse(charData.jsonData));
+            setJsonData(charData.jsonData);
          } else {
-            setNewChar('');
+            setJsonData('');
          }
       } catch (err) {
-         setNewChar('');
+         setJsonData('');
+         console.log(err);
+      }
+   }
+
+   const addCharacter = async(e) => {
+      e.preventDefault();
+      try {
+         const res = await axios.post('https://found-ark-backend.herokuapp.com/api/characters', {
+            char_name: charName,
+            class: className,
+            item_lvl: iLvl,
+            roster_lvl: rosterLvl,
+            char_lvl: charLvl,
+            engravings: engravings,
+            json_data: jsonData,
+         }, {
+            headers: {
+               'Authorization': `token ${token}` 
+            }
+         })
+         console.log(res);
+      } catch (err) {
          console.log(err);
       }
    }
@@ -96,7 +117,7 @@ function Profile() {
                <label htmlFor="engravings"><b>Engravings</b></label>
                <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
 
-               <button type="submit">Add New Character</button>
+               <button onClick={addCharacter}>Add New Character</button>
             </div>
          </form>
          {displayCharInfo()}
