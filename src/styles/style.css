@@ -11,6 +11,7 @@
    display: flex;
    flex-direction: column;
    align-items: center;
+   padding: 0px var(--large);
    margin: 0px 0px auto 0px;
 }
 
@@ -19,24 +20,28 @@
    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-tree.jpg');
    background-repeat: no-repeat;
    background-size: cover;
+   background-attachment: fixed;
 }
 
 .Profile {
    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-giant.jpg');
    background-repeat: no-repeat;
    background-size: cover;
+   background-attachment: fixed;
 }
 
 .Login {
    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-sky.jpg');
    background-repeat: no-repeat;
    background-size: cover;
+   background-attachment: fixed;
 }
 
 .SignUp {
    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-city.jpg');
    background-repeat: no-repeat;
    background-size: cover;
+   background-attachment: fixed;
 }
 
 /* global styles */
@@ -44,10 +49,6 @@ form {
     border: 3px solid var(--accent);
     margin: var(--small);
     padding: var(--small);
-}
-
-label {
-    margin-top: var(--small);
 }
 
 input[type=text],

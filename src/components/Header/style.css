@@ -2,7 +2,7 @@ header {
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
-   padding: var(--large);
+   padding: var(--large) var(--large) var(--medium) var(--large);
 }
 
 .siteTitle {

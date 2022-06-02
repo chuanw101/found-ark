@@ -1,0 +1,48 @@
+.groupsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--medium);
+    margin-bottom: var(--medium);
+}
+
+.filterSearch {
+    border: none;
+    border-radius: var(--tiny);
+    padding: var(--tiny) var(--small);
+    width: 300px;
+    overflow: scroll;
+    margin-left: var(--small);
+}
+
+.groupTabs {
+    display: flex;
+    align-items: center;
+}
+
+.groupTab {
+    display: none;
+}
+
+.groupTabLabel {
+    transition: all 0.2s ease;
+    padding: 10px var(--small);
+}
+
+.groupTabLabel:hover {
+    cursor: pointer;
+    box-shadow: inset 0px -10px 10px -10px var(--accent);
+}
+
+.tabDivider {
+    border: 0.5px solid var(--gray);
+    height: 30px;
+    margin: 0px var(--small);
+}
+
+.activeTab {
+    box-shadow: inset 0px -15px 10px -10px var(--accent) !important;
+}

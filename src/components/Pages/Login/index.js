@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './style.css';
 
-function SignUp() {
+function Login({ currentPage, setCurrentPage }) {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
-   const [region, setRegion] = useState('');
-   const [introduction, setIntroduction] = useState('');
-
    const handleInputChange = (e) => {
       // Getting the value and name of the input which triggered the change
       const { name, value } = e.target;
@@ -16,10 +13,6 @@ function SignUp() {
          setUsername(value);
       } else if (name === 'password') {
          setPassword(value);
-      } else if (name === 'region') {
-         setRegion(value);
-      } else if (name === 'introduction') {
-         setIntroduction(value);
       }
    };
 
@@ -27,28 +20,23 @@ function SignUp() {
       // Preventing the default behavior of the form submit (which is to refresh the page)
       e.preventDefault();
       try {
-         alert(username)
-         const res = await axios.post('https://found-ark-backend.herokuapp.com/api/users/signup', {
+         const res = await axios.post('https://found-ark-backend.herokuapp.com/api/users/login', {
             user_name: username,
             password: password,
-            region: region,
-            introduction: introduction,
          })
          localStorage.setItem('foundArkJwt', res?.data?.token);
+         alert("logged in as "+username)
       } catch (err) {
-         if (err?.response?.data?.msg == 'User name taken') {
-            alert("user name taken")
-         }
+         alert(err?.response?.data?.msg)
          console.log(err);
       }
    };
 
-
    return (
 
-      <div className="page">
+      <div className="page login">
 
-         <h1>Sign Up</h1>
+         <h1>Login</h1>
          <form method="post">
             <div className="container">
                <label htmlFor="username"><b>Username</b></label>
@@ -57,13 +45,7 @@ function SignUp() {
                <label htmlFor="password"><b>Password</b></label>
                <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleInputChange} required />
 
-               <label htmlFor="region"><b>Region</b></label>
-               <input type="text" placeholder="Enter Region" name="region" value={region} onChange={handleInputChange} required />
-
-               <label htmlFor="introduction"><b>Introduction</b></label>
-               <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange} required />
-
-               <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
+               <button type="submit" onClick={handleFormSubmit}>Login</button>
             </div>
          </form>
 
@@ -73,4 +55,4 @@ function SignUp() {
 
 };
 
-export default SignUp;
+export default Login;
