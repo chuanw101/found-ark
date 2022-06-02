@@ -3,6 +3,8 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import './style.css';
 
+import CharacterDetails from '../CharacterDetails';
+
 function Profile() {
    const [charName, setCharName] = useState('');
    const [className, setClassName] = useState('');
@@ -10,6 +12,7 @@ function Profile() {
    const [rosterLvl, setRosterLvl] = useState('');
    const [charLvl, setCharLvl] = useState('');
    const [engravings, setEngravings] = useState('');
+   const [newChar, setNewChar] = useState('');
 
    const token = localStorage.getItem('foundArkJwt');
    const tokenData = jwtDecode(token);
@@ -33,14 +36,30 @@ function Profile() {
       }
    };
 
+   const displayCharInfo = () => {
+      if (newChar) {
+         console.log(newChar)
+         return <CharacterDetails advCharData={newChar} />;
+      }
+   }
+
    const pullCharInfo = async(e) => {
       e.preventDefault();
       try {
          const res = await axios.get(`https://lostark-lookup.herokuapp.com/api/query?pcName=${charName}`)
          if(res.data?.length) {
-            alert("found")
+            const charData = res.data[0];
+            setClassName(charData.pcClassName);
+            setILvl(charData.maxItemLevel);
+            setRosterLvl(charData.expeditionLvl);
+            setCharLvl(charData.pcLevel);
+
+            setNewChar(JSON.parse(charData.jsonData));
+         } else {
+            setNewChar('');
          }
       } catch (err) {
+         setNewChar('');
          console.log(err);
       }
    }
@@ -80,7 +99,7 @@ function Profile() {
                <button type="submit">Add New Character</button>
             </div>
          </form>
-
+         {displayCharInfo()}
       </div>
    );
    
