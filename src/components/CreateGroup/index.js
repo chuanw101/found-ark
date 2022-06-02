@@ -19,7 +19,7 @@ function CreateGroup() {
         if (name === 'tags') {
             setTag(value)
         }
-        if (name === 'dayofweek'){
+        if (name === 'dayofweek') {
             setDay(value)
         }
     }
@@ -42,51 +42,52 @@ function CreateGroup() {
 
             <h1>Create Group</h1>
 
-            <form method="post">
-                <div className="container">
-                    <label htmlFor="groupName"><b>Group Name</b></label>
-                    <input type="text" placeholder="Enter Group Name" name="groupName" onChange={handleInputChange} required />
+            <form method="post" className="createGroup">
+                <label htmlFor="groupName"><b>Group Name</b></label>
+                <input type="text" placeholder="Enter Group Name" name="groupName" onChange={handleInputChange} required />
 
-                    <label htmlFor="description"><b>Description</b></label>
-                    <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
+                <label htmlFor="description"><b>Description</b></label>
+                <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
 
-                    
-                    <label htmlFor="dayofweek"><b>Day</b></label>
-                    <select name="dayofweek" onChange={handleInputChange}>
-                        <option value="Monday">Monday</option>
-                        <option value="Tuesday">Tuesday</option>
-                        <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday">Thursday</option>
-                        <option value="Friday">Friday</option>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
+                <label htmlFor="discord"><b>Discord</b></label>
+                <input type="url" placeholder="https://discord.com" name="discord" pattern="https://.*" onChange={handleInputChange} required />
 
-                    <label htmlFor="timezone"><b>Time Zone</b></label>
-                    <blockquote>Please make a selection:</blockquote>
-                    <div name="timezone" className="select-wrapper">
-                        <TimezoneSelect
-                            value={selectedTimezone}
-                            onChange={setSelectedTimezone}
-                        />
 
-                        <label htmlFor="time"><b>Time</b></label>
-                        <input type="time" placeholder="Time" name="time" onChange={handleInputChange} required />
+                <label htmlFor="dayofweek"><b>Day</b></label>
+                <select name="dayofweek" onChange={handleInputChange}>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
 
-                        <div>
-                            <label htmlFor="tags">Group Tags</label>
-                            <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange}></input>
-                            <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
-                            <span className="validity"></span>
+                <label htmlFor="timezone"><b>Time Zone</b></label>
+                <blockquote>Please make a selection:</blockquote>
+                <div name="timezone" className="select-wrapper">
+                    <TimezoneSelect
+                        value={selectedTimezone}
+                        onChange={setSelectedTimezone}
+                    />
 
-                            <div className="chosenTags">
-                                {tags.map((tag, index) => 
-                                <p key={index} onClick={removeTag}>{tag}</p>)} 
-                            </div>
+                    <label htmlFor="time"><b>Time</b></label>
+                    <input type="time" placeholder="Time" name="time" onChange={handleInputChange} required />
+
+                    <div>
+                        <label htmlFor="tags">Group Tags</label>
+                        <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange}></input>
+                        <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
+                        <span className="validity"></span>
+
+                        <div className="chosenTags">
+                            {tags.map((tag, index) =>
+                                <p key={index} onClick={removeTag}>{tag}</p>)}
                         </div>
-
-                        <button type="submit" onClick={handleFormSubmit}>Create Group</button>
                     </div>
+
+                    <button type="submit" onClick={handleFormSubmit}>Create Group</button>
                 </div>
             </form>
 
