@@ -47,7 +47,6 @@ function SignUp() {
    return (
 
       <div className="page">
-
          <h1>Sign Up</h1>
          <form method="post">
             <div className="container">
@@ -58,7 +57,13 @@ function SignUp() {
                <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleInputChange} required />
 
                <label htmlFor="region"><b>Region</b></label>
-               <input type="text" placeholder="Enter Region" name="region" value={region} onChange={handleInputChange} required />
+               <select name="region" onChange={handleInputChange} value={region}>
+                  <option value="NAE">NAE</option>
+                  <option value="NAW">NAW</option>
+                  <option value="EUW">EUW</option>
+                  <option value="EUC">EUC</option>
+                  <option value="SA">SA</option>
+               </select>
 
                <label htmlFor="introduction"><b>Introduction</b></label>
                <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange} required />
