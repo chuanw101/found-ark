@@ -1,10 +1,49 @@
 import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 import './style.css';
 
 function Profile() {
+   const [charName, setCharName] = useState('');
+   const [className, setClassName] = useState('');
+   const [iLvl, setILvl] = useState('');
+   const [rosterLvl, setRosterLvl] = useState('');
+   const [charLvl, setCharLvl] = useState('');
+   const [engravings, setEngravings] = useState('');
+
    const token = localStorage.getItem('foundArkJwt');
    const tokenData = jwtDecode(token);
+
+   const handleInputChange = (e) => {
+      // Getting the value and name of the input which triggered the change
+      const { name, value } = e.target;
+      // set value based on name
+      if (name === 'charName') {
+         setCharName(value);
+      } else if (name === 'className') {
+         setClassName(value);
+      } else if (name === 'iLvl') {
+         setILvl(value);
+      } else if (name === 'rosterLvl') {
+         setRosterLvl(value);
+      } else if (name === 'charLvl') {
+         setCharLvl(value);
+      } else if (name === 'engravings') {
+         setEngravings(value);
+      }
+   };
+
+   const pullCharInfo = async(e) => {
+      e.preventDefault();
+      try {
+         const res = await axios.get(`https://lostark-lookup.herokuapp.com/api/query?pcName=${charName}`)
+         if(res.data?.length) {
+            alert("found")
+         }
+      } catch (err) {
+         console.log(err);
+      }
+   }
 
    return (
       <div className="page">
@@ -17,26 +56,26 @@ function Profile() {
          </div>
 
          <form method="post">
-            <div class="container">
+            <div className="container">
                <label htmlFor="charName"><b>Character Name</b></label>
-               <input type="text" placeholder="Character Name" name="charName" required />
+               <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-               <button>Auto</button>
+               <button onClick={pullCharInfo}>Auto Fill</button>
 
-               <label htmlFor="class"><b>Class</b></label>
-               <input type="text" placeholder="Enter Class" name="class" required />
+               <label htmlFor="className"><b>Class</b></label>
+               <input type="text" placeholder="Enter Class" name="className" value={className} onChange={handleInputChange} required />
 
-               <label htmlFor="itemLevel"><b>Item Level</b></label>
-               <input type="number" placeholder="Enter Item Level" name="itemLevel" required />
+               <label htmlFor="iLvl"><b>Item Level</b></label>
+               <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
 
-               <label htmlFor="rosterLevel"><b>Roster Level</b></label>
-               <input type="number" placeholder="Enter Roster Level" name="rosterLevel" required />
+               <label htmlFor="rosterLvl"><b>Roster Level</b></label>
+               <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
 
-               <label htmlFor="charLevel"><b>Character Level</b></label>
-               <input type="number" placeholder="Enter Character Level" name="charLevel" required />
+               <label htmlFor="charLvl"><b>Character Level</b></label>
+               <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
 
                <label htmlFor="engravings"><b>Engravings</b></label>
-               <input type="text" placeholder="Enter Engravings" name="engravings" required />
+               <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
 
                <button type="submit">Add New Character</button>
             </div>
