@@ -5,7 +5,7 @@ import './style.css';
 function SignUp() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
-   const [region, setRegion] = useState('');
+   const [region, setRegion] = useState('NAE');
    const [introduction, setIntroduction] = useState('');
 
    const handleInputChange = (e) => {
@@ -66,7 +66,7 @@ function SignUp() {
                </select>
 
                <label htmlFor="introduction"><b>Introduction</b></label>
-               <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange} required />
+               <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange}/>
 
                <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
             </div>
