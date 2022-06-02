@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import AllGroups from '../AllGroups';
 import './style.css';
 
 function SignUp() {
@@ -7,6 +8,10 @@ function SignUp() {
    const [password, setPassword] = useState('');
    const [region, setRegion] = useState('NAE');
    const [introduction, setIntroduction] = useState('');
+   const [currentPage, setCurrentPage] = useState('');
+   const userReg = /^[a-zA-Z0-9]{4,}$/
+   const passReg = /^.{8,}$/
+
 
    const handleInputChange = (e) => {
       // Getting the value and name of the input which triggered the change
@@ -26,35 +31,58 @@ function SignUp() {
    const handleFormSubmit = async (e) => {
       // Preventing the default behavior of the form submit (which is to refresh the page)
       e.preventDefault();
+      const alert = document.querySelector('#alertDiv')
       try {
-         alert(username)
-         const res = await axios.post('https://found-ark-backend.herokuapp.com/api/users/signup', {
-            user_name: username,
-            password: password,
-            region: region,
-            introduction: introduction,
-         })
-         localStorage.setItem('foundArkJwt', res?.data?.token);
-      } catch (err) {
-         if (err?.response?.data?.msg == 'User name taken') {
-            alert("user name taken")
+         if (userReg.test(username) == false || passReg.test(password) == false) {
+            return
+         } else {
+            const res = await axios.post('https://found-ark-backend.herokuapp.com/api/users/signup', {
+               user_name: username,
+               password: password,
+               region: region,
+               introduction: introduction,
+            })
+            localStorage.setItem('foundArkJwt', res?.data?.token);
+
+            // redirect to current or home page//
+            setCurrentPage('AllGroups')
+         }
+      }
+      catch (err) {
+         if (err?.response?.data?.msg === 'User name taken') {
+            // alert("user name taken")
          }
          console.log(err);
       }
    };
 
 
+
    return (
 
       <div className="page">
          <h1>Sign Up</h1>
+         <div id="alertDiv"></div>
          <form method="post">
             <div className="container">
-               <label htmlFor="username"><b>Username</b></label>
-               <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleInputChange} required />
+               <div className={username === "" || userReg.test(username) == true ? "hidden" : "visible"}>
+                  <p>Please enter a username with at least 4 letters/numbers, no special characters</p>
+               </div>
+
+               <div className={password === "" || passReg.test(password) == true ? "hidden" : "visible"}>
+                  <p>Please enter a password with at least 8 characters</p>
+               </div>
+
+               <div>
+                  <label htmlFor="username"><b>Username</b></label>
+                  <input type="text" id="username" placeholder="Enter Username" name="username" pattern='[a-zA-Z0-9]{4,}' value={username} onChange={handleInputChange} required></input>
+                  <span className="validity"></span>
+               </div>
 
                <label htmlFor="password"><b>Password</b></label>
-               <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleInputChange} required />
+               <input type="password" id='password' placeholder="Enter Password" name="password" pattern='.{8,}' value={password} onChange={handleInputChange} required />
+               <span className="validity"></span>
+
 
                <label htmlFor="region"><b>Region</b></label>
                <select name="region" onChange={handleInputChange} value={region}>
@@ -66,7 +94,7 @@ function SignUp() {
                </select>
 
                <label htmlFor="introduction"><b>Introduction</b></label>
-               <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange}/>
+               <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange} />
 
                <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
             </div>

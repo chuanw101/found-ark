@@ -26,7 +26,6 @@ function CreateGroup() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(tags)
     }
 
     const removeTag = (e) => {
