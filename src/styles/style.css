@@ -74,3 +74,12 @@ button {
 button:hover {
     opacity: 0.8;
 }
+
+.hidden {
+   display: none;
+   transition: all 3s ease;
+}
+
+.visible {
+   transition: all 3s ease;
+}
