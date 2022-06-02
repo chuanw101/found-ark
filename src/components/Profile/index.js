@@ -30,7 +30,7 @@ function Profile() {
 
    useEffect(() => {
       getAllChars();
-    }, []);
+   }, []);
 
    //getAllChars();
    console.log(allChars)
@@ -75,12 +75,24 @@ function Profile() {
             setILvl(charData.maxItemLevel);
             setRosterLvl(charData.expeditionLvl);
             setCharLvl(charData.pcLevel);
-
+            setEngravings('');
             setJsonData(charData.jsonData);
          } else {
+            setCharName('');
+            setClassName('');
+            setILvl('');
+            setRosterLvl('');
+            setCharLvl('');
+            setEngravings('');
             setJsonData('');
          }
       } catch (err) {
+         setCharName('');
+         setClassName('');
+         setILvl('');
+         setRosterLvl('');
+         setCharLvl('');
+         setEngravings('');
          setJsonData('');
          console.log(err);
       }
@@ -102,7 +114,14 @@ function Profile() {
                'Authorization': `token ${token}`
             }
          })
-         console.log(res);
+         setCharName('');
+         setClassName('');
+         setILvl('');
+         setRosterLvl('');
+         setCharLvl('');
+         setEngravings('');
+         setJsonData('');
+         getAllChars();
       } catch (err) {
          console.log(err);
       }
