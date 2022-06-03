@@ -33,7 +33,6 @@ function Profile() {
    }, []);
 
    //getAllChars();
-   console.log(allChars)
    const displayAllChars = () => {
       if (allChars) {
          return <AllCharacters allChars={allChars} />;

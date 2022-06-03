@@ -1,22 +1,22 @@
 import React from 'react';
 
 function getItemBg(grade) {
-    if (grade == 1) {
+    if (grade === 1) {
         return { background: "linear-gradient(136.36deg, #191A18 8.49%, #35411D 92.54%)" }
     }
-    if (grade == 2) {
+    if (grade === 2) {
         return { background: "linear-gradient(136.36deg, #111B26 8.49%, #123F60 92.54%)" }
     }
-    if (grade == 3) {
+    if (grade === 3) {
         return { background: "linear-gradient(136.36deg, #271333 8.49%, #470D5A 92.54%)" }
     }
-    if (grade == 4) {
+    if (grade === 4) {
         return { background: "linear-gradient(136.36deg, #301C01 8.49%, #AD6600 92.54%)" }
     }
-    if (grade == 5) {
+    if (grade === 5) {
         return { background: "linear-gradient(136.36deg, #361807 8.49%, #a84203 92.54%)" }
     }
-    if (grade == 6) {
+    if (grade === 6) {
         return { background: "linear-gradient(136.36deg, #413728 8.49%, #D4C193 92.54%)" }
     }
 }
@@ -70,10 +70,10 @@ function CharacterDetails({ jsonData }) {
     }
     return (
         <div>
-            <h1>Gear: </h1>
-            {allGears}
             <h1>Stats: </h1>
             {allStats}
+            <h1>Gear: </h1>
+            {allGears}
         </div>
     );
 
