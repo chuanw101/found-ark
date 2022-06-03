@@ -2,25 +2,25 @@ import React from 'react';
 import Navigation from './Navigation';
 import './style.css';
 
-function Header({ currentPage, setCurrentPage }) {
+function Header() {
 
-   return (
+    return (
 
-      <header>
+        <header>
 
-         <div className="siteTitle">
+            <div className="siteTitle">
 
-            <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
-            <h1>Found Ark</h1>
+                <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
+                <h1 className="">Found Ark</h1>
 
-         </div>
+            </div>
 
-         <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Navigation />
 
-      </header>
-      
-   );
-   
+        </header>
+
+    );
+
 };
 
 export default Header;

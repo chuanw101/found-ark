@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Notifications from './Notifications';
 import './style.css';
 
-function Navigation({ currentPage, setCurrentPage }) {
+function Navigation() {
 
    return (
 

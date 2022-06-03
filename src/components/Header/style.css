@@ -9,7 +9,12 @@ header {
    display: flex;
 }
 
+.siteTitle h1 {
+    margin: 0px;
+}
+
 .lostArkIcon {
    width: 50px;
+   object-fit: contain;
    margin-right: var(--small);
 }

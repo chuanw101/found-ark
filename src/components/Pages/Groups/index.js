@@ -6,7 +6,7 @@ import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
 
-function Groups({ currentPage, setCurrentPage }) {
+function Groups() {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
 
