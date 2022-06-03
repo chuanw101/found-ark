@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './style.css';
 
-function Login() {
+function Login({ currentPage, setCurrentPage }) {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const handleInputChange = (e) => {

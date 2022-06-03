@@ -1,0 +1,15 @@
+@keyframes stretch {
+
+    from {
+        width: 50px;
+    }
+
+    50% {
+        width: 60px;
+    }
+
+    to {
+        width: 50px;
+    }
+
+}
