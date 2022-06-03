@@ -86,5 +86,10 @@ button:hover {
 }
 
 .hidden {
-    display: none;
+   display: none;
+   transition: all 3s ease;
+}
+
+.visible {
+   transition: all 3s ease;
 }
