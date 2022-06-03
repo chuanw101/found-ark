@@ -1,5 +1,5 @@
 // import components
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Profile from './components/Pages/Profile';
@@ -22,7 +22,29 @@ import CreateGroup from './components/Pages/Groups/CreateGroup';
 import MyGroups from './components/Pages/Groups/MyGroups';
 import Group from './components/Pages/Groups/Group';
 
+import jwtDecode from 'jwt-decode';
+
 function App() {
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        const savedToken = localStorage.getItem("foundArkJwt");
+        if (savedToken) {
+            setToken(savedToken)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (token) {
+            setUser(jwtDecode(token))
+        } else {
+            setUser(null);
+        }
+    }, [token])
+
+    console.log(user)
+
     return (
         <div className={"App"}>
             <Header />
