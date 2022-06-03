@@ -23,10 +23,14 @@ import MyGroups from './components/Pages/Groups/MyGroups';
 import Group from './components/Pages/Groups/Group';
 
 import jwtDecode from 'jwt-decode';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         const savedToken = localStorage.getItem("foundArkJwt");
@@ -43,18 +47,59 @@ function App() {
         }
     }, [token])
 
-    console.log(user)
+    const handleLoginSubmit = async (loginData) => {
+        try {
+            const res = await axios.post('https://found-ark-backend.herokuapp.com/api/users/login', {
+                user_name: loginData.username,
+                password: loginData.password,
+            })
+            if (res?.data?.token) {
+                setToken(res.data.token)
+                localStorage.setItem('foundArkJwt', res.data.token);
+                navigate(`/`);
+            }
+        } catch (err) {
+            alert(err?.response?.data?.msg)
+            console.log(err);
+        }
+    }
+
+    const handleSignupSubmit = async (signupData) => {
+        try {
+            const res = await axios.post('https://found-ark-backend.herokuapp.com/api/users/signup', {
+                user_name: signupData.username,
+                password: signupData.password,
+                region: signupData.region,
+                introduction: signupData.introduction,
+            })
+            if (res?.data?.token) {
+                setToken(res.data.token)
+                localStorage.setItem('foundArkJwt', res.data.token);
+                navigate(`/profile`);
+            }
+        }
+        catch (err) {
+            alert("name taken")
+            console.log(err);
+        }
+    }
+
+    const logout = () => {
+        setToken(null);
+        localStorage.removeItem("foundArkJwt");
+        navigate('/login')
+    }
 
     return (
         <div className={"App"}>
-            <Header />
+            <Header user={user} logout={logout} />
             <Routes>
                 <Route path="/" element={<AllGroups />} />
                 <Route path="creategroup" element={<CreateGroup />} />
                 <Route path="mygroups" element={<MyGroups />} />
                 <Route path="group" element={<Group />} />
-                <Route path="login" element={<Login />} />
-                <Route path="signup" element={<SignUp />} />
+                <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
+                <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit}/>} />
                 <Route path="profile" element={<Profile />} />
             </Routes>
             <Footer />
