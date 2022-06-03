@@ -8,14 +8,14 @@ import './style.css';
 function CreateGroup() {
 
     // form data
-    const [selectedTimezone, setSelectedTimezone] = useState({});
+    // const [selectedTimezone, setSelectedTimezone] = useState({});
     const [groupName, setGroupName] = useState("");
     const [description, setDescription] = useState("");
     const [discord, setDiscord] = useState("");
     const [allChars, setAllChars] = useState([]);
-    const [partyLeader, setLeader] = useState("");
-    const [day, setDay] = useState("");
-    const [time, setTime] = useState("");
+    const [charId, setCharId] = useState("");
+    // const [day, setDay] = useState("");
+    // const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
     const [tags, addNewTag] = useState([]);
 
@@ -102,17 +102,17 @@ function CreateGroup() {
             setDiscord(value);
         };
         if (name === 'characters') {
-            setLeader(value);
+            setCharId(value);
         };
-        if (name === 'dayofweek') {
-            setDay(value);
-        };
-        if (name === 'timezone') {
-            setSelectedTimezone(value);
-        };
-        if (name === 'time') {
-            setTime(value);
-        };
+        // if (name === 'dayofweek') {
+        //     setDay(value);
+        // };
+        // if (name === 'timezone') {
+        //     setSelectedTimezone(value);
+        // };
+        // if (name === 'time') {
+        //     setTime(value);
+        // };
         if (name === 'tags') {
             setTag(value);
         };
@@ -142,10 +142,8 @@ function CreateGroup() {
                 group_name: groupName,
                 description: description,
                 discord: discord,
-                char_id: partyLeader,
-                day: day,
-                timezone: selectedTimezone,
-                time: time,
+                char_id: charId,
+                // time: `${day} @ ${time}, ${selectedTimezone}`,
                 tags: tags
             }, {
                 headers: {
@@ -156,19 +154,11 @@ function CreateGroup() {
             const groupData = res.data[0];
             console.log(groupData);
 
-            // if (tags?.length) {
-            //     for (let i = 0; i < tags.length; i++) {
-            //         const tagRes = await axios.post(`https://found-ark-backend.herokuapp.com/api/groups/${groupData.id}/tag/${tags[i]}`);
-
-            //         console.log(tagRes);
-            //     }
-            // };
-
             setGroupName('');
             setDescription('');
             setDiscord('');
-            setDay('');
-            setTime('');
+            // setDay('');
+            // setTime('');
             setTag('');
 
         } catch (err) {
