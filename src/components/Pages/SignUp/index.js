@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Groups from '../Groups';
+import { useNavigate } from "react-router-dom";
 import './style.css';
 
 function SignUp() {
@@ -11,6 +11,7 @@ function SignUp() {
    const [currentPage, setCurrentPage] = useState('');
    const userReg = /^[a-zA-Z0-9]{4,}$/
    const passReg = /^.{8,}$/
+   let navigate = useNavigate();
 
 
    const handleInputChange = (e) => {
@@ -32,7 +33,7 @@ function SignUp() {
       // Preventing the default behavior of the form submit (which is to refresh the page)
       e.preventDefault();
       const alert = document.querySelector('#alertDiv')
-      try {
+            try {
          if (userReg.test(username) == false || passReg.test(password) == false) {
             return
          } else {
@@ -42,10 +43,10 @@ function SignUp() {
                region: region,
                introduction: introduction,
             })
-            localStorage.setItem('foundArkJwt', res?.data?.token);
 
-            // redirect to current or home page//
-            setCurrentPage('Groups')
+            localStorage.setItem('foundArkJwt', res?.data?.token);
+            // redirect allgroups page//
+            navigate(`/`);
          }
       }
       catch (err) {
