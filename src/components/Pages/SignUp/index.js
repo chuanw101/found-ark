@@ -8,9 +8,9 @@ function SignUp() {
    const [password, setPassword] = useState('');
    const [region, setRegion] = useState('NAE');
    const [introduction, setIntroduction] = useState('');
-   const [currentPage, setCurrentPage] = useState('');
    const userReg = /^[a-zA-Z0-9]{4,}$/
    const passReg = /^.{8,}$/
+
    let navigate = useNavigate();
 
 
@@ -33,7 +33,7 @@ function SignUp() {
       // Preventing the default behavior of the form submit (which is to refresh the page)
       e.preventDefault();
       const alert = document.querySelector('#alertDiv')
-            try {
+         try {
          if (userReg.test(username) == false || passReg.test(password) == false) {
             return
          } else {
@@ -95,7 +95,7 @@ function SignUp() {
                </select>
 
                <label htmlFor="introduction"><b>Introduction</b></label>
-               <input type="text" placeholder="Hi~" name="introduction" value={introduction} onChange={handleInputChange} />
+               <input type="text" placeholder="Introduction..." name="introduction" value={introduction} onChange={handleInputChange} />
 
                <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
             </div>
