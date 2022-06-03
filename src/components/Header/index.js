@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import './style.css';
 
-function Header({ currentPage, setCurrentPage }) {
+function Header({ user, logout }) {
 
    return (
 
@@ -15,7 +15,7 @@ function Header({ currentPage, setCurrentPage }) {
 
          </div>
 
-         <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+         <Navigation user={user} logout={logout} />
 
       </header>
       
