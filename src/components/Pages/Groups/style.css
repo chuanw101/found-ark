@@ -13,9 +13,9 @@
     border: none;
     border-radius: var(--tiny);
     padding: var(--tiny) var(--small);
-    width: 300px;
+    width: 350px;
     overflow: scroll;
-    margin-left: var(--small);
+    margin: 0px 0px 0px var(--small);
 }
 
 .groupTabs {

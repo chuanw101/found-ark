@@ -11,6 +11,7 @@
    display: flex;
    flex-direction: column;
    align-items: center;
+   width: 100%;
    padding: 0px var(--large);
    margin: 0px 0px auto 0px;
 }
@@ -46,32 +47,44 @@
 
 /* global styles */
 form {
-    border: 3px solid var(--accent);
-    margin: var(--small);
+    border: 1px solid var(--accent);
+    border-radius: var(--tiny);
     padding: var(--small);
 }
 
-input[type=text],
-input[type=password],
-input[type=url] {
+input,
+select {
+    height: 50px;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0px;
+    padding: 10px 15px;
+    margin: var(--tiny) 0px var(--medium) 0px;
     display: inline-block;
     border: 1px solid #ccc;
+    border-radius: var(--tiny);
     box-sizing: border-box;
 }
 
+select:invalid {
+    color: var(--gray);
+}
+
 button {
-    background-color: var(--dark75);
-    color: white;
+    transition: all 0.2s ease;
+    border-radius: var(--tiny);
+    background-color: var(--light90);
+    color: var(--dark);
     padding: 14px 20px;
-    margin: 8px 0;
     border: none;
     cursor: pointer;
+    height: 50px;
     width: 100%;
 }
 
 button:hover {
+    transition: all 0.3s ease;
     opacity: 0.8;
+}
+
+.hidden {
+    display: none;
 }

@@ -1,7 +1,33 @@
+.createGroupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--large);
+}
+
+.createGroupContainer h1 {
+    margin-bottom: var(--medium);
+}
+
 .createGroup {
     display: flex;
     flex-direction: column;
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
+    padding: var(--medium);
+}
+
+.select-wrapper {
+    color: var(--dark);
+    margin-bottom: var(--medium);
+}
+
+.select-wrapper input {
+    height: 38px !important;
 }
 
 #tags:invalid ~ span:after {
@@ -16,13 +42,35 @@
     position: absolute;
 }
 
+.tagInput {
+    display: flex;
+}
+
+#tags {
+    width: 100%;
+    padding: 10px 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: var(--tiny);
+    box-sizing: border-box;
+    margin: var(--tiny) 0px var(--small) 0px;
+}
+
+#tagBtn {
+    width: 25%;
+    margin: var(--tiny) 0px var(--small) var(--small);
+}
+
 .chosenTags {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: var(--small);
 }
 
 .chosenTags p {
+    display: flex;
+    align-items: center;
     transition: all 0.3s ease;
     color: var(--dark);
     background-color: var(--light90);
@@ -30,7 +78,7 @@
     user-select: none;
     line-height: 1;
     padding: 5px 10px;
-    margin: 5px 5px 0px 0px;
+    margin: 5px 5px 5px 0px;
 }
 
 .chosenTags p:hover {
@@ -42,9 +90,16 @@
     transition: all 0.3s ease;
     content: "✕";
     margin-left: 5px;
-    color: var(--dark25);
+    color: var(--dark50);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .chosenTags p:hover:after {
     color: var(--dark);
+}
+
+#createGroupBtn {
+    margin: var(--small) 0px var(--tiny) 0px;
 }

@@ -52,7 +52,7 @@ function Groups({ currentPage, setCurrentPage }) {
 
                 <div className="groupTabs" onClick={handleTabSelect}>
 
-                    <input type="radio" id="allGroupsTab" name="groupTabs" value="allGroupsTab" checked="checked" className="groupTab"></input>
+                    <input type="radio" id="allGroupsTab" name="groupTabs" value="allGroupsTab" defaultChecked className="groupTab"></input>
                     <label htmlFor="allGroupsTab" className={ currentTab === 'AllGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>All Groups</label>
 
                     <input type="radio" id="myGroupsTab" name="groupTabs" value="myGroupsTab" className="groupTab"></input>
