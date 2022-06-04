@@ -113,7 +113,7 @@ function App() {
     }
 
     return (
-        <div className={"App" + background}>
+        <div className={"App " + background}>
             <Header user={user} logout={logout} />
             <Routes>
                 <Route path="/" element={<Groups />} />
