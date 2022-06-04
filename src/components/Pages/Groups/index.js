@@ -6,7 +6,7 @@ import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
 
-function Groups({ currentPage, setCurrentPage }) {
+function Groups() {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
 
@@ -53,15 +53,15 @@ function Groups({ currentPage, setCurrentPage }) {
                 <div className="groupTabs" onClick={handleTabSelect}>
 
                     <input type="radio" id="allGroupsTab" name="groupTabs" value="allGroupsTab" defaultChecked className="groupTab"></input>
-                    <label htmlFor="allGroupsTab" className={ currentTab === 'AllGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>All Groups</label>
+                    <label htmlFor="allGroupsTab" className={currentTab === 'AllGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>All Groups</label>
 
                     <input type="radio" id="myGroupsTab" name="groupTabs" value="myGroupsTab" className="groupTab"></input>
-                    <label htmlFor="myGroupsTab" className={ currentTab === 'MyGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>My Groups</label>
+                    <label htmlFor="myGroupsTab" className={currentTab === 'MyGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>My Groups</label>
 
                     <div className="tabDivider"></div>
 
                     <input type="radio" id="createGroupsTab" name="groupTabs" value="createGroupsTab" className="groupTab"></input>
-                    <label htmlFor="createGroupsTab" className={ currentTab === 'CreateGroup' ? "groupTabLabel activeTab" : "groupTabLabel"}>Create New Group</label>
+                    <label htmlFor="createGroupsTab" className={currentTab === 'CreateGroup' ? "groupTabLabel activeTab" : "groupTabLabel"}>Create New Group</label>
 
                 </div>
 

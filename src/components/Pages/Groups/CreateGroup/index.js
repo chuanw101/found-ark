@@ -1,25 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-import TimezoneSelect from 'react-timezone-select'
+// import TimezoneSelect from 'react-timezone-select'
 import './style.css';
 
 
 function CreateGroup() {
 
     // form data
-    const [selectedTimezone, setSelectedTimezone] = useState({});
+    // const [selectedTimezone, setSelectedTimezone] = useState({});
     const [groupName, setGroupName] = useState("");
     const [description, setDescription] = useState("");
     const [discord, setDiscord] = useState("");
-    const [day, setDay] = useState("");
-    const [time, setTime] = useState("");
+    const [allChars, setAllChars] = useState([]);
+    const [charId, setCharId] = useState("");
+    // const [day, setDay] = useState("");
+    // const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
     const [tags, addNewTag] = useState([]);
 
     // define token
     const token = localStorage.getItem('foundArkJwt');
     const tokenData = jwtDecode(token);
+
+    // time zone array
+    const timeZones = [
+        '(GMT+0:00) Greenwich Mean Time',
+        '(GMT+0:00) Universal Coordinated Time',
+        '(GMT+1:00) European Central Time',
+        '(GMT+2:00) Eastern European Time',
+        '(GMT+3:00) Eastern African Time',
+        '(GMT+3:30) Middle East Time',
+        '(GMT+4:00) Near East Time',
+        '(GMT+5:00) Pakistan Lahore Time',
+        '(GMT+5:30) India Standard Time',
+        '(GMT+6:00) Bangladesh Standard Time',
+        '(GMT+7:00) Vietnam Standard Time',
+        '(GMT+8:00) China Taiwan Time',
+        '(GMT+9:00) Japan Standard Time',
+        '(GMT+9:30) Australia Central Time',
+        '(GMT+10:00) Australia Eastern Time',
+        '(GMT+11:00) Solomon Standard Time',
+        '(GMT+12:00) New Zealand Standard Time',
+        '(GMT-11:00) Midway Islands Time',
+        '(GMT-10:00) Hawaii Standard Time',
+        '(GMT-9:00) Alaska Standard Time',
+        '(GMT-8:00) Pacific Standard Time',
+        '(GMT-7:00) Phoenix Standard Time',
+        '(GMT-7:00) Mountain Standard Time',
+        '(GMT-6:00) Central Standard Time',
+        '(GMT-5:00) Eastern Standard Time',
+        '(GMT-5:00) Indiana Eastern Standard Time',
+        '(GMT-4:00) Puerto Rico and US Virgin Islands Time',
+        '(GMT-3:30) Canada Newfoundland Time',
+        '(GMT-3:00) Argentina Standard Time',
+        '(GMT-3:00) Brazil Eastern Time',
+        '(GMT-1:00) Central African Time'
+    ]
 
     // validate tag input
     const tagReg = /^[+-_a-zA-Z0-9]{2,}$/;
@@ -40,7 +77,6 @@ function CreateGroup() {
 
     // remove tag from tags array
     const removeTag = (e) => {
-        console.log(e.target.innerText)
         const newTags = tags.filter(tag => tag !== e.target.innerText);
         addNewTag(newTags);
     };
@@ -65,50 +101,64 @@ function CreateGroup() {
         if (name === 'discord') {
             setDiscord(value);
         };
-        if (name === 'dayofweek') {
-            setDay(value);
+        if (name === 'characters') {
+            setCharId(value);
         };
-        if (name === 'time') {
-            setTime(value);
-        };
+        // if (name === 'dayofweek') {
+        //     setDay(value);
+        // };
+        // if (name === 'timezone') {
+        //     setSelectedTimezone(value);
+        // };
+        // if (name === 'time') {
+        //     setTime(value);
+        // };
         if (name === 'tags') {
             setTag(value);
         };
     };
+
+    // fetch character names
+    const getAllChars = async () => {
+        try {
+            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/characters/owner/${tokenData.id}`);
+            setAllChars(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getAllChars();
+    }, []);
 
     // handle form submit
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
 
-            const groupRes = await axios.post('https://found-ark-backend.herokuapp.com/api/groups', {
+            const res = await axios.post('https://found-ark-backend.herokuapp.com/api/groups', {
                 creator_id: tokenData.id,
                 group_name: groupName,
                 description: description,
                 discord: discord,
-                day: day,
-                time: time
+                char_id: charId,
+                // time: `${day} @ ${time}, ${selectedTimezone}`,
+                tags: tags
             }, {
                 headers: {
                     'Authorization': `token ${token}`
                 }
             });
 
-            const groupData = groupRes.data[0];
-
-            if (tags?.length) {
-                for (let i = 0; i < tags.length; i++) {
-                    const tagRes = await axios.post(`https://found-ark-backend.herokuapp.com/api/groups/${groupData.id}/tag/${tags[i]}`);
-
-                    console.log(tagRes);
-                }
-            };
+            const groupData = res.data[0];
+            console.log(groupData);
 
             setGroupName('');
             setDescription('');
             setDiscord('');
-            setDay('');
-            setTime('');
+            // setDay('');
+            // setTime('');
             setTag('');
 
         } catch (err) {
@@ -122,25 +172,35 @@ function CreateGroup() {
 
     return (
 
-        <div className="createGroupContainer">
+        <div className="darkContainer">
 
             <h1>Create New Group</h1>
 
             <form method="post" className="createGroup">
 
 
-                <label htmlFor="groupName"><b>Group Name</b></label>
+                <label htmlFor="groupName">Group Name</label>
                 <input type="text" placeholder="Enter Group Name" name="groupName" onChange={handleInputChange} required />
 
-                <label htmlFor="description"><b>Description</b></label>
+                <label htmlFor="description">Description</label>
                 <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
 
-                <label htmlFor="discord"><b>Discord</b></label>
+                <label htmlFor="discord">Discord</label>
                 <input type="url" placeholder="https://discord.com" name="discord" pattern="https://.*" onChange={handleInputChange} required />
 
-                <label htmlFor="dayofweek"><b>Day</b></label>
+                <label htmlFor="characters">Party Leader</label>
+                <select name="characters" required onChange={handleInputChange}>
+
+                    {allChars.map((char) => {
+                        return (
+                            <option key={char.id} value={char.id}>{char.char_name}</option>
+                        )
+                    })}
+
+                </select>
+
+                <label htmlFor="dayofweek">Day</label>
                 <select name="dayofweek" required onChange={handleInputChange}>
-                    <option value="" defaultValue disabled>Select...</option>
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
                     <option value="Wednesday">Wednesday</option>
@@ -150,12 +210,18 @@ function CreateGroup() {
                     <option value="Sunday">Sunday</option>
                 </select>
 
-                <label htmlFor="timezone"><b>Time Zone</b></label>
-                <div name="timezone" className="select-wrapper">
-                    <TimezoneSelect value={selectedTimezone} onChange={setSelectedTimezone} />
-                </div>
+                <label htmlFor="timezone">Time Zone</label>
+                <select name="timezone" required onChange={handleInputChange}>
 
-                <label htmlFor="time"><b>Time</b></label>
+                    {timeZones.map((zone, index) => {
+                        return (
+                            <option key={index} value={zone}>{zone}</option>
+                        )
+                    })}
+
+                </select>
+
+                <label htmlFor="time">Time</label>
                 <input type="time" placeholder="Time" name="time" onChange={handleInputChange} required />
 
                 <div className="addTags">
@@ -170,7 +236,7 @@ function CreateGroup() {
 
                     </div>
 
-                    <p className={newTag === "" || newTag === [] || !tagReg.test(newTag) ? 'visible' : 'hidden'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+                    <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
 
                     <div className="chosenTags">
                         {tags.map((tag, index) =>

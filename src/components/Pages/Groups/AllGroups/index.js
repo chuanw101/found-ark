@@ -7,20 +7,40 @@ function AllGroups() {
 
     const [allGroups, setAllGroups] = useState([]);
 
+    // define token
+    const token = localStorage.getItem('foundArkJwt');
+    if (token) {
+        // const tokenData = jwtDecode(token);
+    }
+
+    // get all groups
     const getAllGroups = async () => {
+
         try {
-            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/groups`);
-            setAllGroups(res.data);
+
+            if (token) {
+                const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/groups`, {
+                    headers: {
+                        'Authorization': `token ${token}`
+                    }
+                });
+                setAllGroups(res.data);
+                console.log(allGroups);
+            } else {
+                const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/groups`);
+                setAllGroups(res.data);
+                console.log(allGroups);
+            };
+
         } catch (err) {
             console.log(err);
         };
+
     };
 
     useEffect(() => {
         getAllGroups();
     }, []);
-
-    console.log(allGroups)
 
     return (
 
@@ -34,11 +54,11 @@ function AllGroups() {
 
                     <div key={group.id} id={group.id} className="group">
 
-                    <h2>{group.group_name}</h2>
-                    <p>{group.description}</p>
+                        <h2>{group.group_name}</h2>
+                        <p>{group.description}</p>
 
                     </div>
-                    
+
                 )
 
             })}

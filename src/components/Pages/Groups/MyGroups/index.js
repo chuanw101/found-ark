@@ -3,16 +3,16 @@ import './style.css';
 
 function MyGroups() {
 
-   return (
+    return (
 
-      <div className="page">
+        <div className="page">
 
-         <h1>My Groups</h1>
-         
-      </div>
-      
-   );
-   
+            <h1>My Groups</h1>
+
+        </div>
+
+    );
+
 };
 
 export default MyGroups;

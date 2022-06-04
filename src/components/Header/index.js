@@ -4,23 +4,23 @@ import './style.css';
 
 function Header({ user, logout }) {
 
-   return (
+    return (
 
-      <header>
+        <header>
 
-         <div className="siteTitle">
+            <div className="siteTitle">
 
-            <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
-            <h1>Found Ark</h1>
+                <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
+                <h1 className="">Found Ark</h1>
 
-         </div>
+            </div>
 
-         <Navigation user={user} logout={logout} />
+            <Navigation user={user} logout={logout} />
 
-      </header>
-      
-   );
-   
+        </header>
+
+    )
+
 };
 
 export default Header;

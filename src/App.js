@@ -9,6 +9,7 @@ import SignUp from './components/Pages/SignUp';
 import {
     Routes,
     Route,
+    useLocation
 } from "react-router-dom";
 
 // import styles
@@ -17,7 +18,7 @@ import './styles/fonts.css';
 import './styles/variables.css';
 import './styles/animations.css';
 import './styles/style.css';
-import AllGroups from './components/Pages/Groups/AllGroups';
+import Groups from './components/Pages/Groups';
 import CreateGroup from './components/Pages/Groups/CreateGroup';
 import MyGroups from './components/Pages/Groups/MyGroups';
 import Group from './components/Pages/Groups/Group';
@@ -29,6 +30,27 @@ import axios from 'axios';
 function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+    const [background, setBackground] = useState('bgTree');
+
+    const path = window.location.pathname;
+
+    const handleBackgroundChange = () => {
+        if (path === '/' || path === '/group' || path === '/mygroups' || path === '/creategroup') {
+            setBackground('bgTree');
+        } else if (path === '/login') {
+            setBackground('bgCity');
+        } else if (path === '/signup') {
+            setBackground('bgSky');
+        } else if (path === '/profile') {
+            setBackground('bgGiant');
+        };
+    };
+
+    const location = useLocation();
+
+    useEffect(() => {
+        handleBackgroundChange();
+    }, [location]);
 
     let navigate = useNavigate();
 
@@ -91,21 +113,22 @@ function App() {
     }
 
     return (
-        <div className={"App"}>
+        <div className={"App " + background}>
             <Header user={user} logout={logout} />
             <Routes>
-                <Route path="/" element={<AllGroups />} />
+                <Route path="/" element={<Groups />} />
                 <Route path="creategroup" element={<CreateGroup />} />
                 <Route path="mygroups" element={<MyGroups />} />
                 <Route path="group" element={<Group />} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
-                <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit}/>} />
+                <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
                 <Route path="profile" element={<Profile />} />
             </Routes>
             <Footer />
         </div>
 
     );
-}
+
+};
 
 export default App;

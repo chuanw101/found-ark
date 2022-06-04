@@ -1,52 +1,57 @@
 .App {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   min-height: 100vh;
-   color: var(--accent);
-   font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    color: var(--accent);
+    font-size: 18px;
 }
 
 .page {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 100%;
-   padding: 0px var(--large);
-   margin: 0px 0px auto 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0px var(--large);
+    margin: 0px 0px auto 0px;
 }
 
 /* page backgrounds */
-.Groups {
-   background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-tree.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-attachment: fixed;
+.bgTree {
+    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-tree.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.Profile {
-   background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-giant.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-attachment: fixed;
+.bgGiant {
+    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-giant.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.Login {
-   background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-sky.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-attachment: fixed;
+.bgSky {
+    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-sky.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.SignUp {
-   background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-city.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-attachment: fixed;
+.bgCity {
+    background: linear-gradient(hsl(0, 0%, 10%, 0.9), hsl(0, 0%, 10%, 0.25)), url('../../public/assets/images/bg-city.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /* global styles */
 form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    width: 800px;
+    padding: var(--medium);
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
     padding: var(--small);
@@ -68,10 +73,12 @@ select:invalid {
     color: var(--gray);
 }
 
-button {
+/* button {
     transition: all 0.2s ease;
     border-radius: var(--tiny);
-    background-color: var(--light90);
+    background: linear-gradient(180deg,
+    #fea 0%,#dc8 49%,#a95 51%,
+    #dc8 100%);
     color: var(--dark);
     padding: 14px 20px;
     border: none;
@@ -83,13 +90,68 @@ button {
 button:hover {
     transition: all 0.3s ease;
     opacity: 0.8;
-}
+} */
 
 .hidden {
-   display: none;
-   transition: all 3s ease;
+    display: none;
+    transition: all 3s ease;
 }
 
 .visible {
-   transition: all 3s ease;
+    transition: all 3s ease;
+}
+
+.darkContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--large);
+}
+
+.darkContainerWrapped {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    padding: var(--large);
+}
+
+h1 {
+    margin-bottom: var(--medium);
+}
+
+
+
+
+button {
+    border-radius: var(--tiny);
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse farthest-corner at left top, #ffdb58 0%, #FDB931 8%, #f4c430 30%, #e1ad21 40%, transparent 80%),
+        radial-gradient(ellipse farthest-corner at right bottom, #f0dc82 0%, #f7e98e 8%, #ffd300 25%, #fcc200 62.5%, #fcc200 100%);
+    /* background-image: linear-gradient(315deg, #faf0be 0%, #ffdb58 74%); */
+    background-size: 200% 100%;
+    background-position: left;
+    background-repeat: no-repeat;
+    transition: 500ms;
+    font-weight: 700;
+}
+
+button:hover {
+    background-position: right;
+}
+
+button:focus {
+    outline: none;
 }

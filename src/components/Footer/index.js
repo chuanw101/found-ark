@@ -3,16 +3,16 @@ import './style.css';
 
 function Footer() {
 
-   return (
+    return (
 
-      <footer>
+        <footer>
 
-         <p>This is the footer.</p>
-         
-      </footer>
-      
-   );
-   
+            <p>This is the footer.</p>
+
+        </footer>
+
+    );
+
 };
 
 export default Footer;
