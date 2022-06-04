@@ -33,7 +33,6 @@ function Profile() {
     }, []);
 
     //getAllChars();
-    console.log(allChars)
     const displayAllChars = () => {
         if (allChars) {
             return <AllCharacters allChars={allChars} />;
@@ -135,36 +134,31 @@ function Profile() {
 
             {displayAllChars()}
 
-            <div className="darkContainer">
+            <form method="post">
+                <div className="container">
+                    <label htmlFor="charName"><b>Character Name</b></label>
+                    <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-                <h1>Add Character</h1>
-                
-                <form method="post">
-                    <div className="container">
-                        <label htmlFor="charName"><b>Character Name</b></label>
-                        <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
+                    <button onClick={pullCharInfo}>Auto Fill</button>
 
-                        <button onClick={pullCharInfo}>Auto Fill</button>
+                    <label htmlFor="className"><b>Class</b></label>
+                    <input type="text" placeholder="Enter Class" name="className" value={className} onChange={handleInputChange} required />
 
-                        <label htmlFor="className"><b>Class</b></label>
-                        <input type="text" placeholder="Enter Class" name="className" value={className} onChange={handleInputChange} required />
+                    <label htmlFor="iLvl"><b>Item Level</b></label>
+                    <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
 
-                        <label htmlFor="iLvl"><b>Item Level</b></label>
-                        <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
+                    <label htmlFor="rosterLvl"><b>Roster Level</b></label>
+                    <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
 
-                        <label htmlFor="rosterLvl"><b>Roster Level</b></label>
-                        <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
+                    <label htmlFor="charLvl"><b>Character Level</b></label>
+                    <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
 
-                        <label htmlFor="charLvl"><b>Character Level</b></label>
-                        <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
+                    <label htmlFor="engravings"><b>Engravings</b></label>
+                    <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
 
-                        <label htmlFor="engravings"><b>Engravings</b></label>
-                        <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
-
-                        <button onClick={addCharacter}>Add New Character</button>
-                    </div>
-                </form>
-            </div>
+                    <button onClick={addCharacter}>Add New Character</button>
+                </div>
+            </form>
             {displayCharInfo()}
         </div>
     );
