@@ -116,9 +116,9 @@ function App() {
         <div className={"App " + background}>
             <Header user={user} logout={logout} />
             <Routes>
-                <Route path="/" element={<Groups />} />
-                <Route path="creategroup" element={<CreateGroup />} />
-                <Route path="mygroups" element={<MyGroups />} />
+                <Route path="/" element={<Groups user={user} />} />
+                <Route path="creategroup" element={<CreateGroup user={user} />} />
+                <Route path="mygroups" element={<MyGroups user={user} />} />
                 <Route path="group" element={<Group />} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
