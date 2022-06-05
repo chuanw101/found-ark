@@ -1,12 +1,13 @@
 // import components
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Group from './Group';
 import CreateGroup from './CreateGroup';
 import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
 
-function Groups() {
+function Groups({ user }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
 
@@ -24,19 +25,21 @@ function Groups() {
 
     };
 
+    let navigate = useNavigate();
+
     const renderTab = () => {
 
         if (currentTab === 'AllGroups') {
-            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} />;
+            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} />;
         };
         if (currentTab === 'MyGroups') {
-            return <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} />;
+            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
         };
         if (currentTab === 'Group') {
-            return <Group currentTab={currentTab} setcurrentTab={setCurrentTab} />;
+            return user ? <Group currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
         };
         if (currentTab === 'CreateGroup') {
-            return <CreateGroup currentTab={currentTab} setcurrentTab={setCurrentTab} />;
+            return user ? <CreateGroup currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
         };
         return <AllGroups />;
 

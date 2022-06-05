@@ -120,6 +120,11 @@ button:hover {
     background: var(--dark75);
     border-radius: var(--tiny);
     padding: var(--large);
+    margin-bottom: var(--medium);
+}
+
+.darkContainerWrapped:last-of-type {
+    margin-bottom: 0;
 }
 
 h1 {

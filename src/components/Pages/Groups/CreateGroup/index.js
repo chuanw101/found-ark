@@ -157,6 +157,7 @@ function CreateGroup() {
             setGroupName('');
             setDescription('');
             setDiscord('');
+            setCharId('');
             // setDay('');
             // setTime('');
             setTag('');
@@ -188,7 +189,7 @@ function CreateGroup() {
                 <label htmlFor="discord">Discord</label>
                 <input type="url" placeholder="https://discord.com" name="discord" pattern="https://.*" onChange={handleInputChange} required />
 
-                <label htmlFor="characters">Party Leader</label>
+                <label htmlFor="characters">Group Leader</label>
                 <select name="characters" required onChange={handleInputChange}>
 
                     {allChars.map((char) => {

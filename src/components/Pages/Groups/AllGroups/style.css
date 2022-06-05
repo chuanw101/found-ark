@@ -1,0 +1,35 @@
+.groupPreview {
+    display: flex;
+    justify-content: space-between;
+    border-radius: var(--tiny);
+    background-attachment: local;
+    height: 200px;
+    width: 100%;
+    padding: var(--medium);
+    margin-bottom: var(--medium);
+}
+
+.groupPreview:hover {
+    cursor: pointer;
+}
+
+.groupPreview:last-of-type {
+    margin-bottom: 0;
+}
+
+.groupPreviewColumnLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.groupPreviewColumnRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.previewApplyBtn {
+    margin: auto 0px 0px 0px
+}
