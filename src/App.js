@@ -120,7 +120,7 @@ function App() {
                 <Route path="/" element={<Groups user={user} setGroupId={setGroupId}/>} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
-                <Route path="group" element={<Group groupId={groupId}/>} />
+                <Route path="group" element={<Group user={user} groupId={groupId}/>} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
                 <Route path="profile" element={<Profile />} />

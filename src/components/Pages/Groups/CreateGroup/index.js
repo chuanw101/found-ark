@@ -138,13 +138,11 @@ function CreateGroup() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-
             const res = await axios.post('https://found-ark-backend.herokuapp.com/api/groups', {
-                creator_id: tokenData.id,
                 group_name: groupName,
                 description: description,
                 discord: discord,
-                char_id: charId,
+                creator_char_id: charId,
                 // time: `${day} @ ${time}, ${selectedTimezone}`,
                 tags: tags
             }, {
