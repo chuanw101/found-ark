@@ -27,6 +27,7 @@ function AllGroups({ user }) {
                 });
                 setAllGroups(res.data);
                 console.log('All Groups: ', allGroups);
+                console.log(res.data)
             } else {
                 const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/groups`);
                 setAllGroups(res.data);
