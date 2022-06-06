@@ -23,13 +23,14 @@ function getItemBg(grade) {
     }
 }
 
-function CharacterDetails({ jsonData, charName, charClass }) {
+function CharacterDetails({ jsonData }) {
     
     if (!jsonData) {
         return;
     };
 
     const advCharData = JSON.parse(jsonData);
+    console.log(advCharData)
     const rootImgUrl = 'https://cdn.lostark.games.aws.dev/';
 
     let allGears = [];
@@ -96,11 +97,11 @@ function CharacterDetails({ jsonData, charName, charClass }) {
 
             <div className="charHeadline">
 
-                <img src={`https://cdn.lostark.games.aws.dev/EFUI_IconAtlas/PC/${charClass.toLowerCase()}.png`} alt={`${charClass} preview`} className="charClassImg"></img>
+                <img src={`https://cdn.lostark.games.aws.dev/EFUI_IconAtlas/PC/${advCharData.pcClassName?.toLowerCase()}.png`} alt={`${advCharData.pcClassName} preview`} className="charClassImg"></img>
 
                 <div className="charInfo">
 
-                    <h1>{charName}</h1>
+                    <h1>{advCharData.pcName}</h1>
 
                     <div className="charStats">
                         {allStats}
