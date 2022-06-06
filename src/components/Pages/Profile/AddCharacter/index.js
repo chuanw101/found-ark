@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import jwtDecode from 'jwt-decode';
+import React, { useState } from 'react';
 import axios from 'axios';
-
 import CharacterDetails from '../../../CharacterDetails';
+import './style.css';
 
-function AddCharacter() {
+
+function AddCharacter({ currentTab, setCurrentTab }) {
     const [charName, setCharName] = useState('');
     const [className, setClassName] = useState('');
     const [iLvl, setILvl] = useState('');
@@ -12,9 +12,10 @@ function AddCharacter() {
     const [charLvl, setCharLvl] = useState('');
     const [engravings, setEngravings] = useState('');
     const [jsonData, setJsonData] = useState('');
+    const [formStatus, setFormStatus] = useState('hidden');
+    const [buttonStatus, setButtonStatus] = useState('hidden');
 
     const token = localStorage.getItem('foundArkJwt');
-    const tokenData = jwtDecode(token);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -32,7 +33,8 @@ function AddCharacter() {
             setCharLvl(value);
         } else if (name === 'engravings') {
             setEngravings(value);
-        }
+        };
+
     };
 
     const pullCharInfo = async (e) => {
@@ -47,6 +49,7 @@ function AddCharacter() {
                 setCharLvl(charData.pcLevel);
                 setEngravings('');
                 setJsonData(charData.jsonData);
+                setButtonStatus('');
             } else {
                 setCharName('');
                 setClassName('');
@@ -55,6 +58,8 @@ function AddCharacter() {
                 setCharLvl('');
                 setEngravings('');
                 setJsonData('');
+                setFormStatus('');
+                setButtonStatus('');
             }
         } catch (err) {
             setCharName('');
@@ -66,12 +71,13 @@ function AddCharacter() {
             setJsonData('');
             console.log(err);
         }
-    }
+    };
 
     const addCharacter = async (e) => {
+        setCurrentTab('AllCharacters');
         e.preventDefault();
         try {
-            const res = await axios.post('https://found-ark-backend.herokuapp.com/api/characters', {
+            await axios.post('https://found-ark-backend.herokuapp.com/api/characters', {
                 char_name: charName,
                 class: className,
                 item_lvl: iLvl,
@@ -94,44 +100,59 @@ function AddCharacter() {
         } catch (err) {
             console.log(err);
         }
-    }
-
-
-    const displayCharInfo = () => {
-        if (jsonData) {
-            return <CharacterDetails jsonData={jsonData} />;
-        }
-    }
+    };
 
     return (
-        <div class="darkContainerWrapped">
-            <form method="post">
-                <div className="container">
-                    <label htmlFor="charName"><b>Character Name</b></label>
-                    <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-                    <button onClick={pullCharInfo}>Auto Fill</button>
+        <div class="darkContainer">
 
-                    <label htmlFor="className"><b>Class</b></label>
-                    <input type="text" placeholder="Enter Class" name="className" value={className} onChange={handleInputChange} required />
+            <h1>Add Character</h1>
 
-                    <label htmlFor="iLvl"><b>Item Level</b></label>
-                    <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
+            <div className="addCharacterSection">
 
-                    <label htmlFor="rosterLvl"><b>Roster Level</b></label>
-                    <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
+                <div className="addCharacterForm">
 
-                    <label htmlFor="charLvl"><b>Character Level</b></label>
-                    <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
+                    <form method="post" className="autoFillForm">
 
-                    <label htmlFor="engravings"><b>Engravings</b></label>
-                    <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
+                        <label htmlFor="charName"><b>Character Name</b></label>
+                        <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-                    <button onClick={addCharacter}>Add New Character</button>
+                        <button onClick={pullCharInfo}>Search</button>
+
+                    </form>
+
+                    <form method="post" className={"manualForm " + buttonStatus}>
+
+                        <div className={formStatus}>
+
+                            <label htmlFor="className"><b>Class</b></label>
+                            <input type="text" placeholder="Enter Class" name="className" value={className} onChange={handleInputChange} required />
+
+                            <label htmlFor="iLvl"><b>Item Level</b></label>
+                            <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
+
+                            <label htmlFor="rosterLvl"><b>Roster Level</b></label>
+                            <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
+
+                            <label htmlFor="charLvl"><b>Character Level</b></label>
+                            <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
+
+                        </div>
+
+                        <label htmlFor="engravings"><b>Engravings</b></label>
+                        <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
+
+                        <button onClick={addCharacter} className={buttonStatus}>Add Character</button>
+
+                    </form>
+
                 </div>
-            </form>
 
-            {displayCharInfo()}
+                {jsonData ? <div className="characterPreview"> <CharacterDetails jsonData={jsonData} charName={charName} charClass={className} /> </div> : ''}
+
+
+            </div>
+
         </div>
     )
 }

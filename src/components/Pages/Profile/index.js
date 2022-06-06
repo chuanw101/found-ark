@@ -43,12 +43,10 @@ function Profile() {
         getAllChars();
     }, []);
 
-    getAllChars();
-
     const renderTab = () => {
 
         if (currentTab === 'AllCharacters') {
-            return <AllCharacters currentTab={currentTab} setCurrentTab={setCurrentTab} allChars={allChars} /> ;
+            return <AllCharacters currentTab={currentTab} setCurrentTab={setCurrentTab} allChars={allChars} />;
         };
         if (currentTab === 'AddCharacter') {
             return <AddCharacter currentTab={currentTab} setcurrentTab={setCurrentTab} />;
@@ -63,24 +61,23 @@ function Profile() {
 
     return (
         <div className="page">
-            <h1>Profile</h1>
-            <h2>Welcome {tokenData.user_name}</h2>
-            <h2>Region: {tokenData.region}</h2>
 
-            <div className="groupsHeader">
+            <div className="tabHeader">
 
-                <div className="groupTabs" onClick={handleTabSelect}>
+                <h3 className="welcomeMessage">Welcome, {tokenData.user_name}!</h3>
 
-                    <input type="radio" id="allCharTab" name="profileTabs" value="allCharTab" defaultChecked className="groupTab"></input>
-                    <label htmlFor="allCharTab" className={currentTab === 'AllCharacters' ? "groupTabLabel activeTab" : "groupTabLabel"}>My Characters</label>
+                <div className="tabs" onClick={handleTabSelect}>
 
-                    <input type="radio" id="newCharTab" name="profileTabs" value="newCharTab" className="groupTab"></input>
-                    <label htmlFor="newCharTab" className={currentTab === 'AddCharacter' ? "groupTabLabel activeTab" : "groupTabLabel"}>Add Character</label>
+                    <input type="radio" id="allCharTab" name="profileTabs" value="allCharTab" defaultChecked className="tab"></input>
+                    <label htmlFor="allCharTab" className={currentTab === 'AllCharacters' ? "tabLabel activeTab" : "tabLabel"}>My Characters</label>
+
+                    <input type="radio" id="newCharTab" name="profileTabs" value="newCharTab" className="tab"></input>
+                    <label htmlFor="newCharTab" className={currentTab === 'AddCharacter' ? "tabLabel activeTab" : "tabLabel"}>Add Character</label>
 
                     <div className="tabDivider"></div>
 
-                    <input type="radio" id="editInfoTab" name="profileTabs" value="editInfoTab" className="groupTab"></input>
-                    <label htmlFor="editInfoTab" className={currentTab === 'EditInfo' ? "groupTabLabel activeTab" : "groupTabLabel"}>Edit Profile</label>
+                    <input type="radio" id="editInfoTab" name="profileTabs" value="editInfoTab" className="tab"></input>
+                    <label htmlFor="editInfoTab" className={currentTab === 'EditInfo' ? "tabLabel activeTab" : "tabLabel"}>Edit Profile</label>
 
                 </div>
 
