@@ -6,12 +6,14 @@ import CreateGroup from './CreateGroup';
 import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
+import { act } from 'react-dom/test-utils';
 
 function Groups({ user }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
     const [newTag, setTag] = useState("");
     const [tags, setAllTags] = useState([]);
+    const [activeTags, setActiveTags] = useState([]);
 
     const handleTabSelect = () => {
 
@@ -48,6 +50,7 @@ function Groups({ user }) {
             return;
         } else {
             setAllTags([...tags, { tag_name: newTag, active: true }]);
+            setActiveTags([...activeTags, newTag]);
             setTag('');
         };
     };
@@ -66,11 +69,14 @@ function Groups({ user }) {
             let tempTags = [...tags];
             tempTags[e.target.getAttribute('value')].active = false;
             setAllTags([...tempTags]);
+            let temp = tags.filter(tag => tag.active).map(tag => tag.tag_name);
+            setActiveTags([...temp])
         } else if (e.target.className === "savedTagsInactive") {
             //e.target.className = "savedTagsActive";
             let tempTags = [...tags];
             tempTags[e.target.getAttribute('value')].active = true;
             setAllTags([...tempTags]);
+            setActiveTags([...activeTags, tags[e.target.getAttribute('value')].tag_name])
         }
     }
 
@@ -79,7 +85,7 @@ function Groups({ user }) {
     const renderTab = () => {
 
         if (currentTab === 'AllGroups') {
-            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} tags={tags}/>;
+            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} activeTags={activeTags}/>;
         };
         if (currentTab === 'MyGroups') {
             return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} /> : navigate(`/login`);

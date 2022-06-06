@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import './style.css';
 
-function AllGroups({ user }) {
+function AllGroups({ user, activeTags }) {
 
     const [allGroups, setAllGroups] = useState([]);
     // define token
@@ -40,6 +40,22 @@ function AllGroups({ user }) {
         getAllGroups();
     }, []);
 
+    useEffect(()=> {
+        if(activeTags.length) {
+            let tempGroups = [...allGroups];
+            for (const group of tempGroups) {
+                let foundCount = 0;
+                for(const tag of activeTags) {
+                    if (group.tag.some(t=>t.tag_name===tag)) {
+                        foundCount++;
+                    }
+                }
+                group.is_hidden = (foundCount !== activeTags.length);
+            }
+            setAllGroups([...tempGroups]);
+        }
+    }, [activeTags])
+
     let navigate = useNavigate();
 
     const handleGroupClick = (e) => {
@@ -71,8 +87,7 @@ function AllGroups({ user }) {
         <div className="darkContainer">
             <h1>All Groups</h1>
 
-            {allGroups.map((group) => {
-
+            {allGroups.filter(group=>!group?.is_hidden).map((group) => {
                 return (
 
                     <div key={group.id} id={group.id} className={
@@ -97,8 +112,6 @@ function AllGroups({ user }) {
                         </div>
 
                         <div className="groupPreviewColumnRight">
-                            {/* <h4>Group Leader</h4>
-                            <p>{group.creator.char_name} ({group.creator.owner.user_name})</p> */}
                             <button className="previewApplyBtn" value={group.id} onClick={handleApply}>Apply</button>
                         </div>
 
