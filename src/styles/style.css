@@ -73,24 +73,35 @@ select:invalid {
     color: var(--gray);
 }
 
-/* button {
-    transition: all 0.2s ease;
+button {
     border-radius: var(--tiny);
-    background: linear-gradient(180deg,
-    #fea 0%,#dc8 49%,#a95 51%,
-    #dc8 100%);
-    color: var(--dark);
-    padding: 14px 20px;
-    border: none;
-    cursor: pointer;
-    height: 50px;
     width: 100%;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse farthest-corner at left top, #ffdb58 0%, #FDB931 8%, #f4c430 30%, #e1ad21 40%, transparent 80%),
+        radial-gradient(ellipse farthest-corner at right bottom, #f0dc82 0%, #f7e98e 8%, #ffd300 25%, #fcc200 62.5%, #fcc200 100%);
+    background-size: 200% 100%;
+    background-position: left;
+    background-repeat: no-repeat;
+    transition: 500ms;
+    font-weight: 700;
 }
 
 button:hover {
-    transition: all 0.3s ease;
-    opacity: 0.8;
-} */
+    background-position: right;
+}
+
+button:focus {
+    outline: none;
+}
+
+h1 {
+    margin-bottom: var(--medium);
+}
 
 .hidden {
     display: none;
@@ -127,36 +138,45 @@ button:hover {
     margin-bottom: 0;
 }
 
-h1 {
+/* page headers with tabs */
+.tabHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    height: 100px;
+    width: 100%;
+    padding: var(--medium);
     margin-bottom: var(--medium);
 }
 
-
-
-
-button {
-    border-radius: var(--tiny);
-    width: 100%;
-    height: 50px;
-    cursor: pointer;
-    border: none;
+.tabs {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: radial-gradient(ellipse farthest-corner at left top, #ffdb58 0%, #FDB931 8%, #f4c430 30%, #e1ad21 40%, transparent 80%),
-        radial-gradient(ellipse farthest-corner at right bottom, #f0dc82 0%, #f7e98e 8%, #ffd300 25%, #fcc200 62.5%, #fcc200 100%);
-    /* background-image: linear-gradient(315deg, #faf0be 0%, #ffdb58 74%); */
-    background-size: 200% 100%;
-    background-position: left;
-    background-repeat: no-repeat;
-    transition: 500ms;
-    font-weight: 700;
 }
 
-button:hover {
-    background-position: right;
+.tab {
+    display: none;
 }
 
-button:focus {
-    outline: none;
+.tabLabel {
+    transition: all 0.3s ease;
+    padding: 10px var(--tiny);
+    margin: 0px var(--small);
+}
+
+.tabLabel:hover {
+    cursor: pointer;
+    box-shadow: inset 0px -15px 15px -20px var(--accent);
+}
+
+.tabDivider {
+    border: 0.5px solid var(--gray);
+    height: 30px;
+    margin: 0px var(--small);
+}
+
+.activeTab {
+    box-shadow: inset 0px -20px 15px -20px var(--accent) !important;
 }

@@ -49,7 +49,7 @@ function Groups({ user }) {
 
         <div className="page">
 
-            <div className="groupsHeader">
+            <div className="tabHeader">
 
                 {user?.logged_in ? (
                     <div className="groupTabs" onClick={handleTabSelect}>

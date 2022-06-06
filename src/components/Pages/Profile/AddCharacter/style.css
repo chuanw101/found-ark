@@ -1,0 +1,34 @@
+.addCharacterSection {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.addCharacterForm {
+    width: 60%;
+    max-width: 800px;
+}
+
+.addCharacterBtn {
+    padding: var(--small);
+}
+
+.autoFillForm {
+    width: 100%;
+    margin-bottom: var(--medium);
+}
+
+.manualForm {
+    width: 100%;
+}
+
+.characterPreview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--accent);
+    border-radius: var(--tiny);
+    width: 100%;
+    /* padding: var(--small); */
+    margin-left: var(--large);
+}
