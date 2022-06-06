@@ -52,18 +52,18 @@ function Groups({ user }) {
             <div className="tabHeader">
 
                 {user?.logged_in ? (
-                    <div className="groupTabs" onClick={handleTabSelect}>
+                    <div className="tabs" onClick={handleTabSelect}>
 
-                        <input type="radio" id="allGroupsTab" name="groupTabs" value="allGroupsTab" defaultChecked className="groupTab"></input>
-                        <label htmlFor="allGroupsTab" className={currentTab === 'AllGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>All Groups</label>
+                        <input type="radio" id="allGroupsTab" name="groupTabs" value="allGroupsTab" defaultChecked className="tab"></input>
+                        <label htmlFor="allGroupsTab" className={currentTab === 'AllGroups' ? "tabLabel activeTab" : "tabLabel"}>All Groups</label>
 
-                        <input type="radio" id="myGroupsTab" name="groupTabs" value="myGroupsTab" className="groupTab"></input>
-                        <label htmlFor="myGroupsTab" className={currentTab === 'MyGroups' ? "groupTabLabel activeTab" : "groupTabLabel"}>My Groups</label>
+                        <input type="radio" id="myGroupsTab" name="groupTabs" value="myGroupsTab" className="tab"></input>
+                        <label htmlFor="myGroupsTab" className={currentTab === 'MyGroups' ? "tabLabel activeTab" : "tabLabel"}>My Groups</label>
 
                         <div className="tabDivider"></div>
 
-                        <input type="radio" id="createGroupsTab" name="groupTabs" value="createGroupsTab" className="groupTab"></input>
-                        <label htmlFor="createGroupsTab" className={currentTab === 'CreateGroup' ? "groupTabLabel activeTab" : "groupTabLabel"}>Create New Group</label>
+                        <input type="radio" id="createGroupsTab" name="groupTabs" value="createGroupsTab" className="tab"></input>
+                        <label htmlFor="createGroupsTab" className={currentTab === 'CreateGroup' ? "tabLabel activeTab" : "tabLabel"}>Create New Group</label>
 
                     </div>
                 ) : (<></>)}
