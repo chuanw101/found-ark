@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import './style.css';
 
-import AllCharacters from '../../AllCharacters';
+import CharacterDetails from '../../CharacterDetails';
 import AddCharacter from './AddCharacter'
 import EditInfo from './EditInfo'
 
@@ -45,16 +45,32 @@ function Profile() {
 
     const renderTab = () => {
 
-        if (currentTab === 'AllCharacters') {
-            return <AllCharacters currentTab={currentTab} setCurrentTab={setCurrentTab} allChars={allChars} />;
+        // My Characters
+        if (currentTab === 'MyCharacters') {
+
+            return (
+
+                allChars.map( char => {
+
+                    <div className="characterPreview">
+                        <CharacterDetails currentTab={currentTab} setCurrentTab={setCurrentTab} char={char} />
+                    </div>
+
+                })
+
+            );
+
         };
+
+        // Add Character
         if (currentTab === 'AddCharacter') {
             return <AddCharacter currentTab={currentTab} setcurrentTab={setCurrentTab} />;
         };
+
+        // Edit Info
         if (currentTab === 'EditInfo') {
             return <EditInfo currentTab={currentTab} setcurrentTab={setCurrentTab} />;
         };
-        return <AllCharacters />;
 
     };
 
@@ -69,7 +85,7 @@ function Profile() {
                 <div className="tabs" onClick={handleTabSelect}>
 
                     <input type="radio" id="allCharTab" name="profileTabs" value="allCharTab" defaultChecked className="tab"></input>
-                    <label htmlFor="allCharTab" className={currentTab === 'AllCharacters' ? "tabLabel activeTab" : "tabLabel"}>My Characters</label>
+                    <label htmlFor="allCharTab" className={currentTab === 'MyCharacters' ? "tabLabel activeTab" : "tabLabel"}>My Characters</label>
 
                     <input type="radio" id="newCharTab" name="profileTabs" value="newCharTab" className="tab"></input>
                     <label htmlFor="newCharTab" className={currentTab === 'AddCharacter' ? "tabLabel activeTab" : "tabLabel"}>Add Character</label>

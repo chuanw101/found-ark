@@ -23,17 +23,21 @@ function getItemBg(grade) {
     }
 }
 
-function CharacterDetails({ jsonData }) {
-    
-    if (!jsonData) {
+function CharacterDetails({ char }) {
+
+    if (!char) {
         return;
     };
 
-    const advCharData = JSON.parse(jsonData);
-    console.log(advCharData)
+    console.log("CHAR", char);
+
+    const advCharData = JSON.parse(char.json_data);
+
     const rootImgUrl = 'https://cdn.lostark.games.aws.dev/';
 
     let allGears = [];
+
+    console.log("CHAR DATA: ", advCharData);
 
     for (let i = 0; i < 12; i++) {
 
@@ -59,8 +63,8 @@ function CharacterDetails({ jsonData }) {
                     <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
                     <div className="gearInfo">
                         <h4>{curGear.name}</h4>
-                        {bonusEffect.map( effect => <p>{effect}</p>)}
-                        {engravingEffect.map( effect => <p>{effect}</p>)}
+                        {bonusEffect.map(effect => <p>{effect}</p>)}
+                        {engravingEffect.map(effect => <p>{effect}</p>)}
                     </div>
                 </div>
             )
@@ -71,7 +75,7 @@ function CharacterDetails({ jsonData }) {
                     <div className="gearInfo">
                         <h4>{curGear.name}</h4>
                         <p>{curGear.itemLevel}</p>
-                        {engravingEffect.map( effect => <p>{effect}</p>)}
+                        {engravingEffect.map(effect => <p>{effect}</p>)}
                     </div>
                 </div>
             )
@@ -102,6 +106,12 @@ function CharacterDetails({ jsonData }) {
                 <div className="charInfo">
 
                     <h1>{advCharData.pcName}</h1>
+                    <p>Character Class: {advCharData.pcClassName}</p>
+                    <p>Character Lvl: {advCharData.pcLevel}</p>
+                    <p>Item Lvl: {advCharData.maxItemLevel}</p>
+                    <p>Roster Lvl: {advCharData.expeditionLvl}</p>
+                    <p>Engravings: {char.engravings ? char.engravings : 'N/A'}</p>
+
 
                     <div className="charStats">
                         {allStats}
