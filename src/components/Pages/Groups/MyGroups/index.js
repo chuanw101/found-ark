@@ -3,21 +3,15 @@ import axios from 'axios';
 import './style.css';
 
 function MyGroups({ user }) {
-    const [myGroups, setMyGroups] = useState([]);
-
-    const token = localStorage.getItem('foundArkJwt');
+    const [myChars, setMyChars] = useState([]);
 
     //get my groups
-    const getMyGroups = async () => {
+    const getMyChars = async () => {
 
         try {
-            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/groups`, {
-                headers: {
-                    'Authorization': `token ${token}`
-                }
-            });
-            setMyGroups(res.data);
-            console.log(res.data)
+            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/users/${user?.id}`);
+            setMyChars(res.data.characters);
+            console.log(res.data.characters)
         } catch (err) {
             console.log(err);
         };
@@ -25,8 +19,10 @@ function MyGroups({ user }) {
     };
 
     useEffect(() => {
-        //getMyGroups();
+        getMyChars();
     }, []);
+
+    console.log(myChars)
 
     return (
 
