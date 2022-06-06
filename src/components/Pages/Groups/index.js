@@ -85,10 +85,10 @@ function Groups({ user }) {
     const renderTab = () => {
 
         if (currentTab === 'AllGroups') {
-            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} activeTags={activeTags}/>;
+            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} activeTags={activeTags} />;
         };
         if (currentTab === 'MyGroups') {
-            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} /> : navigate(`/login`);
+            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} activeTags={activeTags} /> : navigate(`/login`);
         };
         if (currentTab === 'Group') {
             return user ? <Group currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);

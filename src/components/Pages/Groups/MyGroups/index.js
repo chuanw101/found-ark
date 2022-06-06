@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './style.css';
 
-function MyGroups({ user }) {
+function MyGroups({ user, activeTags }) {
     const [myChars, setMyChars] = useState([]);
 
     //get my groups
@@ -56,6 +56,16 @@ function MyGroups({ user }) {
                                     <div>
                                         <h2>{group.group_name}</h2>
                                         <p>{group.description}</p>
+                                        <p>Members:
+                                            {group.member_char?.map((character) => {
+                                                return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)}{character.char_name}({character.item_lvl}) </span>)
+                                            })}
+                                        </p>
+                                        <p>Tags:
+                                            {group.tag?.map((tag) => {
+                                                return (<span key={tag.id}> {tag.tag_name}</span>)
+                                            })}
+                                        </p>
                                     </div>
 
                                 </div>
