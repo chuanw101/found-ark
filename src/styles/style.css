@@ -153,7 +153,9 @@ h1 {
 
 .tabs {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
+    margin: 0px 0px 0px auto;
 }
 
 .tab {
