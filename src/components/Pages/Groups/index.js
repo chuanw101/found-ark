@@ -33,7 +33,7 @@ function Groups({ user }) {
             return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} />;
         };
         if (currentTab === 'MyGroups') {
-            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
+            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} /> : navigate(`/login`);
         };
         if (currentTab === 'Group') {
             return user ? <Group currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
@@ -50,8 +50,6 @@ function Groups({ user }) {
         <div className="page">
 
             <div className="groupsHeader">
-
-                <input type="search" id="groupFilter" placeholder="Search tags..." className="filterSearch"></input>
 
                 {user?.logged_in ? (
                     <div className="groupTabs" onClick={handleTabSelect}>
