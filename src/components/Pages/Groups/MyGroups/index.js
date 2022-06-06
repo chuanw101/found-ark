@@ -11,17 +11,52 @@ function MyGroups({ user, activeTags }) {
 
         try {
             const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/users/${user?.id}`);
-            setMyChars(res.data.characters);
+            if (res?.data?.characters) {
+                for (const chars of res.data.characters) {
+                    chars.joined = filterGroups(chars.joined);
+                }
+            }
             console.log(res.data.characters)
+            setMyChars(res.data.characters);
         } catch (err) {
             console.log(err);
         };
 
     };
+    
+    const filterGroups = (groupsToFilter) => {
+        if(activeTags.length) {
+            let newGroups = [...groupsToFilter];
+            for (const group of newGroups) {
+                let foundCount = 0;
+                for(const tag of activeTags) {
+                    if (group.tag.some(t=>t.tag_name===tag)) {
+                        foundCount++;
+                    }
+                }
+                group.show = (foundCount === activeTags.length);
+            }
+            return newGroups;
+        } else {
+            let newGroups = [...groupsToFilter];
+            for (const group of newGroups) {
+                group.show = true;
+            }
+            return newGroups;
+        }
+    }
 
     useEffect(() => {
         getMyChars();
     }, []);
+
+    useEffect(()=> {
+        let temp = [...myChars];
+        for (const chars of temp) {
+            chars.joined = filterGroups(chars.joined);
+        }
+        setMyChars(temp);
+    }, [activeTags])
 
     let navigate = useNavigate();
 
@@ -44,7 +79,7 @@ function MyGroups({ user, activeTags }) {
                 return (
                     <div key={char.id}>
                         <h2>{char.char_name}'s Groups</h2>
-                        {char?.joined?.map(group => {
+                        {char?.joined?.filter(group=>group.show).map(group => {
                             return (
 
                                 <div key={group.id} id={group.id} className={
