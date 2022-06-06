@@ -89,9 +89,14 @@ function AllGroups({ user }) {
                         <div className="groupPreviewColumnLeft">
                             <h2>{group.group_name}</h2>
                             <p>{group.description}</p>
-                            <p>
+                            <p>Members: 
                             {group.member_char.map((character)=> {
                                 return( <span key={character.id}>{character.groupmember.is_owner?(<>🟡</>):(<></>)}{character.char_name}({character.item_lvl}) </span>)
+                            })}
+                            </p>
+                            <p>Tags: 
+                            {group.tag.map((tag)=> {
+                                return( <span key={tag.id}> {tag.tag_name}</span>)
                             })}
                             </p>
                         </div>
