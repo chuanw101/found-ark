@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import './style.css';
+import Groups from '..';
 
 function AllGroups({ user, activeTags }) {
 
@@ -21,13 +22,14 @@ function AllGroups({ user, activeTags }) {
                         'Authorization': `token ${token}`
                     }
                 });
-                setAllGroups(res.data);
-                console.log('All Groups: ', allGroups);
+                //setAllGroups(res.data);
                 console.log(res.data)
+                filterGroups(res.data);
             } else {
                 const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/groups`);
-                setAllGroups(res.data);
-                console.log(allGroups);
+                //setAllGroups(res.data);
+                console.log(res.data)
+                filterGroups(res.data);
             };
 
         } catch (err) {
@@ -36,13 +38,9 @@ function AllGroups({ user, activeTags }) {
 
     };
 
-    useEffect(() => {
-        getAllGroups();
-    }, []);
-
-    useEffect(()=> {
+    const filterGroups = (groupsToFilter) => {
         if(activeTags.length) {
-            let tempGroups = [...allGroups];
+            let tempGroups = [...groupsToFilter];
             for (const group of tempGroups) {
                 let foundCount = 0;
                 for(const tag of activeTags) {
@@ -50,10 +48,24 @@ function AllGroups({ user, activeTags }) {
                         foundCount++;
                     }
                 }
-                group.is_hidden = (foundCount !== activeTags.length);
+                group.show = (foundCount === activeTags.length);
+            }
+            setAllGroups([...tempGroups]);
+        } else {
+            let tempGroups = [...groupsToFilter];
+            for (const group of tempGroups) {
+                group.show = true;
             }
             setAllGroups([...tempGroups]);
         }
+    }
+
+    useEffect(() => {
+        getAllGroups();
+    }, []);
+
+    useEffect(()=> {
+        filterGroups(allGroups);
     }, [activeTags])
 
     let navigate = useNavigate();
@@ -87,7 +99,7 @@ function AllGroups({ user, activeTags }) {
         <div className="darkContainer">
             <h1>All Groups</h1>
 
-            {allGroups.filter(group=>!group?.is_hidden).map((group) => {
+            {allGroups.filter(group=>group?.show).map((group) => {
                 return (
 
                     <div key={group.id} id={group.id} className={
