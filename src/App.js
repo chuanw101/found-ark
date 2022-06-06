@@ -30,6 +30,7 @@ import axios from 'axios';
 function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+    const [groupId, setGroupId] = useState(null);
     const [background, setBackground] = useState('bgTree');
 
     const path = window.location.pathname;
@@ -116,10 +117,10 @@ function App() {
         <div className={"App " + background}>
             <Header user={user} logout={logout} />
             <Routes>
-                <Route path="/" element={<Groups user={user} />} />
+                <Route path="/" element={<Groups user={user} setGroupId={setGroupId}/>} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
-                <Route path="group" element={<Group />} />
+                <Route path="group" element={<Group user={user} groupId={groupId}/>} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
                 <Route path="profile" element={<Profile />} />

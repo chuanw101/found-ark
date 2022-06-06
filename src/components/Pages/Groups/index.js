@@ -7,7 +7,7 @@ import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
 
-function Groups({ user }) {
+function Groups({ user, setGroupId }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
 
@@ -30,7 +30,7 @@ function Groups({ user }) {
     const renderTab = () => {
 
         if (currentTab === 'AllGroups') {
-            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} />;
+            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} setGroupId={setGroupId} />;
         };
         if (currentTab === 'MyGroups') {
             return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);

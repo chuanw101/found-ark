@@ -13,7 +13,7 @@ function CreateGroup() {
     const [description, setDescription] = useState("");
     const [discord, setDiscord] = useState("");
     const [allChars, setAllChars] = useState([]);
-    const [charId, setCharId] = useState("");
+    const [charId, setCharId] = useState(null);
     // const [day, setDay] = useState("");
     // const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
@@ -122,7 +122,9 @@ function CreateGroup() {
     const getAllChars = async () => {
         try {
             const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/characters/owner/${tokenData.id}`);
+            console.log(res.data)
             setAllChars(res.data);
+            setCharId(res?.data[0]?.id);
         } catch (err) {
             console.log(err);
         }
@@ -136,13 +138,11 @@ function CreateGroup() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-
             const res = await axios.post('https://found-ark-backend.herokuapp.com/api/groups', {
-                creator_id: tokenData.id,
                 group_name: groupName,
                 description: description,
                 discord: discord,
-                char_id: charId,
+                creator_char_id: charId,
                 // time: `${day} @ ${time}, ${selectedTimezone}`,
                 tags: tags
             }, {
@@ -153,6 +153,7 @@ function CreateGroup() {
 
             const groupData = res.data[0];
             console.log(groupData);
+            console.log(res);
 
             setGroupName('');
             setDescription('');
