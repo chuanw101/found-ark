@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import './style.css';
-
 import axios from 'axios'
-
 import CharacterDetails from '../../../CharacterDetails';
+
+import WidgetBot from '@widgetbot/react-embed'
+import { Server } from '@widgetbot/embed-api';
+
+const api = new Server({ id: 'test' });
+
+api.on('sendMessage', message => {
+  console.log('sending:', message)
+});
+
+api.emit('message', { id: 'testmessage' });
 
 function Group({ user }) {
     const [group, setGroup] = useState(null);
@@ -193,33 +202,53 @@ function Group({ user }) {
         }
     }
 
-    let membersEl = [];
-    if (group) {
-        for (let i = 0; i < group?.member_char?.length; i++) {
-            membersEl.push(
-                <div key={i}>
-                    <h2>{group.member_char[i].char_name}</h2>
-                    <CharacterDetails jsonData={group.member_char[i].json_data} />
-                </div>
-            )
-        }
-    }
+    const groupMembers = group?.member_char;
 
     useEffect(() => {
-        getGroup();
+    getGroup();
     }, []);
 
     return (
 
         <div className="page">
-            {getUserStatus()}
-            <h1>{group?.group_name}</h1>
-            <h2>{group?.description}</h2>
-            <h2>{group?.region}</h2>
-            <h2>Created by {group?.creator.char_name} ({group?.creator.owner.user_name}) </h2>
-            <br></br>
-            <h1>Members:</h1>
-            {membersEl}
+
+            <div className="darkContainer">
+
+                {getUserStatus()}
+
+                <h1>{group?.group_name}</h1>
+                <h2>{group?.description}</h2>
+                <h2>{group?.region}</h2>
+                <h2>Created by {group?.creator.char_name} ({group?.creator.owner.user_name}) </h2>
+
+                <div className="discordEmbed">
+
+                    <WidgetBot
+                        server="983439059089240064"
+                        channel="983439059542233140"
+
+                        height="600" width="800"
+                    />
+
+                </div>
+
+                <h1>Members:</h1>
+
+                {groupMembers?.map(char =>
+                    <div key={char.id} className="characterPreview">
+                        <CharacterDetails char={char} />
+                    </div>
+                )}
+
+            </div>
+
+            {/* <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+                new Crate({
+                    server: '983439059089240064', // Found Ark Chat Server
+                    channel: '983439059542233140' // #general
+                })
+            </script> */}
+
         </div>
 
     );
