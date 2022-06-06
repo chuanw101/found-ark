@@ -58,17 +58,9 @@ function AllGroups({ user }) {
     }
 
     const handleApply = async (e) => {
-
         try {
-
-            if (user) {
-                const res = await axios.post(`https://found-ark-backend.herokuapp.com/api/groupmembers/${e.target.value}`, {
-                    headers: {
-                        'Authorization': `token ${token}`
-                    }
-                });
-                alert(`We've notified the group leader that you would like to join. Keep an eye on your notifications for their response.`)
-                console.log(res);
+            if (user.logged_in) {
+                alert(`TODO add modal to select char.`)
             } else {
                 navigate('login');
             };
@@ -76,7 +68,6 @@ function AllGroups({ user }) {
         } catch (err) {
             console.log(err);
         };
-
     }
 
     return (
@@ -98,11 +89,16 @@ function AllGroups({ user }) {
                         <div className="groupPreviewColumnLeft">
                             <h2>{group.group_name}</h2>
                             <p>{group.description}</p>
+                            <p>
+                            {group.member_char.map((character)=> {
+                                return( <span key={character.id}>{character.groupmember.is_owner?(<>🟡</>):(<></>)}{character.char_name}({character.item_lvl}) </span>)
+                            })}
+                            </p>
                         </div>
 
                         <div className="groupPreviewColumnRight">
-                            <h4>Group Leader</h4>
-                            <p>{group.creator.user_name}</p>
+                            {/* <h4>Group Leader</h4>
+                            <p>{group.creator.char_name} ({group.creator.owner.user_name})</p> */}
                             <button className="previewApplyBtn" value={group.id} onClick={handleApply}>Apply</button>
                         </div>
 
