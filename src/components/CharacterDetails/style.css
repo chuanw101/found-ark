@@ -14,6 +14,7 @@
 .charClassImg {
     width: 400px;
     object-fit: contain;
+    margin-right: var(--medium);
 }
 
 .charInfo {
@@ -23,6 +24,15 @@
 
 .charInfo h1 {
     text-transform: uppercase;
+}
+
+.charSpecs {
+    display: flex;
+    flex-direction: column;
+}
+
+.charSpecs h3 {
+    margin-bottom: var(--small);
 }
 
 .charStats {

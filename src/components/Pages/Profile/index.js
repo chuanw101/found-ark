@@ -14,18 +14,20 @@ function Profile() {
     const token = localStorage.getItem('foundArkJwt');
     const tokenData = jwtDecode(token);
 
-    const [currentTab, setCurrentTab] = useState('AllCharacters');
+    const [currentTab, setCurrentTab] = useState('MyCharacters');
 
     const handleTabSelect = () => {
 
         if (document.getElementById('allCharTab').checked) {
-            setCurrentTab('AllCharacters');
+            setCurrentTab('MyCharacters');
         };
+
         if (document.getElementById('newCharTab').checked) {
-            setCurrentTab('AddCharacter')
+            setCurrentTab('AddCharacter');
         };
+
         if (document.getElementById('editInfoTab').checked) {
-            setCurrentTab('EditInfo')
+            setCurrentTab('EditInfo');
         };
 
     };
@@ -48,17 +50,13 @@ function Profile() {
         // My Characters
         if (currentTab === 'MyCharacters') {
 
-            return (
+            allChars ? (allChars.map(char => {
 
-                allChars.map( char => {
+                <div className="characterPreview">
+                    <CharacterDetails currentTab={currentTab} setCurrentTab={setCurrentTab} char={char} />
+                </div>
 
-                    <div className="characterPreview">
-                        <CharacterDetails currentTab={currentTab} setCurrentTab={setCurrentTab} char={char} />
-                    </div>
-
-                })
-
-            );
+            })) : setCurrentTab('AddCharacter');
 
         };
 

@@ -4,7 +4,7 @@ import CharacterDetails from '../../../CharacterDetails';
 import './style.css';
 
 
-function AddCharacter({ currentTab, setCurrentTab }) {
+function AddCharacter({ setCurrentTab }) {
     const [charName, setCharName] = useState('');
     const [className, setClassName] = useState('');
     const [iLvl, setILvl] = useState('');
@@ -74,7 +74,6 @@ function AddCharacter({ currentTab, setCurrentTab }) {
     };
 
     const addCharacter = async (e) => {
-        setCurrentTab('AllCharacters');
         e.preventDefault();
         try {
             await axios.post('https://found-ark-backend.herokuapp.com/api/characters', {
@@ -99,12 +98,25 @@ function AddCharacter({ currentTab, setCurrentTab }) {
             setJsonData('');
         } catch (err) {
             console.log(err);
-        }
+        };
+
+        setCurrentTab('AllCharacters');
+
     };
+
+    const charData = {
+        char_name: charName,
+        class: className,
+        item_lvl: iLvl,
+        roster_lvl: rosterLvl,
+        char_lvl: charLvl,
+        engravings: engravings,
+        json_data: jsonData,
+    }
 
     return (
 
-        <div class="darkContainer">
+        <div className="darkContainer">
 
             <h1>Add Character</h1>
 
@@ -148,7 +160,7 @@ function AddCharacter({ currentTab, setCurrentTab }) {
 
                 </div>
 
-                {jsonData ? <div className="characterPreview"> <CharacterDetails jsonData={jsonData} charName={charName} charClass={className} /> </div> : ''}
+                {charData.char_name ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
 
 
             </div>

@@ -31,69 +31,75 @@ function CharacterDetails({ char }) {
 
     console.log("CHAR", char);
 
-    const advCharData = JSON.parse(char.json_data);
+    let advCharData;
+
+    if (char.json_data) {
+        advCharData = JSON.parse(char.json_data);
+    };
 
     const rootImgUrl = 'https://cdn.lostark.games.aws.dev/';
 
     let allGears = [];
+    let allStats = [];
 
-    console.log("CHAR DATA: ", advCharData);
+    if (advCharData) {
 
-    for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 12; i++) {
 
-        const curGear = advCharData.equipList[i];
+            const curGear = advCharData.equipList[i];
 
-        const bonusEffect = curGear.stats['Bonus Effect'];
-        const engravingEffect = curGear.stats['Random Engraving Effect'];
+            const bonusEffect = curGear.stats['Bonus Effect'];
+            const engravingEffect = curGear.stats['Random Engraving Effect'];
 
-        // gear equip
-        if (i < 6) {
-            allGears.push(
-                <div key={i} className="charGear">
-                    <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
-                    <div className="gearInfo">
-                        <h4>{curGear.name}</h4>
-                        <p>{curGear.itemLevel}</p>
+            // gear equip
+            if (i < 6) {
+                allGears.push(
+                    <div key={i} className="charGear">
+                        <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
+                        <div className="gearInfo">
+                            <h4>{curGear.name}</h4>
+                            <p>{curGear.itemLevel}</p>
+                        </div>
                     </div>
-                </div>
-            )
-        } else if (i < 11) { // accesories
-            allGears.push(
-                <div key={i} className="charGear">
-                    <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
-                    <div className="gearInfo">
-                        <h4>{curGear.name}</h4>
-                        {bonusEffect.map(effect => <p>{effect}</p>)}
-                        {engravingEffect.map(effect => <p>{effect}</p>)}
+                )
+            } else if (i < 11) { // accesories
+                allGears.push(
+                    <div key={i} className="charGear">
+                        <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
+                        <div className="gearInfo">
+                            <h4>{curGear.name}</h4>
+                            {bonusEffect.map(effect => <p>{effect}</p>)}
+                            {engravingEffect.map(effect => <p>{effect}</p>)}
+                        </div>
                     </div>
-                </div>
-            )
-        } else { //ability stone
-            allGears.push(
-                <div key={i} className="charGear">
-                    <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
-                    <div className="gearInfo">
-                        <h4>{curGear.name}</h4>
-                        <p>{curGear.itemLevel}</p>
-                        {engravingEffect.map(effect => <p>{effect}</p>)}
+                )
+            } else { //ability stone
+                allGears.push(
+                    <div key={i} className="charGear">
+                        <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
+                        <div className="gearInfo">
+                            <h4>{curGear.name}</h4>
+                            <p>{curGear.itemLevel}</p>
+                            {engravingEffect.map(effect => <p>{effect}</p>)}
+                        </div>
                     </div>
+                )
+            };
+
+        };
+
+        for (let i = 0; i < advCharData.statsList.length; i++) {
+            const curStat = advCharData.statsList[i];
+            allStats.push(
+                <div key={i} className="charStat">
+                    <h3>{curStat.value}</h3>
+                    <p>{curStat.description}</p>
                 </div>
             )
         };
 
     };
 
-    let allStats = [];
-
-    for (let i = 0; i < advCharData.statsList.length; i++) {
-        const curStat = advCharData.statsList[i];
-        allStats.push(
-            <div key={i} className="charStat">
-                <h3>{curStat.value}</h3>
-                <p>{curStat.description}</p>
-            </div>
-        )
-    };
 
     return (
 
@@ -101,29 +107,42 @@ function CharacterDetails({ char }) {
 
             <div className="charHeadline">
 
-                <img src={`https://cdn.lostark.games.aws.dev/EFUI_IconAtlas/PC/${advCharData.pcClassName?.toLowerCase()}.png`} alt={`${advCharData.pcClassName} preview`} className="charClassImg"></img>
+                {advCharData ? <img src={`https://cdn.lostark.games.aws.dev/EFUI_IconAtlas/PC/${advCharData.pcClassName?.toLowerCase()}.png`} alt={`${advCharData.pcClassName} preview`} className="charClassImg"></img> : ''}
 
                 <div className="charInfo">
 
-                    <h1>{advCharData.pcName}</h1>
-                    <p>Character Class: {advCharData.pcClassName}</p>
-                    <p>Character Lvl: {advCharData.pcLevel}</p>
-                    <p>Item Lvl: {advCharData.maxItemLevel}</p>
-                    <p>Roster Lvl: {advCharData.expeditionLvl}</p>
-                    <p>Engravings: {char.engravings ? char.engravings : 'N/A'}</p>
+                    <h1>{advCharData ? advCharData.pcName : char.char_name}</h1>
 
+                    <div className="charSpecs">
+                        <p>Character Class:</p>
+                        <h3>{advCharData ? advCharData.pcClassName : char.class}</h3>
 
-                    <div className="charStats">
-                        {allStats}
+                        <p>Character Lvl:</p>
+                        <h3>{advCharData ? advCharData.pcLevel : char.class}</h3>
+
+                        <p>Item Lvl:</p>
+                        <h3>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</h3>
+
+                        <p>Roster Lvl:</p>
+                        <h3>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</h3>
+
+                        <p>Engravings:</p>
+                        <h3>{char.engravings ? char.engravings : '0'}</h3>
                     </div>
 
                 </div>
 
             </div>
 
-            <div className="charGears">
+            <div className="fullCharInfo">
 
-                {allGears}
+                <div className="charStats">
+                    {allStats}
+                </div>
+
+                <div className="charGears">
+                    {allGears}
+                </div>
 
             </div>
 
