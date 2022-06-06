@@ -21,6 +21,7 @@ function AllCharacters({ allChars }) {
     return (
         <div>
             <h1>My Chars</h1>
+            {allChars.map}
             {allCharsEl}
         </div>
     );
