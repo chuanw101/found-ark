@@ -43,8 +43,6 @@ function Profile() {
         getAllChars();
     }, []);
 
-    getAllChars();
-
     const renderTab = () => {
 
         if (currentTab === 'AllCharacters') {
