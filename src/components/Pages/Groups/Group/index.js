@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import './style.css';
 
 import axios from 'axios'
 
 import CharacterDetails from '../../../CharacterDetails';
 
-function Group({ user, groupId }) {
+function Group({ user }) {
     const [group, setGroup] = useState(null);
     const [allChars, setAllChars] = useState(null);
     const [charId, setCharId] = useState(null);
+
+    const { groupId } = useParams();
 
     // get all groups
     const getGroup = async () => {
@@ -55,6 +58,7 @@ function Group({ user, groupId }) {
                     'Authorization': `token ${token}`
                 }
             });
+            window.location.reload(false);
         } catch (err) {
             console.log(err);
         };
@@ -73,6 +77,7 @@ function Group({ user, groupId }) {
                     char_id: charId,
                 }
             });
+            window.location.reload(false);
         } catch (err) {
             console.log(err);
         };
@@ -89,6 +94,7 @@ function Group({ user, groupId }) {
                     'Authorization': `token ${token}`
                 }
             });
+            window.location.reload(false);
         } catch (err) {
             console.log(err);
         };
@@ -107,6 +113,7 @@ function Group({ user, groupId }) {
                     char_id: e.target.value,
                 }
             });
+            window.location.reload(false);
         } catch (err) {
             console.log(err);
         };

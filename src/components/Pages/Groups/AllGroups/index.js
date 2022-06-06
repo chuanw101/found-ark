@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import './style.css';
 
-function AllGroups({ user, setGroupId }) {
+function AllGroups({ user }) {
 
     const [allGroups, setAllGroups] = useState([]);
 
@@ -54,8 +54,7 @@ function AllGroups({ user, setGroupId }) {
             id = temp.id;
             temp = temp.parentElement;
         }
-        setGroupId(id);
-        navigate('/group')
+        navigate(`/group/${id}`)
     }
 
     const handleApply = async (e) => {
