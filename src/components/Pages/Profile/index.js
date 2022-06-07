@@ -46,22 +46,28 @@ function Profile() {
         getAllChars();
     }, []);
 
-    console.log('ALL CHARS: ', allChars);
-
     const renderTab = () => {
 
         // My Characters
         if (currentTab === 'MyCharacters') {
 
-            for (let i = 0; i < allChars.length; i++) {
+            if (allChars) {
 
-                return <div key={allChars[i].id}>
-                    <CharacterDetails char={allChars[i]} />
-                </div>
+                return (
+                    <div className="allMyCharacters">
 
-            }
+                        {allChars.map(char =>
+                            <div key={char.id} className="myCharacterCard">
+                                <CharacterDetails char={char} />
+                            </div>
+                        )}
 
-        }
+                    </div>
+                );
+
+            };
+
+        };
 
         // Add Character
         if (currentTab === 'AddCharacter') {
@@ -101,14 +107,10 @@ function Profile() {
 
             </div>
 
-            <div className="darkContainer">
-
-                {renderTab()}
-
-            </div>
+            {renderTab()}
 
         </div>
-        
+
     );
 
 };

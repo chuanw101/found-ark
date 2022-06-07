@@ -1,3 +1,18 @@
 .welcomeMessage {
     margin-left: var(--small);
 }
+
+.allMyCharacters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--large) var(--large) var(--medium) var(--large);
+}
+
+.myCharacterCard {
+    width: 49%;
+    margin-bottom: var(--medium);
+}

@@ -31,13 +31,13 @@ function CharacterDetails({ char }) {
         return;
     };
 
-    console.log("CHAR", char);
-
     let advCharData;
 
     if (char.json_data) {
         advCharData = JSON.parse(char.json_data);
     };
+
+    console.log("CHAR", advCharData);
 
     const rootImgUrl = 'https://cdn.lostark.games.aws.dev/';
 
@@ -56,7 +56,7 @@ function CharacterDetails({ char }) {
             // gear equip
             if (i < 6) {
                 allGears.push(
-                    <div key={i} className="charGear">
+                    <div key={"gear" + i} className="charGear">
                         <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
@@ -66,7 +66,7 @@ function CharacterDetails({ char }) {
                 )
             } else if (i < 11) { // accesories
                 allGears.push(
-                    <div key={i} className="charGear">
+                    <div key={"gear" + i} className="charGear">
                         <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
@@ -77,7 +77,7 @@ function CharacterDetails({ char }) {
                 )
             } else { //ability stone
                 allGears.push(
-                    <div key={i} className="charGear">
+                    <div key={"gear" + i} className="charGear">
                         <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
@@ -93,7 +93,7 @@ function CharacterDetails({ char }) {
         for (let i = 0; i < advCharData.statsList.length; i++) {
             const curStat = advCharData.statsList[i];
             allStats.push(
-                <div key={i} className="charStat">
+                <div key={"stat" + i} className="charStat">
                     <h3>{curStat.value}</h3>
                     <p>{curStat.description}</p>
                 </div>
