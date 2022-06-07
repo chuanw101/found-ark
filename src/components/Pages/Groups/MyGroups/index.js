@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import moment from 'moment';
 import './style.css';
 
 function MyGroups({ user, activeTags }) {
@@ -71,6 +72,13 @@ function MyGroups({ user, activeTags }) {
         navigate(`/group/${id}`)
     }
 
+    const formatTime = (time) => {
+        if(!time) {
+            return
+        }
+        return(moment(time).format('dddd h:mm a'))
+    }
+
     return (
 
         <div className="darkContainer">
@@ -92,6 +100,7 @@ function MyGroups({ user, activeTags }) {
                                     <div>
                                         <h2>{group.group_name}</h2>
                                         <p>{group.description}</p>
+                                        <p>{formatTime(group.time)}</p>
                                         <p>Members:
                                             {group.member_char?.map((character) => {
                                                 return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)}{character.char_name}({character.item_lvl}) </span>)

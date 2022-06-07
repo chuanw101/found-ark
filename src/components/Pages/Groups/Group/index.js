@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import './style.css';
-import axios from 'axios'
+import axios from 'axios';
+import moment from 'moment';
 import CharacterDetails from '../../../CharacterDetails';
+import DiscordHelpModal from "../../../DiscordHelpModal";
 
 import WidgetBot from '@widgetbot/react-embed'
 import { Server } from '@widgetbot/embed-api';
 
-const api = new Server({ id: 'test' });
 
-api.on('sendMessage', message => {
-    console.log('sending:', message)
-});
-
-api.emit('message', { id: 'testmessage' });
 
 function Group({ user, setBackground }) {
     const [group, setGroup] = useState(null);
     const [allChars, setAllChars] = useState(null);
     const [charId, setCharId] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const { groupId } = useParams();
+
+    const api = new Server({ id: 'test' });
+
+    api.on('sendMessage', message => {
+        console.log('sending:', message)
+    });
+
+    api.emit('message', { id: 'testmessage' });
+
+    const defaultDiscord = ['https://discord.gg/HWHXZftA', '983439059089240064', '983439059542233140'];
 
     // get all groups
     const getGroup = async () => {
@@ -224,6 +231,15 @@ function Group({ user, setBackground }) {
         selectBackground();
     }, []);
 
+    const discordInfo = group?.discord?.split(' ');
+
+    const formatTime = (time) => {
+        if (!time) {
+            return
+        }
+        return (moment(time).format('dddd h:mm a'))
+    }
+
     return (
 
         <div className="page">
@@ -235,6 +251,24 @@ function Group({ user, setBackground }) {
                 <div className="groupTitle">
                     <h1>{group?.group_name}</h1>
                     <p>{group?.description}</p>
+                    <p>{formatTime(group?.time)}</p>
+
+                    {discordInfo ? (
+                        <><a href={discordInfo[0]}>{discordInfo[0]}</a></>
+                    ) : (
+                        <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<span>(default link)</span></a></>
+                    )}
+                    {group?.creator?.owner_id === user?.id ? (
+                        <>
+                            <button className="discordBtn"
+                                onClick={() => {
+                                    setModalOpen(true);
+                                }}
+                            >
+                                Embed A Different Discord
+                            </button>
+                        </>
+                    ) : (<></>)}
                 </div>
 
                 <div className="groupDetails">
@@ -247,7 +281,7 @@ function Group({ user, setBackground }) {
 
             </div>
 
-            {/* </div> */}
+            {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} setGroup={setGroup} group={group} />}
 
             <div className="darkContainer">
 
@@ -268,18 +302,30 @@ function Group({ user, setBackground }) {
                     </div>
 
                     <div className="discordWidget">
+                        {discordInfo?.length == 3 ? (
+                            <>
+                                <WidgetBot
+                                    server={discordInfo[1]}
+                                    channel={discordInfo[2]}
 
-                        <WidgetBot
-                            server="983439059089240064"
-                            channel="983439059542233140"
+                                    height="80vh" width="50vw"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <WidgetBot
+                                    server={defaultDiscord[1]}
+                                    channel={defaultDiscord[2]}
 
-                            height="80vh" width="1000"
-                        />
+                                    height="80vh" width="50vw"
+                                />
+                            </>
+                        )}
+
+
 
                     </div>
-
                 </div>
-
             </div>
 
         </div>
