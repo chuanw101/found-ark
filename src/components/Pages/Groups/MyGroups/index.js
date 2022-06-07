@@ -77,8 +77,9 @@ function MyGroups({ user, activeTags }) {
             <h1>My Groups</h1>
             {myChars.map(char => {
                 return (
-                    <div key={char.id}>
+                    <React.Fragment key={char.id}>
                         <h2>{char.char_name}'s Groups</h2>
+                        {char?.joined?.length ? (<></>) : (<><h3>none joined</h3></>)}
                         {char?.joined?.filter(group=>group.show).map(group => {
                             return (
 
@@ -106,7 +107,7 @@ function MyGroups({ user, activeTags }) {
                                 </div>
                             );
                         })}
-                    </div>
+                    </React.Fragment>
                 )
             })}
         </div>
