@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './style.css'
 
@@ -24,6 +24,8 @@ function getItemBg(grade) {
 }
 
 function CharacterDetails({ char }) {
+
+    const [statsActive, setStatsActive] = useState(false);
 
     if (!char) {
         return;
@@ -100,6 +102,9 @@ function CharacterDetails({ char }) {
 
     };
 
+    const checkStatus = () => {
+        statsActive ? setStatsActive(false) : setStatsActive(true);
+    };
 
     return (
 
@@ -113,28 +118,34 @@ function CharacterDetails({ char }) {
 
                     <h1>{advCharData ? advCharData.pcName : char.char_name}</h1>
 
-                    <div className="charSpecs">
-                        <p>Character Class:</p>
-                        <h3>{advCharData ? advCharData.pcClassName : char.class}</h3>
+                    <div className="statButtonContainer">
 
-                        <p>Character Lvl:</p>
-                        <h3>{advCharData ? advCharData.pcLevel : char.class}</h3>
+                        <div className="charSpecs">
+                            <p>Character Class:</p>
+                            <h3>{advCharData ? advCharData.pcClassName : char.class}</h3>
 
-                        <p>Item Lvl:</p>
-                        <h3>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</h3>
+                            <p>Character Lvl:</p>
+                            <h3>{advCharData ? advCharData.pcLevel : char.class}</h3>
 
-                        <p>Roster Lvl:</p>
-                        <h3>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</h3>
+                            <p>Item Lvl:</p>
+                            <h3>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</h3>
 
-                        <p>Engravings:</p>
-                        <h3>{char.engravings ? char.engravings : '0'}</h3>
+                            <p>Roster Lvl:</p>
+                            <h3>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</h3>
+
+                            <p>Engravings:</p>
+                            <h3>{char.engravings ? char.engravings : '0'}</h3>
+                        </div>
+
+                        <button onClick={checkStatus} className={"collapsible " + (statsActive ? "closed" : "open")}>Stats & Gear</button>
+
                     </div>
 
                 </div>
 
             </div>
 
-            <div className="fullCharInfo">
+            <div className={"fullCharInfo " + (statsActive ? "" : "collapsed")}>
 
                 <div className="charStats">
                     {allStats}
