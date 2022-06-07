@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import './style.css';
-import axios from 'axios'
+import axios from 'axios';
+import moment from 'moment';
 import CharacterDetails from '../../../CharacterDetails';
 import DiscordHelpModal from "../../../DiscordHelpModal";
 
@@ -232,6 +233,13 @@ function Group({ user, setBackground }) {
 
     const discordInfo = group?.discord?.split(' ');
 
+    const formatTime = (time) => {
+        if (!time) {
+            return
+        }
+        return (moment(time).format('dddd h:mm a'))
+    }
+
     return (
 
         <div className="page">
@@ -243,18 +251,24 @@ function Group({ user, setBackground }) {
                 <div className="groupTitle">
                     <h1>{group?.group_name}</h1>
                     <p>{group?.description}</p>
+                    <p>{formatTime(group?.time)}</p>
+
                     {discordInfo ? (
                         <><a href={discordInfo[0]}>{discordInfo[0]}</a></>
                     ) : (
                         <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<span>(default link)</span></a></>
                     )}
-                    <button className = "discordBtn"
-                        onClick={() => {
-                            setModalOpen(true);
-                        }}
-                    >
-                        Embed A Different Discord
-                    </button>
+                    {group?.creator?.owner_id === user?.id ? (
+                        <>
+                            <button className="discordBtn"
+                                onClick={() => {
+                                    setModalOpen(true);
+                                }}
+                            >
+                                Embed A Different Discord
+                            </button>
+                        </>
+                    ) : (<></>)}
                 </div>
 
                 <div className="groupDetails">

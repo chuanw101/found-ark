@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import moment from 'moment';
 import './style.css';
 import Groups from '..';
 
@@ -94,6 +95,13 @@ function AllGroups({ user, activeTags }) {
         };
     }
 
+    const formatTime = (time) => {
+        if(!time) {
+            return
+        }
+        return(moment(time).format('dddd h:mm a'))
+    }
+
     return (
 
         <div className="darkContainer">
@@ -113,6 +121,7 @@ function AllGroups({ user, activeTags }) {
                             <div>
                                 <h2>{group.group_name}</h2>
                                 <p>{group.description}</p>
+                                <p>{formatTime(group.time)}</p>
                             </div>
 
                             <div>
