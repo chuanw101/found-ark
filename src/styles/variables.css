@@ -18,6 +18,7 @@
     --gray: gray;
     --lightgray: rgb(215, 215, 215);
     --darkgray: rgb(30, 30, 30);
+    --opdarkgray: rgba(61, 60, 60, 0.5);
 
     --accent: hsl(40, 90%, 70%);
     --accent90: ;

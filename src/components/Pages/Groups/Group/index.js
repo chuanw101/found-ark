@@ -7,9 +7,8 @@ import CharacterDetails from '../../../CharacterDetails';
 import DiscordHelpModal from "../../../DiscordHelpModal";
 import EditGroupModal from  "../../../EditGroupModal";
 
-import WidgetBot from '@widgetbot/react-embed'
+import WidgetBot from '@widgetbot/react-embed';
 import { Server } from '@widgetbot/embed-api';
-
 
 
 function Group({ user, setBackground }) {
@@ -19,17 +18,15 @@ function Group({ user, setBackground }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [groupModalOpen, setGroupModalOpen] = useState(false);
 
-
-
-    const { groupId } = useParams();
-
     const api = new Server({ id: 'test' });
 
     api.on('sendMessage', message => {
         console.log('sending:', message)
     });
-
+    
     api.emit('message', { id: 'testmessage' });
+
+    const { groupId } = useParams();
 
     const defaultDiscord = ['https://discord.gg/HWHXZftA', '983439059089240064', '983439059542233140'];
 

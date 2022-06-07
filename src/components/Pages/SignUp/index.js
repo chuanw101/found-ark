@@ -51,13 +51,18 @@ function SignUp({ handleSignupSubmit }) {
 
                     <div>
                         <label htmlFor="username"><b>Username</b></label>
+                        <div id="userVal">
                         <input type="text" id="username" placeholder="Enter Username" name="username" pattern='[a-zA-Z0-9]{4,}' value={username} onChange={handleInputChange} required></input>
                         <span className="validity"></span>
+                        </div>
                     </div>
-
+                    <div>
                     <label htmlFor="password"><b>Password</b></label>
+                    <div id="passVal">
                     <input type="password" id='password' placeholder="Enter Password" name="password" pattern='.{8,}' value={password} onChange={handleInputChange} required />
                     <span className="validity"></span>
+                    </div>
+                    </div>
 
 
                     <label htmlFor="region"><b>Region</b></label>

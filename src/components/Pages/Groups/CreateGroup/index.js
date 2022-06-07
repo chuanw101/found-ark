@@ -238,8 +238,8 @@ function CreateGroup() {
                     <div className="tagInput">
 
                         <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                        <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
                         <span className="validity"></span>
+                        <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
 
                     </div>
 

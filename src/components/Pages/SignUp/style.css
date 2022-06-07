@@ -1,0 +1,9 @@
+#passVal{
+    display: flex;
+    flex-direction: row;
+}
+
+#userVal{
+    display: flex;
+    flex-direction: row;
+}
