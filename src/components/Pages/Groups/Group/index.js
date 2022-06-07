@@ -22,6 +22,8 @@ function Group({ user, setBackground }) {
 
     const { groupId } = useParams();
 
+    const defaultDiscord = ['https://discord.gg/HWHXZftA', '983439059089240064', '983439059542233140'];
+
     // get all groups
     const getGroup = async () => {
         try {
@@ -224,6 +226,8 @@ function Group({ user, setBackground }) {
         selectBackground();
     }, []);
 
+    const discordInfo = group?.discord?.split(' ');
+
     return (
 
         <div className="page">
@@ -235,6 +239,11 @@ function Group({ user, setBackground }) {
                 <div className="groupTitle">
                     <h1>{group?.group_name}</h1>
                     <p>{group?.description}</p>
+                    {discordInfo? (
+                        <><a href={discordInfo[0]}>{discordInfo[0]}</a></>
+                    ) : (
+                        <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<spans>(default link)</spans></a></>
+                    )}
                 </div>
 
                 <div className="groupDetails">
@@ -268,18 +277,30 @@ function Group({ user, setBackground }) {
                     </div>
 
                     <div className="discordWidget">
+                        {discordInfo?.length==3 ? (
+                            <>
+                            <WidgetBot
+                            server={discordInfo[1]}
+                            channel={discordInfo[2]}
 
-                        <WidgetBot
-                            server="983439059089240064"
-                            channel="983439059542233140"
+                            height="80vh" width="50vw"
+                            />
+                            </>
+                        ) : (
+                            <>
+                            <WidgetBot
+                            server={defaultDiscord[1]}
+                            channel={defaultDiscord[2]}
 
-                            height="80vh" width="1000"
-                        />
+                            height="80vh" width="50vw"
+                            />
+                            </>
+                        )}
+
+                        
 
                     </div>
-
                 </div>
-
             </div>
 
         </div>
