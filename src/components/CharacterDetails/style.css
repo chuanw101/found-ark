@@ -17,6 +17,10 @@
     margin-right: var(--medium);
 }
 
+.statButtonContainer {
+    display: flex;
+}
+
 .charInfo {
     display: flex;
     flex-direction: column;
@@ -33,6 +37,52 @@
 
 .charSpecs h3 {
     margin-bottom: var(--small);
+}
+
+.collapsible {
+    display: flex;
+    justify-content: flex-end;
+    background: none;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.closed:after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    content: '^';
+    font-size: 1.5em;
+    -webkit-transform: scaleX(150%);
+    transform: scaleX(150%);
+    margin: 7px 0px auto var(--small);
+    transition: all 0.2s ease;
+}
+
+.open:after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    content: '^';
+    font-size: 1.5em;
+    -webkit-transform: scaleX(150%);
+    transform: scaleX(150%);
+    -webkit-transform: scale(150%, -1);
+    transform: scale(150%, -1);
+    margin: -4px 0px auto var(--small);
+    transition: all 0.2s ease;
+}
+
+.collapsed {
+    display: none;
+    transition: all 0.2s ease;
+}
+
+.fullCharInfo {
+    overflow: hidden;
+    transition: all 0.2s ease-out;
 }
 
 .charStats {
