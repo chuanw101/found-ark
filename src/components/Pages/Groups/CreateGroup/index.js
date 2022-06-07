@@ -193,7 +193,7 @@ function CreateGroup() {
                 <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
 
                 <label htmlFor="discord">Discord</label>
-                <input type="url" placeholder="https://discord.com" name="discord" pattern="https://.*" onChange={handleInputChange} required />
+                <input type="url" placeholder="https://discord.gg/aaaa" name="discord" pattern="https://.*" onChange={handleInputChange} required />
 
                 <label htmlFor="characters">Group Leader</label>
                 <select name="characters" required onChange={handleInputChange}>
