@@ -51,6 +51,7 @@ form {
     flex-direction: column;
     width: 100%;
     width: 800px;
+    max-width: 100%;
     padding: var(--medium);
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
@@ -71,6 +72,16 @@ select {
 
 select:invalid {
     color: var(--gray);
+}
+
+input:invalid ~ span:after {
+    content: '✖';
+    padding: 5px;
+}
+
+input:valid ~ span:after {
+    content: '✓';
+    padding: 5px;
 }
 
 button {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import "./style.css";
+import "../../styles/modals.css";
+
 
 function EditGroupModal({ setOpenModal, setGroup, group }) {
     const [groupName, setGroupName] = useState("");
@@ -146,7 +147,6 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                     <h1>Edit Group Information</h1>
                 </div>
 
-                <div className="body">
                     <form method="post" className="createGroup">
 
 
@@ -187,8 +187,8 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                             <div className="tagInput">
 
                                 <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                                <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
                                 <span className="validity"></span>
+                                <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
 
                             </div>
 
@@ -200,15 +200,14 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                             </div>
 
                         </div>
+                        <div className="footer">
+                            <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
+                            <button onClick={submitNewGroupInfo}>Submit</button>
+                        </div>
                     </form>
 
                 </div>
-                <div className="footer">
-                    <button onClick={submitNewGroupInfo}>Submit</button>
-                    <button onClick={() => setOpenModal(false)}>Cancel</button>
-                </div>
             </div>
-        </div>
     );
 }
 
