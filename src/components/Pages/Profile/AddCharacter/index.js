@@ -4,7 +4,7 @@ import CharacterDetails from '../../../CharacterDetails';
 import './style.css';
 
 
-function AddCharacter({ setCurrentTab }) {
+function AddCharacter() {
     const [charName, setCharName] = useState('');
     const [className, setClassName] = useState('');
     const [iLvl, setILvl] = useState('');
@@ -104,7 +104,7 @@ function AddCharacter({ setCurrentTab }) {
             setCharLvl('');
             setEngravings('');
             setJsonData('');
-            setCurrentTab('MyCharacters');
+            window.location.reload(true);
         } catch (err) {
             console.log(err);
         };
