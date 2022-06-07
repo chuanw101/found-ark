@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import './style.css';
 import axios from 'axios'
 import CharacterDetails from '../../../CharacterDetails';
+import DiscordHelpModal from "../../../DiscordHelpModal";
 
 import WidgetBot from '@widgetbot/react-embed'
 import { Server } from '@widgetbot/embed-api';
@@ -19,6 +20,7 @@ function Group({ user, setBackground }) {
     const [group, setGroup] = useState(null);
     const [allChars, setAllChars] = useState(null);
     const [charId, setCharId] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const { groupId } = useParams();
 
@@ -239,11 +241,18 @@ function Group({ user, setBackground }) {
                 <div className="groupTitle">
                     <h1>{group?.group_name}</h1>
                     <p>{group?.description}</p>
-                    {discordInfo? (
+                    {discordInfo ? (
                         <><a href={discordInfo[0]}>{discordInfo[0]}</a></>
                     ) : (
                         <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<spans>(default link)</spans></a></>
                     )}
+                    <button
+                        onClick={() => {
+                            setModalOpen(true);
+                        }}
+                    >
+                        How Do I Embed My Discord?
+                    </button>
                 </div>
 
                 <div className="groupDetails">
@@ -256,7 +265,7 @@ function Group({ user, setBackground }) {
 
             </div>
 
-            {/* </div> */}
+            {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} />}
 
             <div className="darkContainer">
 
@@ -277,27 +286,27 @@ function Group({ user, setBackground }) {
                     </div>
 
                     <div className="discordWidget">
-                        {discordInfo?.length==3 ? (
+                        {discordInfo?.length == 3 ? (
                             <>
-                            <WidgetBot
-                            server={discordInfo[1]}
-                            channel={discordInfo[2]}
+                                <WidgetBot
+                                    server={discordInfo[1]}
+                                    channel={discordInfo[2]}
 
-                            height="80vh" width="50vw"
-                            />
+                                    height="80vh" width="50vw"
+                                />
                             </>
                         ) : (
                             <>
-                            <WidgetBot
-                            server={defaultDiscord[1]}
-                            channel={defaultDiscord[2]}
+                                <WidgetBot
+                                    server={defaultDiscord[1]}
+                                    channel={defaultDiscord[2]}
 
-                            height="80vh" width="50vw"
-                            />
+                                    height="80vh" width="50vw"
+                                />
                             </>
                         )}
 
-                        
+
 
                     </div>
                 </div>
