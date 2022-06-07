@@ -23,12 +23,5 @@
 }
 
 .characterPreview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid var(--accent);
-    border-radius: var(--tiny);
-    width: 100%;
-    /* padding: var(--small); */
     margin-left: var(--large);
 }

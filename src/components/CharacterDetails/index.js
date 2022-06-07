@@ -108,7 +108,7 @@ function CharacterDetails({ char }) {
 
     return (
 
-        <div className="charDetails">
+        <div className={"charCard " + (statsActive ? "" : "collapsed")}>
 
             <div className="charHeadline">
 
@@ -116,36 +116,44 @@ function CharacterDetails({ char }) {
 
                 <div className="charInfo">
 
-                    <h1>{advCharData ? advCharData.pcName : char.char_name}</h1>
+                    <h3>{advCharData ? advCharData.pcName : char.char_name}</h3>
 
-                    <div className="statButtonContainer">
+                    <div className="charSpecs">
 
-                        <div className="charSpecs">
-                            <p>Character Class:</p>
-                            <h3>{advCharData ? advCharData.pcClassName : char.class}</h3>
-
-                            <p>Character Lvl:</p>
-                            <h3>{advCharData ? advCharData.pcLevel : char.class}</h3>
-
-                            <p>Item Lvl:</p>
-                            <h3>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</h3>
-
-                            <p>Roster Lvl:</p>
-                            <h3>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</h3>
-
-                            <p>Engravings:</p>
-                            <h3>{char.engravings ? char.engravings : '0'}</h3>
+                        <div>
+                            <h4>Character Class</h4>
+                            <p>{advCharData ? advCharData.pcClassName : char.class}</p>
                         </div>
 
-                        <button onClick={checkStatus} className={"collapsible " + (statsActive ? "closed" : "open")}>Stats & Gear</button>
+                        <div>
+                            <h4>Character Lvl</h4>
+                            <p>{advCharData ? advCharData.pcLevel : char.class}</p>
+                        </div>
+
+                        <div>
+                            <h4>Item Lvl</h4>
+                            <p>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</p>
+                        </div>
+
+                        <div>
+                            <h4>Roster Lvl</h4>
+                            <p>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</p>
+                        </div>
+
+                        <div>
+                            <h4>Engravings</h4>
+                            <p>{char.engravings ? char.engravings : '0'}</p>
+                        </div>
 
                     </div>
+
+                    <button onClick={checkStatus} className={"collapsible " + (statsActive ? "closed" : "open")}>Full Stats & Gear</button>
 
                 </div>
 
             </div>
 
-            <div className={"fullCharInfo " + (statsActive ? "" : "collapsed")}>
+            <div className="fullCharInfo">
 
                 <div className="charStats">
                     {allStats}

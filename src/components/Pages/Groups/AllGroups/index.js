@@ -39,12 +39,12 @@ function AllGroups({ user, activeTags }) {
     };
 
     const filterGroups = (groupsToFilter) => {
-        if(activeTags.length) {
+        if (activeTags.length) {
             let tempGroups = [...groupsToFilter];
             for (const group of tempGroups) {
                 let foundCount = 0;
-                for(const tag of activeTags) {
-                    if (group.tag.some(t=>t.tag_name===tag)) {
+                for (const tag of activeTags) {
+                    if (group.tag.some(t => t.tag_name === tag)) {
                         foundCount++;
                     }
                 }
@@ -64,7 +64,7 @@ function AllGroups({ user, activeTags }) {
         getAllGroups();
     }, []);
 
-    useEffect(()=> {
+    useEffect(() => {
         filterGroups(allGroups);
     }, [activeTags])
 
@@ -99,7 +99,7 @@ function AllGroups({ user, activeTags }) {
         <div className="darkContainer">
             <h1>All Groups</h1>
 
-            {allGroups.filter(group=>group?.show).map((group) => {
+            {allGroups.filter(group => group?.show).map((group) => {
                 return (
 
                     <div key={group.id} id={group.id} className={
@@ -109,22 +109,39 @@ function AllGroups({ user, activeTags }) {
                     } onClick={handleGroupClick}>
 
                         <div className="groupPreviewColumnLeft">
-                            <h2>{group.group_name}</h2>
-                            <p>{group.description}</p>
-                            <p>Members:
-                                {group.member_char.map((character) => {
-                                    return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)}{character.char_name}({character.item_lvl}) </span>)
-                                })}
-                            </p>
-                            <p>Tags:
-                                {group.tag.map((tag) => {
-                                    return (<span key={tag.id}> {tag.tag_name}</span>)
-                                })}
-                            </p>
+
+                            <div>
+                                <h2>{group.group_name}</h2>
+                                <p>{group.description}</p>
+                            </div>
+
+                            <div>
+                                <h4>Members</h4>
+                                <p>
+                                    {group.member_char.map((character) => {
+                                        return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)} {character.char_name} ({character.item_lvl}) </span>)
+                                    })}
+                                </p>
+                            </div>
+
                         </div>
 
                         <div className="groupPreviewColumnRight">
+
+                            <div className="groupTagsPreview">
+
+                                <h4>Tags</h4>
+
+                                <p>
+                                    {group.tag.map((tag) => {
+                                        return (<span key={tag.id}> {tag.tag_name}</span>)
+                                    })}
+                                </p>
+
+                            </div>
+
                             <button className="previewApplyBtn" value={group.id} onClick={handleApply}>Apply</button>
+
                         </div>
 
                     </div>

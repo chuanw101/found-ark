@@ -6,7 +6,7 @@
     height: 200px;
     width: 100%;
     padding: var(--medium);
-    margin-bottom: var(--medium);
+    margin-bottom: var(--large);
 }
 
 .groupPreview:hover {
@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
 }
 
 .groupPreviewColumnRight {
@@ -28,8 +29,15 @@
     flex-direction: column;
     align-items: flex-end;
     text-align: right;
+    width: 30%;
+}
+
+.groupTagsPreview {
+    display: flex;
+    flex-direction: column;
 }
 
 .previewApplyBtn {
+    width: 150px;
     margin: auto 0px 0px 0px
 }
