@@ -5,10 +5,10 @@ import axios from 'axios';
 import moment from 'moment';
 import CharacterDetails from '../../../CharacterDetails';
 import DiscordHelpModal from "../../../DiscordHelpModal";
+import EditGroupModal from  "../../../EditGroupModal";
 
-import WidgetBot from '@widgetbot/react-embed'
+import WidgetBot from '@widgetbot/react-embed';
 import { Server } from '@widgetbot/embed-api';
-
 
 
 function Group({ user, setBackground }) {
@@ -16,16 +16,17 @@ function Group({ user, setBackground }) {
     const [allChars, setAllChars] = useState(null);
     const [charId, setCharId] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
-
-    const { groupId } = useParams();
+    const [groupModalOpen, setGroupModalOpen] = useState(false);
 
     const api = new Server({ id: 'test' });
 
     api.on('sendMessage', message => {
         console.log('sending:', message)
     });
-
+    
     api.emit('message', { id: 'testmessage' });
+
+    const { groupId } = useParams();
 
     const defaultDiscord = ['https://discord.gg/HWHXZftA', '983439059089240064', '983439059542233140'];
 
@@ -267,6 +268,13 @@ function Group({ user, setBackground }) {
                             >
                                 Embed A Different Discord
                             </button>
+                            <button className="editGroupBtn"
+                                onClick={() => {
+                                    setGroupModalOpen(true);
+                                }}
+                            >
+                                Edit Group Information
+                            </button>
                         </>
                     ) : (<></>)}
                 </div>
@@ -277,9 +285,13 @@ function Group({ user, setBackground }) {
 
                     <h4>Region</h4>
                     <p>{group?.region}</p>
+
+
                 </div>
 
             </div>
+
+            {groupModalOpen && <EditGroupModal setOpenModal={setGroupModalOpen} setGroup={setGroup} group={group} />}
 
             {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} setGroup={setGroup} group={group} />}
 

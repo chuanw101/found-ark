@@ -4,6 +4,7 @@
 }
 
 .navItem {
+    cursor: pointer;
    margin-right: var(--medium);
 }
 

@@ -8,7 +8,7 @@ import AddCharacter from './AddCharacter'
 import EditInfo from './EditInfo'
 
 
-function Profile() {
+function Profile({user}) {
 
     const [allChars, setAllChars] = useState('');
 
@@ -76,7 +76,7 @@ function Profile() {
 
         // Edit Info
         if (currentTab === 'EditInfo') {
-            return <EditInfo currentTab={currentTab} setcurrentTab={setCurrentTab} />;
+            return <EditInfo user={user} currentTab={currentTab} setcurrentTab={setCurrentTab} />;
         };
 
     };

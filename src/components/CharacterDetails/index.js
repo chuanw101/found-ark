@@ -147,7 +147,7 @@ function CharacterDetails({ char }) {
 
                     </div>
 
-                    <button onClick={checkStatus} className={"collapsible " + (statsActive ? "closed" : "open")}>Full Stats & Gear</button>
+                    <h4 onClick={checkStatus} className="collapsible">Full Stats & Gear<span className={"carrot " + (statsActive ? "open" : "closed")}></span></h4>
 
                 </div>
 

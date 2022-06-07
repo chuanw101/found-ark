@@ -51,6 +51,7 @@ form {
     flex-direction: column;
     width: 100%;
     width: 800px;
+    max-width: 100%;
     padding: var(--medium);
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
@@ -73,10 +74,20 @@ select:invalid {
     color: var(--gray);
 }
 
+input:invalid ~ span:after {
+    content: '✖';
+    padding: 5px;
+}
+
+input:valid ~ span:after {
+    content: '✓';
+    padding: 5px;
+}
+
 button {
     border-radius: var(--tiny);
+    min-width: 150px;
     width: 100%;
-    height: 50px;
     cursor: pointer;
     border: none;
     display: flex;
@@ -89,6 +100,7 @@ button {
     background-repeat: no-repeat;
     transition: 500ms;
     font-weight: 700;
+    padding: var(--small);
 }
 
 button:hover {
@@ -145,7 +157,7 @@ h1 {
     align-items: center;
     background: var(--dark75);
     border-radius: var(--tiny);
-    height: 100px;
+    height: 150px;
     width: 100%;
     padding: var(--medium);
     margin-bottom: var(--medium);
@@ -164,13 +176,13 @@ h1 {
 
 .tabLabel {
     transition: all 0.3s ease;
-    padding: 10px var(--tiny);
+    padding: 10px var(--small);
     margin: 0px var(--small);
 }
 
 .tabLabel:hover {
     cursor: pointer;
-    box-shadow: inset 0px -15px 15px -20px var(--accent);
+    box-shadow: inset 0px -20px 20px -25px var(--accent);
 }
 
 .tabDivider {
@@ -180,5 +192,6 @@ h1 {
 }
 
 .activeTab {
-    box-shadow: inset 0px -20px 15px -20px var(--accent) !important;
+    box-shadow: inset 0px -50px 40px -50px var(--accent) !important;
+    border-radius: var(--tiny);
 }

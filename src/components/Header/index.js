@@ -11,7 +11,7 @@ function Header({ user, logout }) {
             <div className="siteTitle">
 
                 <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
-                <h1 className="">Found Ark</h1>
+                <a href="/"><h1>Found Ark</h1></a>
 
             </div>
 

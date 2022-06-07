@@ -81,4 +81,11 @@
 .discordBtn {
     height: 50px;
     width: 250px;
+    margin: var(--tiny);
+}
+
+.editGroupBtn {
+    height: 50px;
+    width: 250px;
+    margin: var(--tiny);
 }
