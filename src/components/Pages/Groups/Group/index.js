@@ -10,12 +10,12 @@ import { Server } from '@widgetbot/embed-api';
 const api = new Server({ id: 'test' });
 
 api.on('sendMessage', message => {
-  console.log('sending:', message)
+    console.log('sending:', message)
 });
 
 api.emit('message', { id: 'testmessage' });
 
-function Group({ user }) {
+function Group({ user, setBackground }) {
     const [group, setGroup] = useState(null);
     const [allChars, setAllChars] = useState(null);
     const [charId, setCharId] = useState(null);
@@ -147,10 +147,10 @@ function Group({ user }) {
                 }
                 // user is creator of this group
                 return (
-                    <>
+                    <div className="applicationSection">
                         <h1>Applicants: </h1>
                         {appsEL}
-                    </>
+                    </div>
                 )
             } else if (group?.member_char.some(char => {
                 if (char.owner_id === user.id) {
@@ -160,10 +160,10 @@ function Group({ user }) {
             })) {
                 // user is a member of this group
                 return (
-                    <>
+                    <div className="applicationSection">
                         <h2>You are a member of this group!</h2>
                         <button onClick={cancelApp}>Leave Group</button>
-                    </>
+                    </div>
                 )
             } else if (group?.app_char.some(char => {
                 if (char.owner_id === user.id) {
@@ -173,10 +173,10 @@ function Group({ user }) {
             })) {
                 // user already applied but not accepted yet
                 return (
-                    <>
+                    <div className="applicationSection">
                         <h2>You already applied to this group</h2>
                         <button onClick={cancelApp}>Cancel Application</button>
-                    </>
+                    </div>
                 )
             } else {
                 // user havent done anything
@@ -187,7 +187,7 @@ function Group({ user }) {
                     return;
                 }
                 return (
-                    <>
+                    <div className="applicationSection">
                         <select name="characters" required onChange={handleInputChange}>
                             {allChars?.map((char) => {
                                 return (
@@ -196,7 +196,7 @@ function Group({ user }) {
                             })}
                         </select>
                         <button onClick={apply}>Apply</button>
-                    </>
+                    </div>
                 )
             }
         }
@@ -204,50 +204,83 @@ function Group({ user }) {
 
     const groupMembers = group?.member_char;
 
+    // set background
+    const selectBackground = () => {
+
+        if (group?.id % 4 === 0) {
+            setBackground('bgTree');
+        } else if (group?.id % 3 === 0) {
+            setBackground('bgGiant');
+        } else if (group?.id % 2 === 0) {
+            setBackground('bgCity');
+        } else {
+            setBackground('bgSky');
+        };
+
+    };
+
     useEffect(() => {
-    getGroup();
+        getGroup();
+        selectBackground();
     }, []);
 
     return (
 
         <div className="page">
 
-            <div className="darkContainer">
+            {/* <div className="groupBanner darkContainer"> */}
 
-                {getUserStatus()}
+            <div className="groupBanner">
 
-                <h1>{group?.group_name}</h1>
-                <h2>{group?.description}</h2>
-                <h2>{group?.region}</h2>
-                <h2>Created by {group?.creator.char_name} ({group?.creator.owner.user_name}) </h2>
-
-                <div className="discordEmbed">
-
-                    <WidgetBot
-                        server="983439059089240064"
-                        channel="983439059542233140"
-
-                        height="600" width="800"
-                    />
-
+                <div className="groupTitle">
+                    <h1>{group?.group_name}</h1>
+                    <p>{group?.description}</p>
                 </div>
 
-                <h1>Members:</h1>
+                <div className="groupDetails">
+                    <h4>Created by</h4>
+                    <p>{group?.creator.char_name} ({group?.creator.owner.user_name})</p>
 
-                {groupMembers?.map(char =>
-                    <div key={char.id} className="characterPreview">
-                        <CharacterDetails char={char} />
-                    </div>
-                )}
+                    <h4>Region</h4>
+                    <p>{group?.region}</p>
+                </div>
 
             </div>
 
-            {/* <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
-                new Crate({
-                    server: '983439059089240064', // Found Ark Chat Server
-                    channel: '983439059542233140' // #general
-                })
-            </script> */}
+            {/* </div> */}
+
+            <div className="darkContainer">
+
+                <div className="groupBody">
+
+                    <div className="groupMemberSection">
+
+                        {getUserStatus()}
+
+                        <h2>Members</h2>
+
+                        {groupMembers?.map(char =>
+                            <div key={char.id} className="groupMemberCard">
+                                <CharacterDetails char={char} />
+                            </div>
+                        )}
+
+                    </div>
+
+                    <div className="discordWidget">
+
+                        <WidgetBot
+                            server="983439059089240064"
+                            channel="983439059542233140"
+
+                            height="80vh" width="1000"
+                        />
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 

@@ -55,7 +55,7 @@ function Profile() {
 
             for (let i = 0; i < allChars.length; i++) {
 
-                return <div key={allChars[i].id} className="characterPreview">
+                return <div key={allChars[i].id}>
                     <CharacterDetails char={allChars[i]} />
                 </div>
 
@@ -77,6 +77,7 @@ function Profile() {
 
 
     return (
+
         <div className="page">
 
             <div className="tabHeader">
@@ -100,9 +101,14 @@ function Profile() {
 
             </div>
 
-            {renderTab()}
+            <div className="darkContainer">
+
+                {renderTab()}
+
+            </div>
 
         </div>
+        
     );
 
 };

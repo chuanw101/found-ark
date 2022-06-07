@@ -13,3 +13,15 @@
     }
 
 }
+
+@keyframes collapse {
+
+    from {
+        height: 450px;
+    }
+
+    to {
+        height: 100%;
+    }
+
+}

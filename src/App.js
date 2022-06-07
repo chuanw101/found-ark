@@ -119,7 +119,7 @@ function App() {
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
-                <Route path="group/:groupId" element={<Group user={user} />} />
+                <Route path="group/:groupId" element={<Group user={user} setBackground={setBackground} />} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
                 <Route path="profile" element={<Profile />} />
