@@ -3,10 +3,10 @@
     justify-content: space-between;
     border-radius: var(--tiny);
     background-attachment: local;
-    height: 200px;
+    height: 250px;
     width: 100%;
     padding: var(--medium);
-    margin-bottom: var(--large);
+    margin-bottom: var(--medium);
 }
 
 .groupPreview:hover {
