@@ -6,10 +6,14 @@ import CreateGroup from './CreateGroup';
 import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
+import { act } from 'react-dom/test-utils';
 
 function Groups({ user }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
+    const [newTag, setTag] = useState("");
+    const [tags, setAllTags] = useState([]);
+    const [activeTags, setActiveTags] = useState([]);
 
     const handleTabSelect = () => {
 
@@ -25,15 +29,66 @@ function Groups({ user }) {
 
     };
 
+    // handle input change
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'tag') {
+            setTag(value);
+        };
+    };
+
+    // validate tag input
+    const tagReg = /^[+-_a-zA-Z0-9]{2,}$/;
+    // add tag to tags array
+    const addTag = () => {
+        if (newTag === '') {
+            return;
+        } else if (tags.includes(newTag)) {
+            return;
+        } else if (!tagReg.test(newTag)) {
+            console.log("invalid tag entry")
+            return;
+        } else {
+            setAllTags([...tags, { tag_name: newTag, active: true }]);
+            setActiveTags([...activeTags, newTag]);
+            setTag('');
+        };
+    };
+
+    // listen for enter key press when adding tags
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            addTag();
+        };
+    };
+
+    const handleTagClick = (e) => {
+        if (e.target.className === "savedTagsActive") {
+            //e.target.className = "savedTagsInactive";
+            let tempTags = [...tags];
+            tempTags[e.target.getAttribute('value')].active = false;
+            setAllTags([...tempTags]);
+            let temp = tags.filter(tag => tag.active).map(tag => tag.tag_name);
+            setActiveTags([...temp])
+        } else if (e.target.className === "savedTagsInactive") {
+            //e.target.className = "savedTagsActive";
+            let tempTags = [...tags];
+            tempTags[e.target.getAttribute('value')].active = true;
+            setAllTags([...tempTags]);
+            setActiveTags([...activeTags, tags[e.target.getAttribute('value')].tag_name])
+        }
+    }
+
     let navigate = useNavigate();
 
     const renderTab = () => {
 
         if (currentTab === 'AllGroups') {
-            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} />;
+            return <AllGroups currentTab={currentTab} setCurrentTab={setCurrentTab} user={user} activeTags={activeTags} />;
         };
         if (currentTab === 'MyGroups') {
-            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} /> : navigate(`/login`);
+            return user ? <MyGroups currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} activeTags={activeTags} /> : navigate(`/login`);
         };
         if (currentTab === 'Group') {
             return user ? <Group currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
@@ -50,6 +105,7 @@ function Groups({ user }) {
         <div className="page">
 
             <div className="tabHeader">
+                <input className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
 
                 {user?.logged_in ? (
                     <div className="tabs" onClick={handleTabSelect}>
@@ -68,6 +124,12 @@ function Groups({ user }) {
                     </div>
                 ) : (<></>)}
 
+            </div>
+            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+
+            <div className="savedTags">
+                {tags.map((tag, index) =>
+                    <p className={tag.active ? ("savedTagsActive") : ("savedTagsInactive")} key={index} value={index} onClick={handleTagClick}>{tag.tag_name}<span>❌</span></p>)}
             </div>
 
             {renderTab()}
