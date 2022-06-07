@@ -149,7 +149,7 @@ function AllGroups({ user, activeTags }) {
 
                             </div>
 
-                            <button className="previewApplyBtn" value={group.id} onClick={handleApply}>Apply</button>
+                            <button className="previewApplyBtn" value={group.id}>Apply</button>
 
                         </div>
 

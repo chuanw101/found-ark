@@ -5,14 +5,14 @@
 .allMyCharacters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     background: var(--dark75);
     border-radius: var(--tiny);
     width: 100%;
-    padding: var(--large) var(--large) var(--medium) var(--large);
+    padding: var(--medium);
 }
 
 .myCharacterCard {
-    width: 49%;
-    margin-bottom: var(--medium);
+    width: 50%;
+    padding: var(--small);
 }
