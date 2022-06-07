@@ -8,13 +8,7 @@ import DiscordHelpModal from "../../../DiscordHelpModal";
 import WidgetBot from '@widgetbot/react-embed'
 import { Server } from '@widgetbot/embed-api';
 
-const api = new Server({ id: 'test' });
 
-api.on('sendMessage', message => {
-    console.log('sending:', message)
-});
-
-api.emit('message', { id: 'testmessage' });
 
 function Group({ user, setBackground }) {
     const [group, setGroup] = useState(null);
@@ -23,6 +17,14 @@ function Group({ user, setBackground }) {
     const [modalOpen, setModalOpen] = useState(false);
 
     const { groupId } = useParams();
+
+    const api = new Server({ id: 'test' });
+
+    api.on('sendMessage', message => {
+        console.log('sending:', message)
+    });
+
+    api.emit('message', { id: 'testmessage' });
 
     const defaultDiscord = ['https://discord.gg/HWHXZftA', '983439059089240064', '983439059542233140'];
 
@@ -244,14 +246,14 @@ function Group({ user, setBackground }) {
                     {discordInfo ? (
                         <><a href={discordInfo[0]}>{discordInfo[0]}</a></>
                     ) : (
-                        <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<spans>(default link)</spans></a></>
+                        <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<span>(default link)</span></a></>
                     )}
-                    <button
+                    <button className = "discordBtn"
                         onClick={() => {
                             setModalOpen(true);
                         }}
                     >
-                        How Do I Embed My Discord?
+                        Embed A Different Discord
                     </button>
                 </div>
 
@@ -265,7 +267,7 @@ function Group({ user, setBackground }) {
 
             </div>
 
-            {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} />}
+            {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} setGroup={setGroup} group={group} />}
 
             <div className="darkContainer">
 

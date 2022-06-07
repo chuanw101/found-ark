@@ -77,3 +77,8 @@
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
 }
+
+.discordBtn {
+    height: 50px;
+    width: 250px;
+}

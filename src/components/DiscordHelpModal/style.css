@@ -6,65 +6,50 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modalContainer {
-    width: 500px;
-    height: 500px;
+    margin-top: -150px;
+}
+
+.modalContainer {
+    width: 600px;
+    height: 700px;
     border-radius: 12px;
-    background-color: white;
+    background-color: var(--dark75);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
     padding: 25px;
-  }
-  
-  .modalContainer .title {
+    overflow-y:scroll;
+}
+
+.modalContainer .title {
     display: inline-block;
     text-align: center;
     margin-top: 10px;
-  }
-  
-  .titleCloseBtn {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .titleCloseBtn button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-  }
-  
-  .modalContainer .body {
-    flex: 50%;
+}
+
+.modalContainer .body {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.7rem;
     text-align: center;
-  }
-  
-  .modalContainer .footer {
-    flex: 20%;
+}
+
+.modalContainer .footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modalContainer .footer button {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.modalContainer a {
+    color: yellow;
+}
+
+.modalContainer button {
     width: 150px;
     height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  #cancelBtn {
-    background-color: crimson;
-  }
+    margin: 5px;
+}
