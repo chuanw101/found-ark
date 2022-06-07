@@ -9,6 +9,7 @@ import EditInfo from './EditInfo'
 
 
 function Profile() {
+
     const [allChars, setAllChars] = useState('');
 
     const token = localStorage.getItem('foundArkJwt');
@@ -39,26 +40,28 @@ function Profile() {
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     useEffect(() => {
         getAllChars();
     }, []);
+
+    console.log('ALL CHARS: ', allChars);
 
     const renderTab = () => {
 
         // My Characters
         if (currentTab === 'MyCharacters') {
 
-            allChars ? (allChars.map(char => {
+            for (let i = 0; i < allChars.length; i++) {
 
-                <div className="characterPreview">
-                    <CharacterDetails currentTab={currentTab} setCurrentTab={setCurrentTab} char={char} />
+                return <div key={allChars[i].id} className="characterPreview">
+                    <CharacterDetails char={allChars[i]} />
                 </div>
 
-            })) : setCurrentTab('AddCharacter');
+            }
 
-        };
+        }
 
         // Add Character
         if (currentTab === 'AddCharacter') {

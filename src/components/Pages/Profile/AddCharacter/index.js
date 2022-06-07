@@ -14,6 +14,7 @@ function AddCharacter({ setCurrentTab }) {
     const [jsonData, setJsonData] = useState('');
     const [formStatus, setFormStatus] = useState('hidden');
     const [buttonStatus, setButtonStatus] = useState('hidden');
+    const [searchStatus, setSearchStatus] = useState('');
 
     const token = localStorage.getItem('foundArkJwt');
 
@@ -50,6 +51,7 @@ function AddCharacter({ setCurrentTab }) {
                 setEngravings('');
                 setJsonData(charData.jsonData);
                 setButtonStatus('');
+                setSearchStatus('searched');
             } else {
                 setCharName('');
                 setClassName('');
@@ -60,6 +62,7 @@ function AddCharacter({ setCurrentTab }) {
                 setJsonData('');
                 setFormStatus('');
                 setButtonStatus('');
+                setSearchStatus('searched');
             }
         } catch (err) {
             setCharName('');
@@ -69,12 +72,17 @@ function AddCharacter({ setCurrentTab }) {
             setCharLvl('');
             setEngravings('');
             setJsonData('');
+            setFormStatus('');
+            setButtonStatus('');
+            setSearchStatus('searched');
             console.log(err);
         }
     };
 
     const addCharacter = async (e) => {
+
         e.preventDefault();
+
         try {
             await axios.post('https://found-ark-backend.herokuapp.com/api/characters', {
                 char_name: charName,
@@ -96,11 +104,10 @@ function AddCharacter({ setCurrentTab }) {
             setCharLvl('');
             setEngravings('');
             setJsonData('');
+            setCurrentTab('MyCharacters');
         } catch (err) {
             console.log(err);
         };
-
-        setCurrentTab('AllCharacters');
 
     };
 
@@ -160,7 +167,7 @@ function AddCharacter({ setCurrentTab }) {
 
                 </div>
 
-                {charData.char_name ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
+                {searchStatus ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
 
 
             </div>
