@@ -14,8 +14,9 @@ function CreateGroup() {
     const [discord, setDiscord] = useState("");
     const [allChars, setAllChars] = useState([]);
     const [charId, setCharId] = useState(null);
-    // const [day, setDay] = useState("");
-    // const [time, setTime] = useState("");
+    const [day, setDay] = useState("2022-06-06");
+    const [timeZone, setTimeZone] = useState("(GMT+00:00) Greenwich Mean Time");
+    const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
     const [tags, addNewTag] = useState([]);
 
@@ -25,37 +26,36 @@ function CreateGroup() {
 
     // time zone array
     const timeZones = [
-        '(GMT+0:00) Greenwich Mean Time',
-        '(GMT+0:00) Universal Coordinated Time',
-        '(GMT+1:00) European Central Time',
-        '(GMT+2:00) Eastern European Time',
-        '(GMT+3:00) Eastern African Time',
-        '(GMT+3:30) Middle East Time',
-        '(GMT+4:00) Near East Time',
-        '(GMT+5:00) Pakistan Lahore Time',
-        '(GMT+5:30) India Standard Time',
-        '(GMT+6:00) Bangladesh Standard Time',
-        '(GMT+7:00) Vietnam Standard Time',
-        '(GMT+8:00) China Taiwan Time',
-        '(GMT+9:00) Japan Standard Time',
-        '(GMT+9:30) Australia Central Time',
+        '(GMT+00:00) Greenwich Mean Time',
+        '(GMT+01:00) European Central Time',
+        '(GMT+02:00) Eastern European Time',
+        '(GMT+03:00) Eastern African Time',
+        '(GMT+03:30) Middle East Time',
+        '(GMT+04:00) Near East Time',
+        '(GMT+05:00) Pakistan Lahore Time',
+        '(GMT+05:30) India Standard Time',
+        '(GMT+06:00) Bangladesh Standard Time',
+        '(GMT+07:00) Vietnam Standard Time',
+        '(GMT+08:00) China Taiwan Time',
+        '(GMT+09:00) Japan Standard Time',
+        '(GMT+09:30) Australia Central Time',
         '(GMT+10:00) Australia Eastern Time',
         '(GMT+11:00) Solomon Standard Time',
         '(GMT+12:00) New Zealand Standard Time',
         '(GMT-11:00) Midway Islands Time',
         '(GMT-10:00) Hawaii Standard Time',
-        '(GMT-9:00) Alaska Standard Time',
-        '(GMT-8:00) Pacific Standard Time',
-        '(GMT-7:00) Phoenix Standard Time',
-        '(GMT-7:00) Mountain Standard Time',
-        '(GMT-6:00) Central Standard Time',
-        '(GMT-5:00) Eastern Standard Time',
-        '(GMT-5:00) Indiana Eastern Standard Time',
-        '(GMT-4:00) Puerto Rico and US Virgin Islands Time',
-        '(GMT-3:30) Canada Newfoundland Time',
-        '(GMT-3:00) Argentina Standard Time',
-        '(GMT-3:00) Brazil Eastern Time',
-        '(GMT-1:00) Central African Time'
+        '(GMT-09:00) Alaska Standard Time',
+        '(GMT-08:00) Pacific Standard Time',
+        '(GMT-07:00) Phoenix Standard Time',
+        '(GMT-07:00) Mountain Standard Time',
+        '(GMT-06:00) Central Standard Time',
+        '(GMT-05:00) Eastern Standard Time',
+        '(GMT-05:00) Indiana Eastern Standard Time',
+        '(GMT-04:00) Puerto Rico and US Virgin Islands Time',
+        '(GMT-03:30) Canada Newfoundland Time',
+        '(GMT-03:00) Argentina Standard Time',
+        '(GMT-03:00) Brazil Eastern Time',
+        '(GMT-01:00) Central African Time'
     ]
 
     // validate tag input
@@ -104,15 +104,15 @@ function CreateGroup() {
         if (name === 'characters') {
             setCharId(value);
         };
-        // if (name === 'dayofweek') {
-        //     setDay(value);
-        // };
-        // if (name === 'timezone') {
-        //     setSelectedTimezone(value);
-        // };
-        // if (name === 'time') {
-        //     setTime(value);
-        // };
+        if (name === 'dayofweek') {
+            setDay(value);
+        };
+        if (name === 'timezone') {
+            setTimeZone(value);
+        };
+        if (name === 'time') {
+            setTime(value);
+        };
         if (name === 'tags') {
             setTag(value);
         };
@@ -138,13 +138,17 @@ function CreateGroup() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
+            let timeInfo;
+            if (time) {
+                timeInfo = new Date(`${day}T${time}:00.000${timeZone.substring(4,10)}`);
+            }
             const res = await axios.post('https://found-ark-backend.herokuapp.com/api/groups', {
                 group_name: groupName,
                 description: description,
                 discord: discord,
                 creator_char_id: charId,
-                // time: `${day} @ ${time}, ${selectedTimezone}`,
-                tags: tags
+                tags: tags,
+                time: timeInfo
             }, {
                 headers: {
                     'Authorization': `token ${token}`
@@ -159,10 +163,12 @@ function CreateGroup() {
             setDescription('');
             setDiscord('');
             setCharId('');
-            // setDay('');
-            // setTime('');
+            setDay('2022-06-06');
+            setTime('');
+            setTimeZone('(GMT+00:00) Greenwich Mean Time');
             setTag('');
 
+            window.location.reload(true);
         } catch (err) {
             if (err?.response?.data?.msg === 'an error occured') {
                 alert("An error occured")
@@ -170,7 +176,6 @@ function CreateGroup() {
             console.log(err);
         };
     };
-
 
     return (
 
@@ -203,13 +208,13 @@ function CreateGroup() {
 
                 <label htmlFor="dayofweek">Day</label>
                 <select name="dayofweek" required onChange={handleInputChange}>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
+                    <option value="2022-06-06">Monday</option>
+                    <option value="2022-06-07">Tuesday</option>
+                    <option value="2022-06-08">Wednesday</option>
+                    <option value="2022-06-09">Thursday</option>
+                    <option value="2022-06-10">Friday</option>
+                    <option value="2022-06-11">Saturday</option>
+                    <option value="2022-06-12">Sunday</option>
                 </select>
 
                 <label htmlFor="timezone">Time Zone</label>

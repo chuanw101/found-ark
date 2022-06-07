@@ -53,7 +53,7 @@ function DiscordHelpModal({ setOpenModal, setGroup, group }) {
                     </ul>
                 </div>
                 <div className="footer">
-                    <input type="text" placeholder="https://discord.gg/aegwg 123415687 123456132" name="discord" value={discord} onChange={handleInputChange} />
+                    <input type="text" placeholder="https://discord.gg/aaaa 111111111 111111111" name="discord" value={discord} onChange={handleInputChange} />
                     <button onClick={submitDiscord}>Submit</button>
                     <button onClick={()=>setOpenModal(false)}>Cancel</button>
                 </div>
