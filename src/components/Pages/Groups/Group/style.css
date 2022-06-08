@@ -5,8 +5,8 @@
     background: var(--dark75);
     border-radius: var(--tiny);
     width: 100%;
-    padding: var(--large);
-    margin-bottom: var(--large);
+    padding: var(--medium);
+    margin-bottom: var(--medium);
 }
 
 .groupTitle {
@@ -89,4 +89,7 @@
     height: 50px;
     width: 250px;
     margin: var(--tiny);
+}
+.defaultSpan{
+    margin-left: var(--tiny);
 }

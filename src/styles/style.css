@@ -63,11 +63,16 @@ select {
     height: 50px;
     width: 100%;
     padding: 10px 15px;
-    margin: var(--tiny) 0px var(--medium) 0px;
+    margin: var(--tiny) 0px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: var(--tiny);
     box-sizing: border-box;
+}
+
+.userInput {
+    display: block;
+    margin-top: var(--medium);
 }
 
 select:invalid {
@@ -103,6 +108,10 @@ button {
     padding: var(--small);
 }
 
+.submitBtn {
+    margin-top: var(--medium);
+}
+
 button:hover {
     background-position: right;
 }
@@ -132,7 +141,7 @@ h1 {
     background: var(--dark75);
     border-radius: var(--tiny);
     width: 100%;
-    padding: var(--large);
+    padding: var(--medium);
 }
 
 .darkContainerWrapped {
@@ -142,7 +151,7 @@ h1 {
     align-items: center;
     background: var(--dark75);
     border-radius: var(--tiny);
-    padding: var(--large);
+    padding: var(--medium);
     margin-bottom: var(--medium);
 }
 

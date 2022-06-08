@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
 
-function Login({ handleLoginSubmit }) {
+function Login({ handleLoginSubmit, loginError }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const userReg = /^[a-zA-Z0-9]{4,}$/
@@ -30,27 +30,28 @@ function Login({ handleLoginSubmit }) {
     };
 
     return (
-
         <div className="page login">
+            <div className="darkContainerWrapped">
 
-            <h1>Login</h1>
-
-            <form method="post">
-                <div className="container">
-                    <label htmlFor="username"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleInputChange} required />
-
-                    <label htmlFor="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleInputChange} required />
-
-                    <button type="submit" onClick={handleFormSubmit}>Login</button>
+                <h1>Login</h1>
+                <div className={loginError ? "loginErr" : "hidden"}>
+                    <p>Wrong email or password credentials!</p>
                 </div>
-            </form>
+                <form method="post">
+                    <div className="container">
+                        <label htmlFor="username"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleInputChange} required />
 
+                        <label className="userInput" htmlFor="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleInputChange} required />
+
+                        <button className="submitBtn" type="submit" onClick={handleFormSubmit}>Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
     );
-
 };
 
 export default Login;
