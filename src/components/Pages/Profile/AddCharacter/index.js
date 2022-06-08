@@ -53,8 +53,7 @@ function AddCharacter() {
                 setButtonStatus('');
                 setSearchStatus('searched');
             } else {
-                setCharName('');
-                setClassName('');
+                setClassName('berserker');
                 setILvl('');
                 setRosterLvl('');
                 setCharLvl('');
@@ -65,8 +64,7 @@ function AddCharacter() {
                 setSearchStatus('searched');
             }
         } catch (err) {
-            setCharName('');
-            setClassName('');
+            setClassName('berserker');
             setILvl('');
             setRosterLvl('');
             setCharLvl('');
@@ -123,7 +121,7 @@ function AddCharacter() {
 
     return (
 
-        <div className="darkContainer">
+        <div className="darkContainerWrapped">
 
             <h1>Add Character</h1>
 
@@ -145,16 +143,34 @@ function AddCharacter() {
                         <div className={formStatus}>
 
                             <label htmlFor="className"><b>Class</b></label>
-                            <input type="text" placeholder="Enter Class" name="className" value={className} onChange={handleInputChange} required />
+                            <select name="className" onChange={handleInputChange} required>
+                                <option value="berserker">berserker</option>
+                                <option value="paladin">paladin</option>
+                                <option value="gunlancer">gunlancer</option>
+                                <option value="destroyer">destroyer</option>
+                                <option value="striker">striker</option>
+                                <option value="wardancer">wardancer</option>
+                                <option value="scrapper">scrapper</option>
+                                <option value="soulfist">soulfist</option>
+                                <option value="glaivier">glaivier</option>
+                                <option value="gunslinger">gunslinger</option>
+                                <option value="artillerist">artillerist</option>
+                                <option value="deadeye">deadeye</option>
+                                <option value="sharpshooter">sharpshooter</option>
+                                <option value="bard">bard</option>
+                                <option value="sorceress">sorceress</option>
+                                <option value="shadowhunter">shadowhunter</option>
+                                <option value="deathblade">deathblade</option>
+                            </select>
+
+                            <label htmlFor="charLvl"><b>Character Level</b></label>
+                            <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
 
                             <label htmlFor="iLvl"><b>Item Level</b></label>
                             <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
 
                             <label htmlFor="rosterLvl"><b>Roster Level</b></label>
                             <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
-
-                            <label htmlFor="charLvl"><b>Character Level</b></label>
-                            <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
 
                         </div>
 
@@ -167,7 +183,22 @@ function AddCharacter() {
 
                 </div>
 
-                {searchStatus ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
+                <div className="charDisplay">
+
+                    {searchStatus && !jsonData ?
+                        <div className="leaderboardLink">
+                            <h3>Import Character</h3>
+                            <p>Link your account to import your character info, stats, and gear.</p>
+                            <p>Then come back and try searching for your name again.</p>
+                            <p className="orDivider">OR</p>
+                            <p>Enter your character information manually.</p>
+                        </div>
+                    : ''
+                    }
+
+                    {searchStatus ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
+
+                </div>
 
 
             </div>
