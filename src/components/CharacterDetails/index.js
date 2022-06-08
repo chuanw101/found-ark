@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './style.css'
 
@@ -37,8 +37,6 @@ function CharacterDetails({ char }) {
         advCharData = JSON.parse(char.json_data);
     };
 
-    console.log("CHAR", advCharData);
-
     const rootImgUrl = 'https://cdn.lostark.games.aws.dev/';
 
     let allGears = [];
@@ -70,8 +68,8 @@ function CharacterDetails({ char }) {
                         <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
-                            {bonusEffect.map(effect => <p>{effect}</p>)}
-                            {engravingEffect.map(effect => <p>{effect}</p>)}
+                            {bonusEffect.map(effect => <p>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
+                            {engravingEffect.map(effect => <p>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
                         </div>
                     </div>
                 )
@@ -82,7 +80,7 @@ function CharacterDetails({ char }) {
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
                             <p>{curGear.itemLevel}</p>
-                            {engravingEffect.map(effect => <p>{effect}</p>)}
+                            {engravingEffect.map(effect => <p>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
                         </div>
                     </div>
                 )
@@ -110,9 +108,9 @@ function CharacterDetails({ char }) {
 
         <div className={"charCard " + (statsActive ? "" : "collapsed")}>
 
-            <div className="charHeadline">
+            <div className={"charHeadline " + char?.class.toLowerCase()}>
 
-                {advCharData ? <img src={`https://cdn.lostark.games.aws.dev/EFUI_IconAtlas/PC/${advCharData.pcClassName?.toLowerCase()}.png`} alt={`${advCharData.pcClassName} preview`} className="charClassImg"></img> : ''}
+                {/* {char.class ? <img src={`${rootImgUrl}EFUI_IconAtlas/PC/${char?.class.toLowerCase()}.png`} alt={`${char?.class} preview`} className="charClassImg"></img> : ''} */}
 
                 <div className="charInfo">
 
@@ -120,34 +118,49 @@ function CharacterDetails({ char }) {
 
                     <div className="charSpecs">
 
-                        <div>
-                            <h4>Character Class</h4>
-                            <p>{advCharData ? advCharData.pcClassName : char.class}</p>
-                        </div>
+                        {char.class ?
+                            <div>
+                                <h4>Character Class</h4>
+                                <p>{advCharData ? advCharData.pcClassName : char.class}</p>
+                            </div>
+                            : ''
+                        }
 
-                        <div>
-                            <h4>Character Lvl</h4>
-                            <p>{advCharData ? advCharData.pcLevel : char.class}</p>
-                        </div>
+                        {char.char_lvl ?
+                            <div>
+                                <h4>Character Level</h4>
+                                <p>{advCharData ? advCharData.pcLevel : char.char_lvl}</p>
+                            </div>
+                            : ''
+                        }
 
-                        <div>
-                            <h4>Item Lvl</h4>
-                            <p>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</p>
-                        </div>
+                        {char.item_lvl ?
+                            <div>
+                                <h4>Item Level</h4>
+                                <p>{advCharData ? Math.floor(advCharData.maxItemLevel) : char.item_lvl}</p>
+                            </div>
+                            : ''
+                        }
 
-                        <div>
-                            <h4>Roster Lvl</h4>
-                            <p>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</p>
-                        </div>
+                        {char.roster_lvl ?
+                            <div>
+                                <h4>Roster Level</h4>
+                                <p>{advCharData ? advCharData.expeditionLvl : char.roster_lvl}</p>
+                            </div>
+                            : ''
+                        }
 
-                        <div>
-                            <h4>Engravings</h4>
-                            <p>{char.engravings ? char.engravings : '0'}</p>
-                        </div>
+                        {char.engravings ?
+                            <div>
+                                <h4>Engravings</h4>
+                                <p>{char.engravings ? char.engravings : ''}</p>
+                            </div>
+                            : ''
+                        }
 
                     </div>
 
-                    <h4 onClick={checkStatus} className="collapsible">Full Stats & Gear<span className={"carrot " + (statsActive ? "open" : "closed")}></span></h4>
+                    {advCharData ? <h4 onClick={checkStatus} className="collapsible">Full Stats & Gear<span className={"carrot " + (statsActive ? "open" : "closed")}></span></h4> : ''}
 
                 </div>
 

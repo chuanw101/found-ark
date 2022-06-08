@@ -1,4 +1,4 @@
-.charCard {
+/* .charCard {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,7 +20,7 @@
 .charHeadline {
     display: flex;
     justify-content: center;
-    align-items: space-between;
+    align-items: center;
     min-height: 450px;
     max-height: 450px;
     width: 100%;
@@ -29,12 +29,11 @@
 }
 
 .charClassImg {
-    height: fit-content;
     max-height: 100%;
     max-width: 50%;
     object-fit: contain;
     padding: 0px var(--small);
-    margin-top: 0px;
+    margin: 0px 0px auto 0px;
 }
 
 .charInfo {
@@ -144,4 +143,276 @@
 .gearInfo {
     display: flex;
     flex-direction: column;
+} */
+
+
+
+.charCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--accent);
+    border-radius: var(--tiny);
+    height: 100%;
+    width: 100%;
+    min-width: 600px;
+    max-width: 100%;
+    max-height: 10000px;
+    transition: all 0.5s ease;
+    box-shadow: inset 0px -200px 200px -200px var(--accent);
+    overflow: hidden;
+}
+
+.collapsed {
+    max-height: 450px;
+}
+
+.charHeadline {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    min-height: 450px;
+    max-height: 450px;
+    width: 100%;
+    padding: var(--medium);
+    transition: all 0.5s ease;
+}
+
+.charClassImg {
+
+    max-height: 100%;
+    max-width: 50%;
+    object-fit: contain;
+    padding: 0px var(--small);
+    margin: 0px 0px auto 0px;
+}
+
+.charInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 100%;
+}
+
+.charInfo h3 {
+    text-transform: uppercase;
+    margin-bottom: var(--small);
+}
+
+.charSpecs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: auto;
+}
+
+.charSpecs div {
+    display: flex;
+    flex-direction: column;
+}
+
+.charSpecs p {
+    text-transform: uppercase;
+    margin-bottom: var(--small);
+}
+
+.collapsible {
+    display: flex;
+    cursor: pointer;
+}
+
+.carrot {
+    border-left: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    height: 12px;
+    width: 12px;
+    margin: auto 0px 8px 10px;
+    transition: all 0.5s ease;
+}
+
+.open {
+    -webkit-transform: rotate(-315deg) scaleY(-1);
+    transform: rotate(-315deg) scaleY(-1);
+    margin: auto 0px 1px 10px;
+}
+
+.fullCharInfo {
+    overflow: hidden;
+    padding: 0px var(--medium) var(--small) var(--medium);
+}
+
+.charStats {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--accent);
+    width: 100%;
+    padding: var(--small) 0px;
+}
+
+.charStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    padding: var(--medium) var(--small);
+}
+
+.charGears {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--accent);
+    width: 100%;
+    padding-top: var(--small);
+}
+
+.charGear {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    padding: var(--medium) var(--small);
+
+}
+
+.charGear img {
+    object-fit: contain;
+    border-radius: var(--tiny);
+    width: 60px;
+    height: 60px;
+    padding: var(--tiny);
+    margin: 0px var(--small) var(--small) 0px;
+}
+
+.charGear p {
+    display: flex;
+    flex-direction: column;
+}
+
+.gearInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* character class backgrounds */
+.berserker {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/berserker.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.paladin {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/paladin.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.gunlancer {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/gunlancer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.destroyer {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/destroyer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.striker {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/striker.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.wardancer {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/wardancer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.scrapper {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/scrapper.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.soulfist {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/soulfist.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.glaivier {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/glaivier.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.gunslinger {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/gunslinger.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.artillerist {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/artillerist.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.deadeye {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/deadeye.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.sharpshooter {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/sharpshooter.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.bard {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/bard.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.sorceress {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/sorceress.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.shadowhunter {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/shadowhunter.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
+}
+
+.deathblade {
+    background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/deathblade.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%, 60%;
 }

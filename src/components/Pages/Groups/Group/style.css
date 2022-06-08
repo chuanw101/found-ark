@@ -43,17 +43,18 @@
 .applicationSection {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
+    height: auto;
     padding: var(--small);
-    margin-right: var(--large);
-    margin-bottom: var(--large);
+    margin-right: var(--medium);
+    margin-bottom: var(--medium);
 }
 
 .groupMemberSection {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     width: 50%;
 }
 
@@ -62,8 +63,8 @@
 }
 
 .groupMemberCard {
-    margin-right: var(--large);
-    margin-bottom: var(--large);
+    margin-right: var(--medium);
+    margin-bottom: var(--medium);
 }
 
 .groupMemberCard:last-of-type {
