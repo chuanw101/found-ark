@@ -26,11 +26,53 @@ import Group from './components/Pages/Groups/Group';
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import io from "socket.io-client";
 
 function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
+    const [socket, setSocket] = useState(null);
+
+    const joinRoom = () => {
+        if (user) {
+            console.log("joiningRoom")
+            socket.emit("setup", user.id);
+        }
+    };
+
+    useEffect(() => {
+        setSocket(io('http://localhost:3001'));
+      }, []);
+
+    useEffect(() => {
+        console.log(user)
+        if (!socket) {
+            return
+        }
+        if(user) {
+            socket.emit("setup", user.id);
+            console.log("Connecting to" + user.id)
+        }
+        socket.on("connected", () => console.log("connected"));
+    }, [user?.id]);
+    
+    useEffect(() => {
+        if(!socket) {
+            return
+        }
+        console.log("recieving")
+        socket.on("message recieved", (data) => {
+            console.log("noti recieved" + data)
+        });
+    },[socket])
+    
+
+    const test = () => {
+        console.log("hi")
+        const message = "hellllllloooo"
+        socket.emit("new notification", { message, receiver:2 });
+    }
 
     const path = window.location.pathname;
 
@@ -114,7 +156,7 @@ function App() {
 
     return (
         <div className={"App " + background}>
-            <Header user={user} logout={logout} />
+            <Header user={user} logout={logout} test={test}/>
             <Routes>
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
