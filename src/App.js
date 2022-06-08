@@ -178,7 +178,7 @@ function App() {
 
     return (
         <div className={"App " + background}>
-            <Header user={user} logout={logout} notis={notis}/>
+            <Header user={user} logout={logout} notis={notis} setNotis={setNotis}/>
             <Routes>
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />

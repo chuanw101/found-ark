@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Notifications from './Notifications';
 import './style.css';
 
-function Navigation({ user, logout, notis }) {
+function Navigation({ user, logout, notis, setNotis }) {
     return (
 
         <ul className="navigation">
@@ -19,7 +19,7 @@ function Navigation({ user, logout, notis }) {
                             <img src="/assets/icons/notification-bell.png" alt="notifications" className="notificationIcon"></img>
                             <span className="notificationAlert"></span>
                         </div>
-                        <Notifications notis={notis}/>
+                        <Notifications notis={notis} setNotis={setNotis} />
                     </li>
 
                     <li className="navItem">
