@@ -32,46 +32,39 @@ function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
-    const [socket, setSocket] = useState(null);
+    // const [socket, setSocket] = useState(null);
 
-    const joinRoom = () => {
-        if (user) {
-            console.log("joiningRoom")
-            socket.emit("setup", user.id);
-        }
-    };
+    // useEffect(() => {
+    //     setSocket(io('http://localhost:3001'));
+    //   }, []);
 
-    useEffect(() => {
-        setSocket(io('http://localhost:3001'));
-      }, []);
-
-    useEffect(() => {
-        console.log(user)
-        if (!socket) {
-            return
-        }
-        if(user) {
-            socket.emit("setup", user.id);
-            console.log("Connecting to" + user.id)
-        }
-        socket.on("connected", () => console.log("connected"));
-    }, [user?.id]);
+    // useEffect(() => {
+    //     console.log(user)
+    //     if (!socket) {
+    //         return
+    //     }
+    //     if(user) {
+    //         socket.emit("setup", user.id);
+    //         console.log("Connecting to" + user.id)
+    //     }
+    //     socket.on("connected", () => console.log("connected"));
+    // }, [user?.id]);
     
-    useEffect(() => {
-        if(!socket) {
-            return
-        }
-        console.log("recieving")
-        socket.on("message recieved", (data) => {
-            console.log("noti recieved" + data)
-        });
-    },[socket])
+    // useEffect(() => {
+    //     if(!socket) {
+    //         return
+    //     }
+    //     console.log("recieving")
+    //     socket.on("message recieved", (data) => {
+    //         console.log("noti recieved" + data)
+    //     });
+    // },[socket])
     
 
     const test = () => {
         console.log("hi")
-        const message = "hellllllloooo"
-        socket.emit("new notification", { message, receiver:2 });
+        // const message = "hellllllloooo"
+        // socket.emit("new notification", { message, receiver:2 });
     }
 
     const path = window.location.pathname;
