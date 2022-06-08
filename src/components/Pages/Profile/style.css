@@ -6,10 +6,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: var(--dark75);
     border-radius: var(--tiny);
     width: 100%;
-    padding: var(--medium);
 }
 
 .myCharacterCard {

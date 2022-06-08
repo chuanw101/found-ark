@@ -8,7 +8,7 @@ import AddCharacter from './AddCharacter'
 import EditInfo from './EditInfo'
 
 
-function Profile({user}) {
+function Profile({ user }) {
 
     const [allChars, setAllChars] = useState('');
 
@@ -54,15 +54,23 @@ function Profile({user}) {
             if (allChars) {
 
                 return (
-                    <div className="allMyCharacters">
 
-                        {allChars.map(char =>
-                            <div key={char.id} className="myCharacterCard">
-                                <CharacterDetails char={char} />
-                            </div>
-                        )}
+                    <div className="darkContainer">
+
+                        <h1>My Characters</h1>
+
+                        <div className="allMyCharacters">
+
+                            {allChars.map(char =>
+                                <div key={char.id} className="myCharacterCard">
+                                    <CharacterDetails char={char} />
+                                </div>
+                            )}
+
+                        </div>
 
                     </div>
+
                 );
 
             };

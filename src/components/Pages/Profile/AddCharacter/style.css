@@ -2,10 +2,10 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    min-width: 800px;
 }
 
 .addCharacterForm {
-    width: 60%;
     max-width: 800px;
 }
 
@@ -14,14 +14,34 @@
 }
 
 .autoFillForm {
-    width: 100%;
-    margin-bottom: var(--medium);
+    min-width: 100%;
 }
 
 .manualForm {
     width: 100%;
+    margin-top: var(--medium);
+}
+
+.charDisplay {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.leaderboardLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 228px;
+    padding: var(--small);
+    margin-left: var(--medium);
+}
+
+.orDivider {
+    line-height: 2;
 }
 
 .characterPreview {
-    margin-left: var(--large);
+    max-width: 100%;
+    margin-left: var(--medium);
 }
