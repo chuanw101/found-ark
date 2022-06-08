@@ -7,3 +7,7 @@
     display: flex;
     flex-direction: row;
 }
+
+.signupErr {
+    padding-bottom: 15px;
+}

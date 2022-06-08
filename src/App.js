@@ -31,6 +31,8 @@ function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
+    const [loginError, setLogInError] = useState(false)
+    const [nameTaken, setNameTaken]= useState(false)
 
     const path = window.location.pathname;
 
@@ -75,14 +77,15 @@ function App() {
                 user_name: loginData.username,
                 password: loginData.password,
             })
+            console.log(res)
             if (res?.data?.token) {
                 setToken(res.data.token)
                 localStorage.setItem('foundArkJwt', res.data.token);
                 navigate(`/`);
             }
         } catch (err) {
-            alert(err?.response?.data?.msg)
             console.log(err);
+            setLogInError(true)
         }
     }
 
@@ -101,7 +104,7 @@ function App() {
             }
         }
         catch (err) {
-            alert("name taken")
+            setNameTaken(true)
             console.log(err);
         }
     }
@@ -120,8 +123,8 @@ function App() {
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
                 <Route path="group/:groupId" element={<Group user={user} setBackground={setBackground} />} />
-                <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
-                <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
+                <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} loginError={loginError}/>} />
+                <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} nameTaken={nameTaken} />} />
                 <Route path="profile" element={<Profile user={user}/>} />
             </Routes>
             <Footer />
