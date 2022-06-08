@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import './style.css';
 
-function Header({ user, logout , test}) {
+function Header({ user, logout }) {
 
     return (
 
@@ -15,7 +15,7 @@ function Header({ user, logout , test}) {
 
             </div>
 
-            <Navigation user={user} logout={logout} test={test}/>
+            <Navigation user={user} logout={logout} />
 
         </header>
 

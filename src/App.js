@@ -32,39 +32,38 @@ function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
-    // const [socket, setSocket] = useState(null);
+    const [socket, setSocket] = useState(null);
 
-    // useEffect(() => {
-    //     setSocket(io('http://localhost:3001'));
-    //   }, []);
+    useEffect(() => {
+        setSocket(io('https://found-ark-backend.herokuapp.com/'));
+      }, []);
 
-    // useEffect(() => {
-    //     console.log(user)
-    //     if (!socket) {
-    //         return
-    //     }
-    //     if(user) {
-    //         socket.emit("setup", user.id);
-    //         console.log("Connecting to" + user.id)
-    //     }
-    //     socket.on("connected", () => console.log("connected"));
-    // }, [user?.id]);
+    useEffect(() => {
+        console.log(user)
+        if (!socket) {
+            return
+        }
+        if(user) {
+            socket.emit("setup", user.id);
+            console.log("Connecting to" + user.id)
+        }
+        socket.on("connected", () => console.log("connected"));
+    }, [user?.id]);
     
-    // useEffect(() => {
-    //     if(!socket) {
-    //         return
-    //     }
-    //     console.log("recieving")
-    //     socket.on("message recieved", (data) => {
-    //         console.log("noti recieved" + data)
-    //     });
-    // },[socket])
+    useEffect(() => {
+        if(!socket) {
+            return
+        }
+        console.log("recieving")
+        socket.on("message recieved", (data) => {
+            console.log("noti recieved" + data)
+        });
+    },[socket])
     
 
-    const test = () => {
+    const sendNoti = (noti) => {
         console.log("hi")
-        // const message = "hellllllloooo"
-        // socket.emit("new notification", { message, receiver:2 });
+        socket.emit("new notification", noti);
     }
 
     const path = window.location.pathname;
@@ -149,12 +148,12 @@ function App() {
 
     return (
         <div className={"App " + background}>
-            <Header user={user} logout={logout} test={test}/>
+            <Header user={user} logout={logout}/>
             <Routes>
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
-                <Route path="group/:groupId" element={<Group user={user} setBackground={setBackground} />} />
+                <Route path="group/:groupId" element={<Group user={user} sendNoti={sendNoti} setBackground={setBackground} />} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
                 <Route path="profile" element={<Profile user={user}/>} />
