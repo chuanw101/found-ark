@@ -33,6 +33,7 @@ function App() {
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
     const [notis, setNotis] = useState([]);
+    const [newNoti, setNewNoti] = useState(null);
     const [socket, setSocket] = useState(null);
 
 
@@ -78,8 +79,16 @@ function App() {
         console.log("recieving")
         socket.on("message recieved", (data) => {
             console.log("noti recieved" + data)
+            setNewNoti(data);
         });
     }, [socket])
+
+    useEffect(() => {
+        if (newNoti) {
+            setNotis([newNoti, ...notis]);
+            setNewNoti(null)
+        }
+    }, [newNoti])
 
 
     const sendNoti = (noti) => {

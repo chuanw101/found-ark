@@ -11,7 +11,7 @@ import WidgetBot from '@widgetbot/react-embed';
 import { Server } from '@widgetbot/embed-api';
 
 
-function Group({ user, setBackground }) {
+function Group({ user, sendNoti, setBackground }) {
     const [group, setGroup] = useState(null);
     const [allChars, setAllChars] = useState(null);
     const [charId, setCharId] = useState(null);
@@ -75,6 +75,8 @@ function Group({ user, setBackground }) {
                     'Authorization': `token ${token}`
                 }
             });
+            console.log(res.data)
+            sendNoti(res.data)
             window.location.reload(false);
         } catch (err) {
             console.log(err);
@@ -85,7 +87,6 @@ function Group({ user, setBackground }) {
         e.preventDefault();
         try {
             const token = localStorage.getItem('foundArkJwt');
-            console.log(token)
             const res = await axios.delete(`https://found-ark-backend.herokuapp.com/api/groupmembers/${groupId}`, {
                 headers: {
                     'Authorization': `token ${token}`
