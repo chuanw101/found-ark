@@ -1,62 +1,23 @@
 import './style.css';
 
-function Notifications() {
+function Notifications(props) {
 
-   return (
+  console.log(props?.notis);
+  return (
 
-      <ul className="notifications">
+    <ul className="notifications">
 
-        <li className="notificationItem">
-          <p>Notification 1</p>
-        </li>
+      {props?.notis.map(noti => {
+        return (
+          <li className="notificationItem" key={noti.id}>
+          <p>{noti.message}</p>
+          </li>
+        )
+      })}
 
-        <li className="notificationItem">
-          <p>Notification 2</p>
-        </li>
+    </ul>
 
-        <li className="notificationItem">
-          <p>Notification 3</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 4</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 5</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 6</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 7</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 8</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 9</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 10</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 11</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 12</p>
-        </li>
-
-      </ul>
-
-   )
+  )
 
 };
 

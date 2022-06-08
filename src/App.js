@@ -32,34 +32,55 @@ function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
+    const [notis, setNotis] = useState([]);
     const [socket, setSocket] = useState(null);
+
+
+    const getAllNotis = async (receiver_id) => {
+        try {
+            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/notifications/receiver/${receiver_id}`, {
+                headers: {
+                    'Authorization': `token ${token}`
+                }
+            })
+            console.log("========== getting notis")
+            console.log(res.data)
+            setNotis(res.data)
+        } catch (err) {
+            alert(err?.response?.data?.msg)
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
         setSocket(io('https://found-ark-backend.herokuapp.com/'));
-      }, []);
+    }, []);
 
     useEffect(() => {
         console.log(user)
+        if (user) {
+            getAllNotis(user.id);
+        }
         if (!socket) {
             return
         }
-        if(user) {
+        if (user) {
             socket.emit("setup", user.id);
             console.log("Connecting to" + user.id)
         }
         socket.on("connected", () => console.log("connected"));
     }, [user?.id]);
-    
+
     useEffect(() => {
-        if(!socket) {
+        if (!socket) {
             return
         }
         console.log("recieving")
         socket.on("message recieved", (data) => {
             console.log("noti recieved" + data)
         });
-    },[socket])
-    
+    }, [socket])
+
 
     const sendNoti = (noti) => {
         console.log("hi")
@@ -148,7 +169,7 @@ function App() {
 
     return (
         <div className={"App " + background}>
-            <Header user={user} logout={logout}/>
+            <Header user={user} logout={logout} notis={notis}/>
             <Routes>
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
@@ -156,7 +177,7 @@ function App() {
                 <Route path="group/:groupId" element={<Group user={user} sendNoti={sendNoti} setBackground={setBackground} />} />
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} />} />
-                <Route path="profile" element={<Profile user={user}/>} />
+                <Route path="profile" element={<Profile user={user} />} />
             </Routes>
             <Footer />
         </div>
