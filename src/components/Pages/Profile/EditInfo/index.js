@@ -72,10 +72,10 @@ function EditInfo({ user }) {
                         <option value="SA">SA</option>
                     </select>
 
-                    <label htmlFor="introduction"><b>Introduction</b></label>
+                    <label className="userInput" htmlFor="introduction"><b>Introduction</b></label>
                     <input type="text" placeholder="Introduction..." name="introduction" value={introduction} onChange={handleInputChange} />
 
-                    <button type="submit" onClick={submitNewProfInfo}>Edit</button>
+                    <button type="submit" className="submitBtn" onClick={submitNewProfInfo}>Edit</button>
                 </form>
             </div>
         </div>

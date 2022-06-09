@@ -4,7 +4,6 @@
 
 #tags {
     width: 100%;
-    padding: 10px 15px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: var(--tiny);
@@ -19,7 +18,6 @@
 
 .chosenTags {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     margin-bottom: var(--small);
 }
@@ -54,8 +52,4 @@
 
 .chosenTags p:hover:after {
     color: var(--dark);
-}
-
-#createGroupBtn {
-    margin: var(--small) 0px var(--tiny) 0px;
 }

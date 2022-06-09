@@ -2,24 +2,19 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    min-width: 800px;
-}
-
-.addCharacterForm {
-    max-width: 800px;
-}
-
-.addCharacterBtn {
-    padding: var(--small);
 }
 
 .autoFillForm {
     min-width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .manualForm {
     width: 100%;
     margin-top: var(--medium);
+    display: flex;
+    align-items: center;
 }
 
 .charDisplay {
@@ -44,4 +39,8 @@
 .characterPreview {
     max-width: 100%;
     margin-left: var(--medium);
+}
+
+.charSpecsCont {
+    width: 100%;
 }

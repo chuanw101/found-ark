@@ -115,13 +115,13 @@ function EditCharModal({ setOpenModal, char }) {
                             <label htmlFor="charName"><b>Character Name</b></label>
                             <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-                            <button onClick={pullCharInfo} className="charSearchBtn">Search</button>
+                            <button onClick={pullCharInfo} className="submitBtn">Search</button>
 
                         </form>
 
                         <form method="post" className="manualForm">
 
-                            <div>
+                            <div className="charEditSpecs">
 
                                 <label htmlFor="className"><b>Class</b></label>
                                 <select name="className" onChange={handleInputChange} required>
@@ -159,8 +159,8 @@ function EditCharModal({ setOpenModal, char }) {
                             <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
 
                             <div className="editCharFooter">
-                                <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
-                                <button onClick={updateCharacter}>Submit</button>
+                                <button onClick={() => setOpenModal(false)} className="submitBtn">Cancel</button>
+                                <button onClick={updateCharacter} className="submitBtn">Submit</button>
                             </div>
 
                         </form>

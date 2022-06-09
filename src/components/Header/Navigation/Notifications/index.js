@@ -76,7 +76,7 @@ function Notifications(props) {
   return (
 
     <ul className="notifications">
-      {props?.notis?.length === 0 && <li class="notificationItem">No Notifications</li>}
+      {props?.notis?.length === 0 && <li className="notificationItem">No Notifications</li>}
       {props?.notis?.map((noti, index) => {
         const message = noti.message.split(':')[0]
         const groupName = noti.message.split(':')[1]

@@ -33,11 +33,6 @@
     display: none;
 }
 
-.modalContainer button {
-    margin: var(--tiny);
-    width: 100%;
-}
-
 .footer {
     display: flex;
     width: 100%;
@@ -100,6 +95,6 @@
     width: 100%;
 }
 
-.charSearchBtn {
-    margin: var(--small) 0px 0px 0px !important;
+.charEditSpecs {
+    width: 100%;
 }
