@@ -63,7 +63,7 @@ function Notifications(props) {
       navigate(`/group/${props.notis[index].group_id}`)
     }
     if (todo === 'delete') {
-      //delNoti(props.notis[index].id);
+      delNoti(props.notis[index].id);
       let tempNotis = props.notis;
       tempNotis.splice(index, 1);
       props.setNotis(tempNotis);

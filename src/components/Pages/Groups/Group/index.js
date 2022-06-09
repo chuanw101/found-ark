@@ -108,6 +108,9 @@ function Group({ user, sendNoti, setBackground }) {
                     char_id: charId,
                 }
             });
+            if (res.data?.receive_id) {
+                sendNoti(res.data)
+            }
             window.location.reload(false);
         } catch (err) {
             console.log(err);
@@ -125,6 +128,7 @@ function Group({ user, sendNoti, setBackground }) {
                     'Authorization': `token ${token}`
                 }
             });
+            sendNoti(res.data)
             window.location.reload(false);
         } catch (err) {
             console.log(err);
@@ -144,6 +148,7 @@ function Group({ user, sendNoti, setBackground }) {
                     char_id: e.target.value,
                 }
             });
+            sendNoti(res.data)
             window.location.reload(false);
         } catch (err) {
             console.log(err);
@@ -243,17 +248,13 @@ function Group({ user, sendNoti, setBackground }) {
     useEffect(() => {
         getGroup();
         selectBackground();
-    }, []);
+    }, [groupId]);
 
     useEffect(() =>{
         groupMember();
     }, [group, user])
 
     const displayDiscord = () => {
-  
-            console.log(isGroupMember)
-            console.log(defaultDiscord)
-            console.log(discordInfo)
             if (isGroupMember) {
                 return (
                     <><a href={discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])}>{discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])} {discordInfo[0].length > 10 ? "" : <span className='defaultSpan'>(default link)</span>}</a></>
@@ -268,8 +269,7 @@ function Group({ user, sendNoti, setBackground }) {
         }
         return (moment(time).format('dddd h:mm a'))
     }
-    console.log(isGroupMember)
-    console.log(discordInfo)
+    
     return (
 
         <div className="page">
