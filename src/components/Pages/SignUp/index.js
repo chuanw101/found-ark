@@ -38,37 +38,37 @@ function SignUp({ handleSignupSubmit, nameTaken }) {
     return (
         <div className="page">
             <div className="darkContainerWrapped">
-                <h1>Sign Up</h1>
-                <div className={nameTaken ? "signupErr" : "hidden"}>
+                <h1 className="formTitle">Sign Up</h1>
+                <div className={nameTaken ? "signupErr" : "invisible signupErr"}>
                     <p>Username Taken!</p>
                 </div>
                 <form method="post">
                     <div className="container">
 
 
-                        <div>
-                            <label htmlFor="username"><b>Username</b></label>
-                            <div id="userVal">
-                                <input type="text" id="username" placeholder="Enter Username" name="username" pattern='[a-zA-Z0-9]{4,}' value={username} onChange={handleInputChange} required></input>
-                                <span className="validity"></span>
-                            </div>
-                            <div className={username === "" || userReg.test(username) == true ? "hidden" : "visible"}>
-                                <p>Please enter a username with at least 4 letters/numbers, no special characters</p>
-                            </div>
+
+                        <label htmlFor="username"><b>Username</b></label>
+                        <div id="userVal">
+                            <input type="text" id="username" placeholder="Enter Username" name="username" pattern='[a-zA-Z0-9]{4,}' value={username} onChange={handleInputChange} required></input>
+                            <span className="validity"></span>
                         </div>
-                        <div>
-                            <label  className='userInput' htmlFor="password"><b>Password</b></label>
-                            <div id="passVal">
-                                <input type="password" id='password' placeholder="Enter Password" name="password" pattern='.{8,}' value={password} onChange={handleInputChange} required />
-                                <span className="validity"></span>
-                            </div>
-                            <div className={password === "" || passReg.test(password) == true ? "hidden" : "visible"}>
-                                <p>Please enter a password with at least 8 characters</p>
-                            </div>
+                        <div className={username === "" || userReg.test(username) == true ? "invisible inputErrP" : "visible inputErrP"}>
+                            <p>Must include at least 4 letters/numbers, no special characters</p>
                         </div>
 
 
-                        <label  className='userInput' htmlFor="region"><b>Region</b></label>
+                        <label className='userInput tintyMargin' htmlFor="password"><b>Password</b></label>
+                        <div id="passVal">
+                            <input type="password" id='password' placeholder="Enter Password" name="password" pattern='.{8,}' value={password} onChange={handleInputChange} required />
+                            <span className="validity passValid"></span>
+                        </div>
+                        <div className={password === "" || passReg.test(password) == true ? "invisible inputErrP" : "visible inputErrP"}>
+                            <p>Please enter a password with at least 8 characters</p>
+                        </div>
+
+
+
+                        <label className='userInput tintyMargin' htmlFor="region"><b>Region</b></label>
                         <select name="region" onChange={handleInputChange} value={region}>
                             <option value="NAE">NAE</option>
                             <option value="NAW">NAW</option>
@@ -77,7 +77,7 @@ function SignUp({ handleSignupSubmit, nameTaken }) {
                             <option value="SA">SA</option>
                         </select>
 
-                        <label  className='userInput' htmlFor="introduction"><b>Introduction</b></label>
+                        <label className='userInput' htmlFor="introduction"><b>Introduction</b></label>
                         <input type="text" placeholder="Introduction..." name="introduction" value={introduction} onChange={handleInputChange} />
 
                         <button className="submitBtn" type="submit" onClick={handleFormSubmit}>Sign Up</button>

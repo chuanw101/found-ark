@@ -50,7 +50,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    width: 800px;
+    width: 500px;
     max-width: 100%;
     padding: var(--medium);
     border: 1px solid var(--accent);
@@ -58,11 +58,41 @@ form {
     padding: var(--small);
 }
 
-input,
-select {
-    height: 50px;
+form .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    text-align: left;
     width: 100%;
-    padding: 10px 15px;
+}
+
+.inputErrP {
+    text-align: left;
+    width: 100%;
+    transition: all .2s ease-in-out !important;
+    opacity: 0.75;
+    font-size: 0.9em;
+}
+
+input {
+    width: 100%;
+    height: 43px;
+    padding: 8px 12px;
+    margin: var(--tiny) 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: var(--tiny);
+    box-sizing: border-box;
+}
+
+select{
+    width: 100%;
+    height:43px;
+    padding: 7px 9px;
     margin: var(--tiny) 0px;
     display: inline-block;
     border: 1px solid #ccc;
@@ -72,31 +102,39 @@ select {
 
 .userInput {
     display: block;
-    margin-top: var(--medium);
+    margin-top: 20px;
+}
+
+.passWordLI {
+    margin-top: 22px;
+}
+
+.tintyMargin {
+    margin-top: 0;
 }
 
 select:invalid {
     color: var(--gray);
 }
 
-input:invalid ~ span:after {
+input:invalid~span:after {
     content: '✖';
     padding: 5px;
 }
 
-input:valid ~ span:after {
+input:valid~span:after {
     content: '✓';
     padding: 5px;
 }
 
 button {
     border-radius: var(--tiny);
-    min-width: 150px;
-    width: 100%;
+    width: 150px;
+    height: 43px;
     cursor: pointer;
     border: none;
     display: flex;
-    align-items: center;
+    align-self: flex-end;
     justify-content: center;
     background: radial-gradient(ellipse farthest-corner at left top, #ffdb58 0%, #FDB931 8%, #f4c430 30%, #e1ad21 40%, transparent 80%),
         radial-gradient(ellipse farthest-corner at right bottom, #f0dc82 0%, #f7e98e 8%, #ffd300 25%, #fcc200 62.5%, #fcc200 100%);
@@ -105,11 +143,11 @@ button {
     background-repeat: no-repeat;
     transition: 500ms;
     font-weight: 700;
-    padding: var(--small);
+    padding: 9px 12px;
 }
 
 .submitBtn {
-    margin-top: var(--medium);
+    margin-top: var(--small);
 }
 
 button:hover {
@@ -124,6 +162,10 @@ h1 {
     margin-bottom: var(--medium);
 }
 
+.formTitle {
+    margin-bottom: var(--tiny);
+}
+
 .hidden {
     display: none;
     transition: all 3s ease;
@@ -131,6 +173,25 @@ h1 {
 
 .visible {
     transition: all 3s ease;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.validity{
+    position: absolute;
+    transform: translate(82px, -24px);
+}
+
+.passValid {
+    position: absolute;
+    transform: translate(75px, -24px);
+}
+
+.tagValid{
+    position: absolute;
+    transform: translate(90px, -24px);
 }
 
 .darkContainer {
@@ -187,6 +248,7 @@ h1 {
     transition: all 0.3s ease;
     padding: 10px var(--small);
     margin: 0px var(--small);
+    width: auto;
 }
 
 .tabLabel:last-of-type {
@@ -208,3 +270,27 @@ h1 {
     box-shadow: inset 0px -50px 40px -50px var(--accent) !important;
     border-radius: var(--tiny);
 }
+
+/* Media Queries */
+
+/* large screens */
+@media screen and (max-width: 1200px) {
+    .page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0px var(--large);
+        margin: 0;
+    }
+}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {}
+
+/* phones */
+@media screen and (max-width: 480px) {}

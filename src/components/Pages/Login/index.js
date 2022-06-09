@@ -33,8 +33,8 @@ function Login({ handleLoginSubmit, loginError }) {
         <div className="page login">
             <div className="darkContainerWrapped">
 
-                <h1>Login</h1>
-                <div className={loginError ? "loginErr" : "hidden"}>
+                <h1 className="formTitle">Login</h1>
+                <div className={loginError ? "loginErr" : "invisible loginErr"}>
                     <p>Wrong email or password credentials!</p>
                 </div>
                 <form method="post">
@@ -42,7 +42,7 @@ function Login({ handleLoginSubmit, loginError }) {
                         <label htmlFor="username"><b>Username</b></label>
                         <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleInputChange} required />
 
-                        <label className="userInput" htmlFor="password"><b>Password</b></label>
+                        <label className="userInput passWordLI" htmlFor="password"><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleInputChange} required />
 
                         <button className="submitBtn" type="submit" onClick={handleFormSubmit}>Login</button>

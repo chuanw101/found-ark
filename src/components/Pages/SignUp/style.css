@@ -1,13 +1,17 @@
 #passVal{
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 #userVal{
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .signupErr {
     padding-bottom: 15px;
+    transition: all .2s ease;
 }
+

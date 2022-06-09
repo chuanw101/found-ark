@@ -18,7 +18,7 @@ function CreateGroup() {
     const [timeZone, setTimeZone] = useState("(GMT+00:00) Greenwich Mean Time");
     const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
-    const [tags, addNewTag] = useState([]);
+    const [tags, addNewTag] = useState(["valtan", "maps", "vykas", "argos"]);
 
     // define token
     const token = localStorage.getItem('foundArkJwt');
@@ -140,7 +140,7 @@ function CreateGroup() {
         try {
             let timeInfo;
             if (time) {
-                timeInfo = new Date(`${day}T${time}:00.000${timeZone.substring(4,10)}`);
+                timeInfo = new Date(`${day}T${time}:00.000${timeZone.substring(4, 10)}`);
             }
             const res = await axios.post('https://found-ark-backend.herokuapp.com/api/groups', {
                 group_name: groupName,
@@ -179,7 +179,7 @@ function CreateGroup() {
 
     return (
 
-        <div className="darkContainer">
+        <div className="darkContainerWrapped">
 
             <h1>Create New Group</h1>
 
@@ -189,13 +189,13 @@ function CreateGroup() {
                 <label htmlFor="groupName">Group Name</label>
                 <input type="text" placeholder="Enter Group Name" name="groupName" onChange={handleInputChange} required />
 
-                <label htmlFor="description">Description</label>
+                <label className="userInput" htmlFor="description">Description</label>
                 <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
 
-                <label htmlFor="discord">Discord</label>
+                <label className="userInput" htmlFor="discord">Discord</label>
                 <input type="url" placeholder="https://discord.gg/aaaa" name="discord" pattern="https://.*" onChange={handleInputChange} required />
 
-                <label htmlFor="characters">Group Leader</label>
+                <label className="userInput" htmlFor="characters">Group Leader</label>
                 <select name="characters" required onChange={handleInputChange}>
 
                     {allChars.map((char) => {
@@ -206,7 +206,7 @@ function CreateGroup() {
 
                 </select>
 
-                <label htmlFor="dayofweek">Day</label>
+                <label className="userInput" htmlFor="dayofweek">Day</label>
                 <select name="dayofweek" required onChange={handleInputChange}>
                     <option value="2022-06-06">Monday</option>
                     <option value="2022-06-07">Tuesday</option>
@@ -217,7 +217,7 @@ function CreateGroup() {
                     <option value="2022-06-12">Sunday</option>
                 </select>
 
-                <label htmlFor="timezone">Time Zone</label>
+                <label className="userInput" htmlFor="timezone">Time Zone</label>
                 <select name="timezone" required onChange={handleInputChange}>
 
                     {timeZones.map((zone, index) => {
@@ -228,17 +228,17 @@ function CreateGroup() {
 
                 </select>
 
-                <label htmlFor="time">Time</label>
+                <label className="userInput" htmlFor="time">Time</label>
                 <input type="time" placeholder="Time" name="time" onChange={handleInputChange} required />
 
                 <div className="addTags">
 
-                    <label htmlFor="tags">Group Tags</label>
+                    <label className="userInput" htmlFor="tags">Group Tags</label>
 
                     <div className="tagInput">
 
                         <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                        <span className="validity"></span>
+                        <span className="validity tagValid"></span>
                         <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
 
                     </div>
@@ -252,7 +252,7 @@ function CreateGroup() {
 
                 </div>
 
-                <button type="submit" id="createGroupBtn" onClick={handleFormSubmit}>Create Group</button>
+                <button type="submit" className="submitBtn" onClick={handleFormSubmit}>Create Group</button>
 
             </form>
 

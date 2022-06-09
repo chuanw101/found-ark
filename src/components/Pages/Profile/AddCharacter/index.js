@@ -41,7 +41,7 @@ function AddCharacter() {
     const pullCharInfo = async (e) => {
 
         e.preventDefault();
-        
+
         try {
             const res = await axios.get(`https://lostark-lookup.herokuapp.com/api/query?pcName=${charName}`)
             if (res.data?.length) {
@@ -136,13 +136,13 @@ function AddCharacter() {
                         <label htmlFor="charName"><b>Character Name</b></label>
                         <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-                        <button onClick={pullCharInfo}>Search</button>
+                        <button className="submitBtn" onClick={pullCharInfo}>Search</button>
 
                     </form>
 
                     <form method="post" className={"manualForm " + buttonStatus}>
 
-                        <div className={formStatus}>
+                        <div className={formStatus + " charSpecsCont"}>
 
                             <label htmlFor="className"><b>Class</b></label>
                             <select name="className" onChange={handleInputChange} required>
@@ -165,21 +165,21 @@ function AddCharacter() {
                                 <option value="deathblade">deathblade</option>
                             </select>
 
-                            <label htmlFor="charLvl"><b>Character Level</b></label>
+                            <label className="userInput" htmlFor="charLvl"><b>Character Level</b></label>
                             <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
 
-                            <label htmlFor="iLvl"><b>Item Level</b></label>
+                            <label className="userInput" htmlFor="iLvl"><b>Item Level</b></label>
                             <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
 
-                            <label htmlFor="rosterLvl"><b>Roster Level</b></label>
+                            <label className="userInput" htmlFor="rosterLvl"><b>Roster Level</b></label>
                             <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
 
                         </div>
 
-                        <label htmlFor="engravings"><b>Engravings</b></label>
+                        <label className={!formStatus && " userInput"} htmlFor="engravings"><b>Engravings</b></label>
                         <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
 
-                        <button onClick={addCharacter} className={buttonStatus}>Add Character</button>
+                        <button onClick={addCharacter} className={buttonStatus + " submitBtn"}>Add Character</button>
 
                     </form>
 
@@ -195,7 +195,7 @@ function AddCharacter() {
                             <p className="orDivider">OR</p>
                             <p>Enter your character information manually.</p>
                         </div>
-                    : ''
+                        : ''
                     }
 
                     {searchStatus ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
