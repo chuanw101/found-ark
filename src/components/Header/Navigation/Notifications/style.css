@@ -2,13 +2,18 @@
    display: none;
    flex-direction: column;
    position: absolute;
-   background: var(--dark50);
+   background: var(--dark75);
    box-shadow: var(--shadow);
-   transform: translateX(-15px);
-   width: 200px;
+   transform: translateX(-65px);
+   width: 300px;
    max-height: 250px;
-   overflow: scroll;
-   padding: var(--small);
+   overflow-y: scroll;
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+}
+
+.notifications::-webkit-scrollbar {
+   display: none;
 }
 
 .notifications:hover {
@@ -18,7 +23,6 @@
 .notificationItem {
    user-select: none;
    font-size: 0.8em;
-   margin-bottom: var(--small);
 }
 
 .notificationItem:last-of-type {
@@ -26,16 +30,19 @@
 }
 
 .unread {
-   color:red;
-   cursor: default;
+   color: white;
+   cursor: pointer;
+   background-color: var(--light25);
+   padding: var(--small);
 }
 
 .read {
-   cursor: default;
+   cursor: pointer;
+   padding: var(--small);
 }
 
 .groupName {
-   color: green;
+   color: var(--accent);
    cursor: pointer;
 }
 

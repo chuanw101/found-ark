@@ -1,0 +1,4 @@
+.myGroupsCharName {
+    margin: var(--medium) 0 var(--small) 0;
+    text-transform: capitalize;
+}

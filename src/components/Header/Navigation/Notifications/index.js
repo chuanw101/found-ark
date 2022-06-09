@@ -44,6 +44,14 @@ function Notifications(props) {
       index = temp.getAttribute('index');
       temp = temp.parentElement;
     }
+    if (todo === 'delete') {
+      delNoti(props.notis[index].id);
+      let tempNotis = props.notis;
+      tempNotis.splice(index, 1);
+      props.setNotis(tempNotis);
+      setUpdate(!update);
+      return
+    }
     if (todo === 'markread') {
       let tempNotis = props.notis;
       tempNotis[index].read = true;
@@ -59,16 +67,8 @@ function Notifications(props) {
         setUpdate(!update);
         markRead(props.notis[index].id);
       }
-      
-      navigate(`/group/${props.notis[index].group_id}`)
     }
-    if (todo === 'delete') {
-      delNoti(props.notis[index].id);
-      let tempNotis = props.notis;
-      tempNotis.splice(index, 1);
-      props.setNotis(tempNotis);
-      setUpdate(!update);
-    }
+    navigate(`/group/${props.notis[index].group_id}`)
   }
 
   console.log(props.notis)
@@ -76,7 +76,7 @@ function Notifications(props) {
   return (
 
     <ul className="notifications">
-
+      {props?.notis?.length === 0 && <li class="notificationItem">No Notifications</li>}
       {props?.notis?.map((noti, index) => {
         const message = noti.message.split(':')[0]
         const groupName = noti.message.split(':')[1]
