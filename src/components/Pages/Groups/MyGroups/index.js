@@ -24,14 +24,14 @@ function MyGroups({ user, activeTags }) {
         };
 
     };
-    
+
     const filterGroups = (groupsToFilter) => {
-        if(activeTags.length) {
+        if (activeTags.length) {
             let newGroups = [...groupsToFilter];
             for (const group of newGroups) {
                 let foundCount = 0;
-                for(const tag of activeTags) {
-                    if (group.tag.some(t=>t.tag_name===tag)) {
+                for (const tag of activeTags) {
+                    if (group.tag.some(t => t.tag_name === tag)) {
                         foundCount++;
                     }
                 }
@@ -51,7 +51,7 @@ function MyGroups({ user, activeTags }) {
         getMyChars();
     }, []);
 
-    useEffect(()=> {
+    useEffect(() => {
         let temp = [...myChars];
         for (const chars of temp) {
             chars.joined = filterGroups(chars.joined);
@@ -73,10 +73,10 @@ function MyGroups({ user, activeTags }) {
     }
 
     const formatTime = (time) => {
-        if(!time) {
+        if (!time) {
             return
         }
-        return(moment(time).format('dddd h:mm a'))
+        return (moment(time).format('dddd h:mm a'))
     }
 
     return (
@@ -86,9 +86,9 @@ function MyGroups({ user, activeTags }) {
             {myChars.map(char => {
                 return (
                     <React.Fragment key={char.id}>
-                        <h2>{char.char_name}'s Groups</h2>
-                        {char?.joined?.length ? (<></>) : (<><h3>none joined</h3></>)}
-                        {char?.joined?.filter(group=>group.show).map(group => {
+                        <h2 className="myGroupsCharName" >{char.char_name}'s Groups</h2>
+                        {char?.joined?.length ? (<></>) : (<><p>This character doesn't belong to any groups yet!</p></>)}
+                        {char?.joined?.filter(group => group.show).map(group => {
                             return (
 
                                 <div key={group.id} id={group.id} className={
@@ -97,23 +97,45 @@ function MyGroups({ user, activeTags }) {
                                             group.id % 2 === 0 ? 'groupPreview bgCity' : 'groupPreview bgSky'
                                 } onClick={handleGroupClick}>
 
-                                    <div>
-                                        <h2>{group.group_name}</h2>
-                                        <p>{group.description}</p>
-                                        <p>{formatTime(group.time)}</p>
-                                        <p>Members:
-                                            {group.member_char?.map((character) => {
-                                                return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)}{character.char_name}({character.item_lvl}) </span>)
-                                            })}
-                                        </p>
-                                        <p>Tags:
-                                            {group.tag?.map((tag) => {
-                                                return (<span key={tag.id}> {tag.tag_name}</span>)
-                                            })}
-                                        </p>
+                                    <div className="groupPreviewColumnLeft">
+
+                                        <div>
+                                            <h2>{group.group_name}</h2>
+                                            <p>{group.description}</p>
+                                            <p>{formatTime(group.time)}</p>
+                                        </div>
+
+                                        <div>
+                                            <h4>Members</h4>
+                                            <p>
+                                                {group.member_char.map((character) => {
+                                                    return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)} {character.char_name} ({character.item_lvl}) </span>)
+                                                })}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="groupPreviewColumnRight">
+
+                                        <div className="groupTagsPreview">
+
+                                            <h4>Tags</h4>
+
+                                            <p>
+                                                {group.tag.map((tag) => {
+                                                    return (<span key={tag.id}> {tag.tag_name}</span>)
+                                                })}
+                                            </p>
+
+                                        </div>
+
+                                        <button className="previewApplyBtn" value={group.id}>View Details</button>
+
                                     </div>
 
                                 </div>
+
                             );
                         })}
                     </React.Fragment>

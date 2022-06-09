@@ -4,14 +4,16 @@
     padding: var(--tiny) var(--small);
     width: 350px;
     overflow: scroll;
-    margin: 0px 0px 0px var(--medium);
+}
+
+.searchTagsArea{
+    display: flex;
+    flex-direction: column;
 }
 
 .savedTags {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: var(--small);
 }
 
 .savedTagsInactive {
@@ -19,7 +21,7 @@
     align-items: center;
     transition: all 0.3s ease;
     color: var(--dark);
-    background-color: var(--light90);
+    background-color: var(--light50);
     border-radius: 5px;
     user-select: none;
     line-height: 1;
@@ -42,10 +44,10 @@
 
 .savedTagsInactive:hover {
     cursor: pointer;
-    /* background-color: var(--accent); */
+    background-color: var(--light75);
 }
 
 .savedTagsActive:hover {
     cursor: pointer;
-    /* background-color: var(--light90); */
+    background-color: var(--accent75);
 }

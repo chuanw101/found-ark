@@ -189,6 +189,10 @@ h1 {
     margin: 0px var(--small);
 }
 
+.tabLabel:last-of-type {
+    margin: 0 0 0 var(--small);
+}
+
 .tabLabel:hover {
     cursor: pointer;
     box-shadow: inset 0px -20px 20px -25px var(--accent);

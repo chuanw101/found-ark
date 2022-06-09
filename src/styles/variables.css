@@ -22,7 +22,7 @@
 
     --accent: hsl(40, 90%, 70%);
     --accent90: ;
-    --accent75: ;
+    --accent75: hsla(40, 90%, 70%, 0.753);
     --accent50: ;
     --accent25: ;
     --accent10: ;

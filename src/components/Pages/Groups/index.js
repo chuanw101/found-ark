@@ -12,7 +12,7 @@ function Groups({ user }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
     const [newTag, setTag] = useState("");
-    const [tags, setAllTags] = useState([]);
+    const [tags, setAllTags] = useState([{ tag_name: "valtan", active: false }, { tag_name: "maps", active: false }, { tag_name: "vykas", active: false }, { tag_name: "argos", active: false }]);
     const [activeTags, setActiveTags] = useState([]);
 
     const handleTabSelect = () => {
@@ -105,7 +105,15 @@ function Groups({ user }) {
         <div className="page">
 
             <div className="tabHeader">
-                <input className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
+                <div className="searchTagsArea">
+                {currentTab != "CreateGroup" && <input className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>}
+                <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+    
+                {currentTab != "CreateGroup" && <div className="savedTags">
+                    {tags.map((tag, index) =>
+                        <p className={tag.active ? ("savedTagsActive") : ("savedTagsInactive")} key={index} value={index} onClick={handleTagClick}>{tag.tag_name}</p>)}
+                </div>}
+                </div>
 
                 {user?.logged_in ? (
                     <div className="tabs" onClick={handleTabSelect}>
@@ -124,12 +132,6 @@ function Groups({ user }) {
                     </div>
                 ) : (<></>)}
 
-            </div>
-            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
-
-            <div className="savedTags">
-                {tags.map((tag, index) =>
-                    <p className={tag.active ? ("savedTagsActive") : ("savedTagsInactive")} key={index} value={index} onClick={handleTagClick}>{tag.tag_name}<span>❌</span></p>)}
             </div>
 
             {renderTab()}
