@@ -72,8 +72,8 @@ function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar })
                         <img style={getItemBg(curGear.grade)} src={rootImgUrl + curGear.icon} alt={curGear.icon}></img>
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
-                            {bonusEffect.map(effect => <p>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
-                            {engravingEffect.map(effect => <p>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
+                            {bonusEffect.map((effect, index) => <p key={index}>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
+                            {engravingEffect.map((effect, index) => <p key={index}>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
                         </div>
                     </div>
                 )
@@ -84,7 +84,7 @@ function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar })
                         <div className="gearInfo">
                             <h4>{curGear.name}</h4>
                             <p>{curGear.itemLevel}</p>
-                            {engravingEffect.map(effect => <p>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
+                            {engravingEffect.map((effect, index) => <p key={index}>{effect?.replace('[', '').replace(']', '').replace('Node', '')}</p>)}
                         </div>
                     </div>
                 )

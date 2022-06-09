@@ -94,7 +94,7 @@ function Groups({ user }) {
             return user ? <Group currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
         };
         if (currentTab === 'CreateGroup') {
-            return user ? <CreateGroup currentTab={currentTab} setcurrentTab={setCurrentTab} /> : navigate(`/login`);
+            return user ? <CreateGroup currentTab={currentTab} setcurrentTab={setCurrentTab} user={user} /> : navigate(`/login`);
         };
         return <AllGroups />;
 
