@@ -5,17 +5,27 @@ import './style.css';
 
 import CharacterDetails from '../../CharacterDetails';
 import AddCharacter from './AddCharacter'
+import EditCharModal from '../../EditCharModal'
 import EditInfo from './EditInfo'
 
 
 function Profile({ user }) {
 
     const [allChars, setAllChars] = useState('');
+    const [currentTab, setCurrentTab] = useState('MyCharacters');
+    const [charModalOpen, setCharModalOpen] = useState(false);
+    const [selectedChar, setSelectedChar] = useState();
 
     const token = localStorage.getItem('foundArkJwt');
     const tokenData = jwtDecode(token);
 
-    const [currentTab, setCurrentTab] = useState('MyCharacters');
+    if (charModalOpen) {
+        // Disable scroll
+        document.body.style.overflow = "hidden";
+    } else {
+        // Enable scroll
+        document.body.style.overflow = "auto";
+    }
 
     const handleTabSelect = () => {
 
@@ -63,7 +73,7 @@ function Profile({ user }) {
 
                             {allChars.map(char =>
                                 <div key={char.id} className="myCharacterCard">
-                                    <CharacterDetails char={char} />
+                                    <CharacterDetails char={char} editChar={true} setCharModalOpen={setCharModalOpen} setSelectedChar={setSelectedChar}/>
                                 </div>
                             )}
 
@@ -116,6 +126,8 @@ function Profile({ user }) {
             </div>
 
             {renderTab()}
+
+            {charModalOpen && <EditCharModal setOpenModal={setCharModalOpen} char={selectedChar} />}
 
         </div>
 

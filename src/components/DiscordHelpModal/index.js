@@ -47,8 +47,8 @@ function DiscordHelpModal({ setOpenModal, setGroup, group }) {
     }
 
     return (
-        <div className="modalBackground">
-            <div className="modalContainer">
+        <div className="modalBackground" onClick={() => setOpenModal(false)}>
+            <div className="modalContainer" onClick={e => e.stopPropagation()}>
 
                 <form>
                     <div className="title">

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
+import axios from 'axios';
 import './style.css'
 
 function getItemBg(grade) {
@@ -23,13 +23,17 @@ function getItemBg(grade) {
     }
 }
 
-function CharacterDetails({ char }) {
+function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar }) {
 
     const [statsActive, setStatsActive] = useState(false);
+
+    const token = localStorage.getItem('foundArkJwt');
 
     if (!char) {
         return;
     };
+
+    console.log('CHAR: ', char.char_name);
 
     let advCharData;
 
@@ -100,6 +104,42 @@ function CharacterDetails({ char }) {
 
     };
 
+    const updateChar = async () => {
+
+        try {
+
+            const res = await axios.get(`https://lostark-lookup.herokuapp.com/api/query?pcName=${char.char_name}`);
+
+            if (res.data?.length) {
+
+                const charData = res.data[0];
+
+                try {
+                    await axios.put(`https://found-ark-backend.herokuapp.com/api/characters/${char.id}`, {
+                        char_name: charData.pcName,
+                        class: charData.pcClassName,
+                        item_lvl: charData.maxItemLevel,
+                        roster_lvl: charData.expeditionLvl,
+                        char_lvl: charData.pcLevel,
+                        json_data: charData.jsonData,
+                    }, {
+                        headers: {
+                            'Authorization': `token ${token}`
+                        }
+                    })
+                    window.location.reload(true);
+                } catch (err) {
+                    console.log(err);
+                };
+
+            };
+
+        } catch (err) {
+            console.log(err);
+        };
+
+    };
+
     const checkStatus = () => {
         statsActive ? setStatsActive(false) : setStatsActive(true);
     };
@@ -109,8 +149,6 @@ function CharacterDetails({ char }) {
         <div className={"charCard " + (statsActive ? "" : "collapsed")}>
 
             <div className={"charHeadline " + char?.class.toLowerCase()}>
-
-                {/* {char.class ? <img src={`${rootImgUrl}EFUI_IconAtlas/PC/${char?.class.toLowerCase()}.png`} alt={`${char?.class} preview`} className="charClassImg"></img> : ''} */}
 
                 <div className="charInfo">
 
@@ -161,6 +199,13 @@ function CharacterDetails({ char }) {
                     </div>
 
                     {advCharData ? <h4 onClick={checkStatus} className="collapsible">Full Stats & Gear<span className={"carrot " + (statsActive ? "open" : "closed")}></span></h4> : ''}
+
+                </div>
+
+                <div className="editCharacterContainer">
+
+                    {editChar && <img src="/assets/icons/refresh-icon.png" alt="refresh icon" className="updateCharBtn" onClick={() => { updateChar(); }}></img>}
+                    {editChar && <button className="editCharBtn" onClick={() => { setCharModalOpen(true); setSelectedChar(char); }}>Edit</button>}
 
                 </div>
 

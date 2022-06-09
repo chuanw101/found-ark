@@ -9,12 +9,14 @@
     justify-content: center;
     align-items: center;
     margin-top: -150px;
+    animation: fade-in 0.5s;
 }
 
 .modalContainer {
-    width: 800px;
+    min-width: 800px;
     height: fit-content;
     max-height: 90vh;
+    max-width: 90vw;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: var(--dark50);
@@ -24,6 +26,7 @@
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    animation: fade-up 0.5s backwards 0.4s;
 }
 
 .modalContainer::-webkit-scrollbar {
@@ -68,4 +71,35 @@
     margin-left: auto;
     margin-right: auto;
     width: max-content;
+}
+
+.editCharacterSection {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-width: 800px;
+    max-width: 1800px;
+}
+
+.editCharacterForm {
+    max-width: 800px;
+}
+
+.editCharFooter {
+    display: flex;
+    width: 100%;
+}
+
+.editCharFooter button {
+    margin: var(--medium) var(--small) 0px 0px;
+    width: 100%;
+}
+
+.editCharFooter button:last-of-type {
+    margin: var(--medium) 0px 0px 0px;
+    width: 100%;
+}
+
+.charSearchBtn {
+    margin: var(--small) 0px 0px 0px !important;
 }

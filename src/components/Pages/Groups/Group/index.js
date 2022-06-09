@@ -17,7 +17,15 @@ function Group({ user, sendNoti, setBackground }) {
     const [charId, setCharId] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [groupModalOpen, setGroupModalOpen] = useState(false);
-    const [isGroupMember, setIsGroupMember] = useState(false)
+    const [isGroupMember, setIsGroupMember] = useState(false);
+
+    if (modalOpen || groupModalOpen) {
+        // Disable scroll
+        document.body.style.overflow = "hidden";
+    } else {
+        // Enable scroll
+        document.body.style.overflow = "auto";
+    }
 
     const api = new Server({ id: 'test' });
 
