@@ -5,7 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import CharacterDetails from '../../../CharacterDetails';
 import DiscordHelpModal from "../../../DiscordHelpModal";
-import EditGroupModal from  "../../../EditGroupModal";
+import EditGroupModal from "../../../EditGroupModal";
 
 import WidgetBot from '@widgetbot/react-embed';
 import { Server } from '@widgetbot/embed-api';
@@ -17,13 +17,14 @@ function Group({ user, sendNoti, setBackground }) {
     const [charId, setCharId] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [groupModalOpen, setGroupModalOpen] = useState(false);
+    const [isGroupMember, setIsGroupMember] = useState(false)
 
     const api = new Server({ id: 'test' });
 
     api.on('sendMessage', message => {
         console.log('sending:', message)
     });
-    
+
     api.emit('message', { id: 'testmessage' });
 
     const { groupId } = useParams();
@@ -38,6 +39,18 @@ function Group({ user, sendNoti, setBackground }) {
             console.log(res.data);
         } catch (err) {
             console.log(err);
+        };
+    };
+
+    // //user is a member 
+    const groupMember = () => {
+        if (group?.member_char.some(char => {
+            if (char.owner_id === user.id) {
+                return true
+            }
+            return false
+        })) {
+            setIsGroupMember(true)
         };
     };
 
@@ -138,7 +151,6 @@ function Group({ user, sendNoti, setBackground }) {
     }
 
     const getUserStatus = () => {
-        console.log("hi")
         if (user?.logged_in) {
             if (group?.creator?.owner_id === user.id) {
                 let appsEL = [];
@@ -233,6 +245,21 @@ function Group({ user, sendNoti, setBackground }) {
         selectBackground();
     }, []);
 
+    useEffect(() =>{
+        groupMember();
+    }, [group, user])
+
+    const displayDiscord = () => {
+  
+            console.log(isGroupMember)
+            console.log(defaultDiscord)
+            console.log(discordInfo)
+            if (isGroupMember) {
+                return (
+                    <><a href={discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])}>{discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])} {discordInfo[0].length > 10 ? "" : <span className='defaultSpan'>(default link)</span>}</a></>
+                )
+            }
+    }
     const discordInfo = group?.discord?.split(' ');
 
     const formatTime = (time) => {
@@ -241,12 +268,11 @@ function Group({ user, sendNoti, setBackground }) {
         }
         return (moment(time).format('dddd h:mm a'))
     }
-
+    console.log(isGroupMember)
+    console.log(discordInfo)
     return (
 
         <div className="page">
-
-            {/* <div className="groupBanner darkContainer"> */}
 
             <div className="groupBanner">
 
@@ -255,11 +281,8 @@ function Group({ user, sendNoti, setBackground }) {
                     <p>{group?.description}</p>
                     <p>{formatTime(group?.time)}</p>
 
-                    {discordInfo ? (
-                        <><a href={discordInfo[0]}>{discordInfo[0]}</a></>
-                    ) : (
-                        <><a href={defaultDiscord[0]}>{defaultDiscord[0]}<span>(default link)</span></a></>
-                    )}
+                    {displayDiscord()}
+
                     {group?.creator?.owner_id === user?.id ? (
                         <>
                             <button className="discordBtn"

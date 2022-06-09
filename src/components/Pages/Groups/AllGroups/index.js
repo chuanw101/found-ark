@@ -82,19 +82,6 @@ function AllGroups({ user, activeTags }) {
         navigate(`/group/${id}`)
     }
 
-    const handleApply = async (e) => {
-        try {
-            if (user.logged_in) {
-                alert(`TODO add modal to select char.`)
-            } else {
-                navigate('login');
-            };
-
-        } catch (err) {
-            console.log(err);
-        };
-    }
-
     const formatTime = (time) => {
         if(!time) {
             return
