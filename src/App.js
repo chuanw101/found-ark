@@ -93,7 +93,6 @@ function App() {
 
 
     const sendNoti = (noti) => {
-        console.log("hi")
         socket.emit("new notification", noti);
     }
 
