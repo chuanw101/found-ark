@@ -24,3 +24,21 @@
 .notificationItem:last-of-type {
    margin-bottom: 0;
 }
+
+.unread {
+   color:red;
+   cursor: default;
+}
+
+.read {
+   cursor: default;
+}
+
+.groupName {
+   color: green;
+   cursor: pointer;
+}
+
+.pointer {
+   cursor: pointer;
+}

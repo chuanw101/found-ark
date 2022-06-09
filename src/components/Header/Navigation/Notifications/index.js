@@ -1,62 +1,103 @@
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import './style.css';
 
-function Notifications() {
+function Notifications(props) {
+  const [update, setUpdate] = useState(false);
 
-   return (
+  let navigate = useNavigate();
 
-      <ul className="notifications">
+  const markRead = async (notiId) => {
+    try {
+      const token = localStorage.getItem('foundArkJwt');
+      const res = await axios.put(`https://found-ark-backend.herokuapp.com/api/notifications/${notiId}`, {}, {
+        headers: {
+          'Authorization': `token ${token}`
+        }
+      });
+      console.log(res)
+    } catch (err) {
+      console.log(err);
+    };
+  }
 
-        <li className="notificationItem">
-          <p>Notification 1</p>
-        </li>
+  const delNoti = async (notiId) => {
+    try {
+      const token = localStorage.getItem('foundArkJwt');
+      const res = await axios.delete(`https://found-ark-backend.herokuapp.com/api/notifications/${notiId}`, {
+        headers: {
+          'Authorization': `token ${token}`
+        }
+      });
+      console.log(res)
+    } catch (err) {
+      console.log(err);
+    };
+  }
 
-        <li className="notificationItem">
-          <p>Notification 2</p>
-        </li>
+  const handleNotiClick = (e) => {
+    const todo = e.target.getAttribute('todo');
+    let index;
+    let temp = e.target;
+    while (!index) {
+      index = temp.getAttribute('index');
+      temp = temp.parentElement;
+    }
+    if (todo === 'markread') {
+      let tempNotis = props.notis;
+      tempNotis[index].read = true;
+      props.setNotis(tempNotis);
+      setUpdate(!update);
+      markRead(props.notis[index].id);
+    }
+    if (todo === 'nav') {
+      if (e.target.parentElement.getAttribute('todo') === 'markread') {
+        let tempNotis = props.notis;
+        tempNotis[index].read = true;
+        props.setNotis(tempNotis);
+        setUpdate(!update);
+        markRead(props.notis[index].id);
+      }
+      
+      navigate(`/group/${props.notis[index].group_id}`)
+    }
+    if (todo === 'delete') {
+      delNoti(props.notis[index].id);
+      let tempNotis = props.notis;
+      tempNotis.splice(index, 1);
+      props.setNotis(tempNotis);
+      setUpdate(!update);
+    }
+  }
 
-        <li className="notificationItem">
-          <p>Notification 3</p>
-        </li>
+  console.log(props.notis)
 
-        <li className="notificationItem">
-          <p>Notification 4</p>
-        </li>
+  return (
 
-        <li className="notificationItem">
-          <p>Notification 5</p>
-        </li>
+    <ul className="notifications">
 
-        <li className="notificationItem">
-          <p>Notification 6</p>
-        </li>
+      {props?.notis?.map((noti, index) => {
+        const message = noti.message.split(':')[0]
+        const groupName = noti.message.split(':')[1]
+        return (
+          <li className="notificationItem" key={index} index={index} onClick={handleNotiClick}>
+            {noti.read ? (
+              <>
+                <p className="read">{message}: <span className="groupName" todo='nav'>{groupName}</span> <span className="pointer" todo='delete'>❌</span></p>
+              </>
+            ) : (
+              <>
+                <p className="unread" todo='markread'>{message}: <span className="groupName" todo='nav'>{groupName}</span> <span className="pointer" todo='delete'>❌</span></p>
+              </>
+            )}
+          </li>
+        )
+      })}
 
-        <li className="notificationItem">
-          <p>Notification 7</p>
-        </li>
+    </ul>
 
-        <li className="notificationItem">
-          <p>Notification 8</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 9</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 10</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 11</p>
-        </li>
-
-        <li className="notificationItem">
-          <p>Notification 12</p>
-        </li>
-
-      </ul>
-
-   )
+  )
 
 };
 
