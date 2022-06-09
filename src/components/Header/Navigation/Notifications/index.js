@@ -38,6 +38,7 @@ function Notifications(props) {
 
   const handleNotiClick = (e) => {
     const todo = e.target.getAttribute('todo');
+    console.log(todo)
     let index;
     let temp = e.target;
     while (!index) {
@@ -68,7 +69,16 @@ function Notifications(props) {
         markRead(props.notis[index].id);
       }
     }
-    navigate(`/group/${props.notis[index].group_id}`)
+    if (todo !== 'noNav') {
+      let curUrl = window.location.href;
+      curUrl = curUrl.split('/')
+      console.log(curUrl)
+      if (curUrl[curUrl.length - 2] === 'group' && curUrl[curUrl.length - 1] == props.notis[index].group_id) {
+        window.location.reload(false);
+      } else {
+        navigate(`/group/${props.notis[index].group_id}`)
+      }
+    }
   }
 
   console.log(props.notis)
@@ -84,11 +94,19 @@ function Notifications(props) {
           <li className="notificationItem" key={index} index={index} onClick={handleNotiClick}>
             {noti.read ? (
               <>
-                <p className="read">{message}: <span className="groupName" todo='nav'>{groupName}</span> <span className="pointer" todo='delete'>❌</span></p>
+                {groupName ? (
+                  <p className="read">{message}: <span className="groupName" todo='nav'>{groupName}</span> <span className="pointer" todo='delete'>❌</span></p>
+                ) : (
+                  <p className="read" todo='noNav'>{message} <span className="pointer" todo='delete'>❌</span></p>
+                )}
               </>
             ) : (
               <>
-                <p className="unread" todo='markread'>{message}: <span className="groupName" todo='nav'>{groupName}</span> <span className="pointer" todo='delete'>❌</span></p>
+                {groupName ? (
+                  <p className="unread" todo='markread'>{message}: <span className="groupName" todo='nav'>{groupName}</span> <span className="pointer" todo='delete'>❌</span></p>
+                ) : (
+                  <p className="unread" todo='noNav'>{message} <span className="pointer" todo='delete'>❌</span></p>
+                )}
               </>
             )}
           </li>

@@ -85,7 +85,7 @@
     margin: var(--tiny);
 }
 
-.editGroupBtn {
+.btns {
     height: 50px;
     width: 250px;
     margin: var(--tiny);

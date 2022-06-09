@@ -6,6 +6,7 @@ import moment from 'moment';
 import CharacterDetails from '../../../CharacterDetails';
 import DiscordHelpModal from "../../../DiscordHelpModal";
 import EditGroupModal from "../../../EditGroupModal";
+import DelGroupModal from "../../../DelGroupModal";
 
 import WidgetBot from '@widgetbot/react-embed';
 import { Server } from '@widgetbot/embed-api';
@@ -17,6 +18,7 @@ function Group({ user, sendNoti, setBackground }) {
     const [charId, setCharId] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [groupModalOpen, setGroupModalOpen] = useState(false);
+    const [delGroupModalOpen, setDelGroupModalOpen] = useState(false);
     const [isGroupMember, setIsGroupMember] = useState(false);
 
     if (modalOpen || groupModalOpen) {
@@ -177,6 +179,8 @@ function Group({ user, sendNoti, setBackground }) {
                                 <h2>{group.app_char[i].char_name}</h2>
                                 <button value={group.app_char[i].id} onClick={approve}>Approve</button>
                                 <button value={group.app_char[i].id} onClick={decline}>Decline</button>
+                                <p>User: {group.app_char[i].owner.user_name}</p>
+                                <p>{group.app_char[i].owner.introduction}</p>
                                 <CharacterDetails char={group.app_char[i]} />
                             </div>
                         )
@@ -263,16 +267,16 @@ function Group({ user, sendNoti, setBackground }) {
         selectBackground();
     }, [groupId]);
 
-    useEffect(() =>{
+    useEffect(() => {
         groupMember();
     }, [group, user])
 
     const displayDiscord = () => {
-            if (isGroupMember) {
-                return (
-                    <><a href={discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])}>{discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])} {discordInfo[0].length > 10 ? "" : <span className='defaultSpan'>(default link)</span>}</a></>
-                )
-            }
+        if (isGroupMember) {
+            return (
+                <><a href={discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])}>{discordInfo[0].length > 10 ? (discordInfo[0]) : (defaultDiscord[0])} {discordInfo[0].length > 10 ? "" : <span className='defaultSpan'>(default link)</span>}</a></>
+            )
+        }
     }
     const discordInfo = group?.discord?.split(' ');
 
@@ -305,12 +309,19 @@ function Group({ user, sendNoti, setBackground }) {
                             >
                                 Embed A Different Discord
                             </button>
-                            <button className="editGroupBtn"
+                            <button className="btns"
                                 onClick={() => {
                                     setGroupModalOpen(true);
                                 }}
                             >
                                 Edit Group Information
+                            </button>
+                            <button className="btns"
+                                onClick={() => {
+                                    setDelGroupModalOpen(true);
+                                }}
+                            >
+                                Delete Group
                             </button>
                         </>
                     ) : (<></>)}
@@ -329,7 +340,7 @@ function Group({ user, sendNoti, setBackground }) {
             </div>
 
             {groupModalOpen && <EditGroupModal setOpenModal={setGroupModalOpen} setGroup={setGroup} group={group} />}
-
+            {delGroupModalOpen && <DelGroupModal setDelGroupModalOpen={setDelGroupModalOpen} group={group} sendNoti={sendNoti} />}
             {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} setGroup={setGroup} group={group} />}
 
             <div className="darkContainer">
@@ -344,37 +355,37 @@ function Group({ user, sendNoti, setBackground }) {
 
                         {groupMembers?.map(char =>
                             <div key={char.id} className="groupMemberCard">
-                                {group?.creator?.owner_id === user?.id && char?.owner_id!=user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
+                                {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
                                 <CharacterDetails char={char} />
                             </div>
                         )}
 
                     </div>
+                    {
+                        isGroupMember &&
+                        <div className="discordWidget">
+                            {discordInfo?.length == 3 ? (
+                                <>
+                                    <WidgetBot
+                                        server={discordInfo[1]}
+                                        channel={discordInfo[2]}
 
-                    <div className="discordWidget">
-                        {discordInfo?.length == 3 ? (
-                            <>
-                                <WidgetBot
-                                    server={discordInfo[1]}
-                                    channel={discordInfo[2]}
+                                        height="80vh" width="50vw"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <WidgetBot
+                                        server={defaultDiscord[1]}
+                                        channel={defaultDiscord[2]}
 
-                                    height="80vh" width="50vw"
-                                />
-                            </>
-                        ) : (
-                            <>
-                                <WidgetBot
-                                    server={defaultDiscord[1]}
-                                    channel={defaultDiscord[2]}
+                                        height="80vh" width="50vw"
+                                    />
+                                </>
+                            )}
+                        </div>
+                    }
 
-                                    height="80vh" width="50vw"
-                                />
-                            </>
-                        )}
-
-
-
-                    </div>
                 </div>
             </div>
 
