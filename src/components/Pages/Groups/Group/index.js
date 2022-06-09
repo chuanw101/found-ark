@@ -108,7 +108,7 @@ function Group({ user, sendNoti, setBackground }) {
                     char_id: charId,
                 }
             });
-            if (res.data?.receive_id) {
+            if (res.data?.receiver_id) {
                 sendNoti(res.data)
             }
             window.location.reload(false);
