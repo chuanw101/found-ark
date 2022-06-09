@@ -4,6 +4,14 @@ import Notifications from './Notifications';
 import './style.css';
 
 function Navigation({ user, logout, notis, setNotis }) {
+
+    let count = 0;
+    for (const n of notis) {
+        if (!n.read) {
+            count++
+        }
+    }
+
     return (
 
         <ul className="navigation">
@@ -17,7 +25,7 @@ function Navigation({ user, logout, notis, setNotis }) {
                     <li className="navItem">
                         <div className="notificationContainer">
                             <img src="/assets/icons/notification-bell.png" alt="notifications" className="notificationIcon"></img>
-                            <span className="notificationAlert"></span>
+                            {count && <span className="notificationAlert"></span>}
                         </div>
                         <Notifications notis={notis} setNotis={setNotis} />
                     </li>
