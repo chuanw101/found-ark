@@ -52,6 +52,9 @@ function Group({ user, sendNoti, setBackground }) {
 
     // //user is a member 
     const groupMember = () => {
+        if (!user?.logged_in) {
+            return false;
+        }
         if (group?.member_char.some(char => {
             if (char.owner_id === user.id) {
                 return true
@@ -113,7 +116,7 @@ function Group({ user, sendNoti, setBackground }) {
                     'Authorization': `token ${token}`
                 },
                 data: {
-                    char_id: charId,
+                    char_id: e.target.value,
                 }
             });
             if (res.data?.receiver_id) {
@@ -147,7 +150,6 @@ function Group({ user, sendNoti, setBackground }) {
         e.preventDefault();
         try {
             const token = localStorage.getItem('foundArkJwt');
-            console.log(token)
             const res = await axios.delete(`https://found-ark-backend.herokuapp.com/api/groupmembers/${groupId}`, {
                 headers: {
                     'Authorization': `token ${token}`
@@ -165,6 +167,7 @@ function Group({ user, sendNoti, setBackground }) {
 
     const getUserStatus = () => {
         if (user?.logged_in) {
+            let targetCharId;
             if (group?.creator?.owner_id === user.id) {
                 let appsEL = [];
                 if (group) {
@@ -174,7 +177,7 @@ function Group({ user, sendNoti, setBackground }) {
                                 <h2>{group.app_char[i].char_name}</h2>
                                 <button value={group.app_char[i].id} onClick={approve}>Approve</button>
                                 <button value={group.app_char[i].id} onClick={decline}>Decline</button>
-                                <CharacterDetails jsonData={group.app_char[i].json_data} />
+                                <CharacterDetails char={group.app_char[i]} />
                             </div>
                         )
                     }
@@ -188,6 +191,7 @@ function Group({ user, sendNoti, setBackground }) {
                 )
             } else if (group?.member_char.some(char => {
                 if (char.owner_id === user.id) {
+                    targetCharId = char.id;
                     return true;
                 }
                 return false;
@@ -196,11 +200,12 @@ function Group({ user, sendNoti, setBackground }) {
                 return (
                     <div className="applicationSection">
                         <h2>You are a member of this group!</h2>
-                        <button onClick={cancelApp}>Leave Group</button>
+                        <button value={targetCharId} onClick={cancelApp}>Leave Group</button>
                     </div>
                 )
             } else if (group?.app_char.some(char => {
                 if (char.owner_id === user.id) {
+                    targetCharId = char.id;
                     return true;
                 }
                 return false;
@@ -209,7 +214,7 @@ function Group({ user, sendNoti, setBackground }) {
                 return (
                     <div className="applicationSection">
                         <h2>You already applied to this group</h2>
-                        <button onClick={cancelApp}>Cancel Application</button>
+                        <button value={targetCharId} onClick={cancelApp}>Cancel Application</button>
                     </div>
                 )
             } else {
@@ -277,7 +282,7 @@ function Group({ user, sendNoti, setBackground }) {
         }
         return (moment(time).format('dddd h:mm a'))
     }
-    
+
     return (
 
         <div className="page">
@@ -339,6 +344,7 @@ function Group({ user, sendNoti, setBackground }) {
 
                         {groupMembers?.map(char =>
                             <div key={char.id} className="groupMemberCard">
+                                {group?.creator?.owner_id === user?.id && char?.owner_id!=user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
                                 <CharacterDetails char={char} />
                             </div>
                         )}
