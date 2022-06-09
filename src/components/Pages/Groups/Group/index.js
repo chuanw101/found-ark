@@ -116,7 +116,7 @@ function Group({ user, sendNoti, setBackground }) {
                     'Authorization': `token ${token}`
                 },
                 data: {
-                    char_id: charId,
+                    char_id: e.target.value,
                 }
             });
             if (res.data?.receiver_id) {
@@ -167,6 +167,7 @@ function Group({ user, sendNoti, setBackground }) {
 
     const getUserStatus = () => {
         if (user?.logged_in) {
+            let targetCharId;
             if (group?.creator?.owner_id === user.id) {
                 let appsEL = [];
                 if (group) {
@@ -190,6 +191,7 @@ function Group({ user, sendNoti, setBackground }) {
                 )
             } else if (group?.member_char.some(char => {
                 if (char.owner_id === user.id) {
+                    targetCharId = char.id;
                     return true;
                 }
                 return false;
@@ -198,11 +200,12 @@ function Group({ user, sendNoti, setBackground }) {
                 return (
                     <div className="applicationSection">
                         <h2>You are a member of this group!</h2>
-                        <button onClick={cancelApp}>Leave Group</button>
+                        <button value={targetCharId} onClick={cancelApp}>Leave Group</button>
                     </div>
                 )
             } else if (group?.app_char.some(char => {
                 if (char.owner_id === user.id) {
+                    targetCharId = char.id;
                     return true;
                 }
                 return false;
@@ -211,7 +214,7 @@ function Group({ user, sendNoti, setBackground }) {
                 return (
                     <div className="applicationSection">
                         <h2>You already applied to this group</h2>
-                        <button onClick={cancelApp}>Cancel Application</button>
+                        <button value={targetCharId} onClick={cancelApp}>Cancel Application</button>
                     </div>
                 )
             } else {
@@ -279,7 +282,7 @@ function Group({ user, sendNoti, setBackground }) {
         }
         return (moment(time).format('dddd h:mm a'))
     }
-    
+
     return (
 
         <div className="page">
