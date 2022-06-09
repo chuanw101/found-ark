@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Notifications from './Notifications';
 import './style.css';
 
-function Navigation({ user, logout }) {
+function Navigation({ user, logout, notis, setNotis }) {
+
+    let count = 0;
+    for (const n of notis) {
+        if (!n.read) {
+            count++
+        }
+    }
+
     return (
 
         <ul className="navigation">
@@ -17,9 +25,9 @@ function Navigation({ user, logout }) {
                     <li className="navItem">
                         <div className="notificationContainer">
                             <img src="/assets/icons/notification-bell.png" alt="notifications" className="notificationIcon"></img>
-                            <span className="notificationAlert"></span>
+                            {count && <span className="notificationAlert"></span>}
                         </div>
-                        <Notifications />
+                        <Notifications notis={notis} setNotis={setNotis} />
                     </li>
 
                     <li className="navItem">

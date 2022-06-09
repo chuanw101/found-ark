@@ -26,13 +26,76 @@ import Group from './components/Pages/Groups/Group';
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import io from "socket.io-client";
 
 function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [background, setBackground] = useState('bgTree');
+    const [notis, setNotis] = useState([]);
+    const [newNoti, setNewNoti] = useState(null);
+    const [socket, setSocket] = useState(null);
     const [loginError, setLogInError] = useState(false)
     const [nameTaken, setNameTaken]= useState(false)
+
+    const getAllNotis = async (receiver_id) => {
+        try {
+            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/notifications/receiver/${receiver_id}`, {
+                headers: {
+                    'Authorization': `token ${token}`
+                }
+            })
+            console.log("========== getting notis")
+            console.log(res.data)
+            setNotis(res.data)
+        } catch (err) {
+            alert(err?.response?.data?.msg)
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        setSocket(io('https://found-ark-backend.herokuapp.com/'));
+    }, []);
+
+    useEffect(() => {
+        console.log(user)
+        if (user) {
+            getAllNotis(user.id);
+        }
+        if (!socket) {
+            return
+        }
+        if (user) {
+            socket.emit("setup", user.id);
+            console.log("Connecting to" + user.id)
+        }
+        socket.on("connected", () => console.log("connected"));
+    }, [user?.id]);
+
+    useEffect(() => {
+        if (!socket) {
+            return
+        }
+        console.log("recieving")
+        socket.on("message recieved", (data) => {
+            console.log("noti recieved" + data)
+            setNewNoti(data);
+        });
+    }, [socket])
+
+    useEffect(() => {
+        if (newNoti) {
+            setNotis([newNoti, ...notis]);
+            setNewNoti(null)
+        }
+    }, [newNoti])
+
+
+    const sendNoti = (noti) => {
+        console.log("hi")
+        socket.emit("new notification", noti);
+    }
 
     const path = window.location.pathname;
 
@@ -117,15 +180,15 @@ function App() {
 
     return (
         <div className={"App " + background}>
-            <Header user={user} logout={logout} />
+            <Header user={user} logout={logout} notis={notis} setNotis={setNotis}/>
             <Routes>
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
-                <Route path="group/:groupId" element={<Group user={user} setBackground={setBackground} />} />
-                <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} loginError={loginError}/>} />
+                <Route path="group/:groupId" element={<Group user={user} sendNoti={sendNoti} setBackground={setBackground} />} />
+                <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} loginError={loginError} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} nameTaken={nameTaken} />} />
-                <Route path="profile" element={<Profile user={user}/>} />
+                <Route path="profile" element={<Profile user={user} />} />
             </Routes>
             <Footer />
         </div>
