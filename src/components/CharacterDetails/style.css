@@ -1,152 +1,3 @@
-/* .charCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid var(--accent);
-    border-radius: var(--tiny);
-    height: 100%;
-    width: 100%;
-    max-width: 100%;
-    max-height: 10000px;
-    transition: all 0.5s ease;
-    box-shadow: inset 0px -200px 200px -200px var(--accent);
-    overflow: hidden;
-}
-
-.collapsed {
-    max-height: 450px;
-}
-
-.charHeadline {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 450px;
-    max-height: 450px;
-    width: 100%;
-    padding: var(--medium);
-    transition: all 0.5s ease;
-}
-
-.charClassImg {
-    max-height: 100%;
-    max-width: 50%;
-    object-fit: contain;
-    padding: 0px var(--small);
-    margin: 0px 0px auto 0px;
-}
-
-.charInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    min-width: 350px;
-}
-
-.charInfo h3 {
-    text-transform: uppercase;
-    margin-bottom: var(--small);
-}
-
-.charSpecs {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: auto;
-}
-
-.charSpecs div {
-    display: flex;
-    flex-direction: column;
-}
-
-.charSpecs p {
-    margin-bottom: var(--small);
-}
-
-.collapsible {
-    display: flex;
-    cursor: pointer;
-}
-
-.carrot {
-    border-right: 2px solid var(--accent);
-    border-bottom: 2px solid var(--accent);
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    height: 12px;
-    width: 12px;
-    margin: auto 0px 8px 10px;
-    transition: all 0.5s ease;
-}
-
-.open {
-    -webkit-transform: rotate(45deg) scale(-1, -1);
-    transform: rotate(45deg) scale(-1, -1);
-    margin: auto 0px 1px 10px;
-}
-
-.fullCharInfo {
-    overflow: hidden;
-    padding: 0px var(--medium) var(--small) var(--medium);
-}
-
-.charStats {
-    display: flex;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--accent);
-    width: 100%;
-    padding: var(--small) 0px;
-}
-
-.charStat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-    padding: var(--medium) var(--small);
-}
-
-.charGears {
-    display: flex;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--accent);
-    width: 100%;
-    padding-top: var(--small);
-}
-
-.charGear {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    text-align: center;
-    width: 50%;
-    padding: var(--medium) var(--small);
-
-}
-
-.charGear img {
-    object-fit: contain;
-    border-radius: var(--tiny);
-    width: 60px;
-    height: 60px;
-    padding: var(--tiny);
-    margin: 0px var(--small) var(--small) 0px;
-}
-
-.charGear p {
-    display: flex;
-    flex-direction: column;
-}
-
-.gearInfo {
-    display: flex;
-    flex-direction: column;
-} */
-
-
-
 .charCard {
     display: flex;
     flex-direction: column;
@@ -169,7 +20,7 @@
 
 .charHeadline {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: space-between;
     min-height: 450px;
     max-height: 450px;
@@ -179,7 +30,6 @@
 }
 
 .charClassImg {
-
     max-height: 100%;
     max-width: 50%;
     object-fit: contain;
@@ -191,7 +41,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-width: 100%;
+    width: fit-content;
 }
 
 .charInfo h3 {
@@ -295,6 +145,24 @@
 .gearInfo {
     display: flex;
     flex-direction: column;
+}
+
+.editCharacterContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-self: flex-end;
+    height: fit-content;
+}
+
+.updateCharBtn {
+    width: 40px;
+    margin: auto var(--medium);
+}
+
+.updateCharBtn:hover {
+    cursor: pointer;
+    animation: spin 1.5s infinite linear;
 }
 
 /* character class backgrounds */

@@ -39,7 +39,9 @@ function AddCharacter() {
     };
 
     const pullCharInfo = async (e) => {
+
         e.preventDefault();
+        
         try {
             const res = await axios.get(`https://lostark-lookup.herokuapp.com/api/query?pcName=${charName}`)
             if (res.data?.length) {

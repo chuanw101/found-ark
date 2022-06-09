@@ -141,8 +141,8 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
     }
 
     return (
-        <div className="modalBackground">
-            <div className="modalContainer">
+        <div className="modalBackground" onClick={() => setOpenModal(false)}>
+            <div className="modalContainer" onClick={e => e.stopPropagation()}>
                 <div className="title">
                     <h1>Edit Group Information</h1>
                 </div>

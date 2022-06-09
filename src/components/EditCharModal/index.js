@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import CharacterDetails from '../CharacterDetails';
 import "../../styles/modals.css";
 
-function editCharModal({ setOpenModal }) {
-    const [charName, setCharName] = useState('');
-    const [className, setClassName] = useState('');
-    const [iLvl, setILvl] = useState('');
-    const [rosterLvl, setRosterLvl] = useState('');
-    const [charLvl, setCharLvl] = useState('');
-    const [engravings, setEngravings] = useState('');
-    const [jsonData, setJsonData] = useState('');
-    const [formStatus, setFormStatus] = useState('hidden');
-    const [buttonStatus, setButtonStatus] = useState('hidden');
-    const [searchStatus, setSearchStatus] = useState('');
+function EditCharModal({ setOpenModal, char }) {
+
+    const [charName, setCharName] = useState(char.char_name);
+    const [className, setClassName] = useState(char.class);
+    const [iLvl, setILvl] = useState(char.item_lvl);
+    const [rosterLvl, setRosterLvl] = useState(char.roster_lvl);
+    const [charLvl, setCharLvl] = useState(char.char_lvl);
+    const [engravings, setEngravings] = useState(char.engravings);
+    const [jsonData, setJsonData] = useState(char.json_data);
+    const [searchStatus, setSearchStatus] = useState(false);
+
+    const token = localStorage.getItem('foundArkJwt');
 
     // handle input change
     const handleInputChange = (e) => {
@@ -39,43 +41,26 @@ function editCharModal({ setOpenModal }) {
             if (res.data?.length) {
                 const charData = res.data[0];
                 setClassName(charData.pcClassName);
-                setILvl(charData.maxItemLevel);
+                setILvl(Math.floor(charData.maxItemLevel));
                 setRosterLvl(charData.expeditionLvl);
                 setCharLvl(charData.pcLevel);
-                setEngravings('');
                 setJsonData(charData.jsonData);
-                setButtonStatus('');
-                setSearchStatus('searched');
+                setSearchStatus(true);
             } else {
-                setClassName('berserker');
-                setILvl('');
-                setRosterLvl('');
-                setCharLvl('');
-                setEngravings('');
-                setJsonData('');
-                setFormStatus('');
-                setButtonStatus('');
-                setSearchStatus('searched');
+                setSearchStatus(true);
             }
         } catch (err) {
-            setClassName('berserker');
-            setILvl('');
-            setRosterLvl('');
-            setCharLvl('');
-            setEngravings('');
-            setJsonData('');
-            setFormStatus('');
-            setButtonStatus('');
-            setSearchStatus('searched');
+            setSearchStatus(true);
             console.log(err);
         }
     };
+
     const updateCharacter = async (e) => {
 
         e.preventDefault();
 
         try {
-            await axios.put(`https://found-ark-backend.herokuapp.com/api/characters/${id}`, {
+            await axios.put(`https://found-ark-backend.herokuapp.com/api/characters/${char.id}`, {
                 char_name: charName,
                 class: className,
                 item_lvl: iLvl,
@@ -113,101 +98,98 @@ function editCharModal({ setOpenModal }) {
     }
 
     return (
-        <div className="modalBackground">
-            <div className="modalContainer">
 
-                <form>
-                    <div className="title">
-                        <h1>Edit Character</h1>
-                    </div>
-                    <div className="addCharacterSection">
+        <div className="modalBackground" onClick={() => setOpenModal(false)}>
+            
+            <div className="modalContainer" onClick={e => e.stopPropagation()}>
 
-                        <div className="addCharacterForm">
+                <div className="title">
+                    <h1>Edit Character</h1>
+                </div>
+                <div className="editCharacterSection">
 
-                            <form method="post" className="autoFillForm">
+                    <div className="editCharacterForm">
 
-                                <label htmlFor="charName"><b>Character Name</b></label>
-                                <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
+                        <form method="post" className="autoFillForm">
 
-                                <button onClick={pullCharInfo}>Search</button>
+                            <label htmlFor="charName"><b>Character Name</b></label>
+                            <input type="text" placeholder="Character Name" name="charName" value={charName} onChange={handleInputChange} required />
 
-                            </form>
+                            <button onClick={pullCharInfo} className="charSearchBtn">Search</button>
 
-                            <form method="post" className={"manualForm " + buttonStatus}>
+                        </form>
 
-                                <div className={formStatus}>
+                        <form method="post" className="manualForm">
 
-                                    <label htmlFor="className"><b>Class</b></label>
-                                    <select name="className" onChange={handleInputChange} required>
-                                        <option value="berserker">berserker</option>
-                                        <option value="paladin">paladin</option>
-                                        <option value="gunlancer">gunlancer</option>
-                                        <option value="destroyer">destroyer</option>
-                                        <option value="striker">striker</option>
-                                        <option value="wardancer">wardancer</option>
-                                        <option value="scrapper">scrapper</option>
-                                        <option value="soulfist">soulfist</option>
-                                        <option value="glaivier">glaivier</option>
-                                        <option value="gunslinger">gunslinger</option>
-                                        <option value="artillerist">artillerist</option>
-                                        <option value="deadeye">deadeye</option>
-                                        <option value="sharpshooter">sharpshooter</option>
-                                        <option value="bard">bard</option>
-                                        <option value="sorceress">sorceress</option>
-                                        <option value="shadowhunter">shadowhunter</option>
-                                        <option value="deathblade">deathblade</option>
-                                    </select>
+                            <div>
 
-                                    <label htmlFor="charLvl"><b>Character Level</b></label>
-                                    <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
+                                <label htmlFor="className"><b>Class</b></label>
+                                <select name="className" onChange={handleInputChange} required>
+                                    <option value="berserker">berserker</option>
+                                    <option value="paladin">paladin</option>
+                                    <option value="gunlancer">gunlancer</option>
+                                    <option value="destroyer">destroyer</option>
+                                    <option value="striker">striker</option>
+                                    <option value="wardancer">wardancer</option>
+                                    <option value="scrapper">scrapper</option>
+                                    <option value="soulfist">soulfist</option>
+                                    <option value="glaivier">glaivier</option>
+                                    <option value="gunslinger">gunslinger</option>
+                                    <option value="artillerist">artillerist</option>
+                                    <option value="deadeye">deadeye</option>
+                                    <option value="sharpshooter">sharpshooter</option>
+                                    <option value="bard">bard</option>
+                                    <option value="sorceress">sorceress</option>
+                                    <option value="shadowhunter">shadowhunter</option>
+                                    <option value="deathblade">deathblade</option>
+                                </select>
 
-                                    <label htmlFor="iLvl"><b>Item Level</b></label>
-                                    <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
+                                <label htmlFor="charLvl" className="userInput"><b>Character Level</b></label>
+                                <input type="number" placeholder="Enter Character Level" name="charLvl" value={charLvl} onChange={handleInputChange} required />
 
-                                    <label htmlFor="rosterLvl"><b>Roster Level</b></label>
-                                    <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
+                                <label htmlFor="iLvl" className="userInput"><b>Item Level</b></label>
+                                <input type="number" placeholder="Enter Item Level" name="iLvl" value={iLvl} onChange={handleInputChange} required />
 
-                                </div>
+                                <label htmlFor="rosterLvl" className="userInput"><b>Roster Level</b></label>
+                                <input type="number" placeholder="Enter Roster Level" name="rosterLvl" value={rosterLvl} onChange={handleInputChange} required />
 
-                                <label htmlFor="engravings"><b>Engravings</b></label>
-                                <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
+                            </div>
 
-                                <button onClick={addCharacter} className={buttonStatus}>Add Character</button>
+                            <label htmlFor="engravings" className="userInput"><b>Engravings</b></label>
+                            <input type="text" placeholder="Enter Engravings" name="engravings" value={engravings} onChange={handleInputChange} required />
 
-                            </form>
+                            <div className="editCharFooter">
+                                <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
+                                <button onClick={updateCharacter}>Submit</button>
+                            </div>
 
-                        </div>
-
-                        <div className="charDisplay">
-
-                            {searchStatus && !jsonData ?
-                                <div className="leaderboardLink">
-                                    <h3>Import Character</h3>
-                                    <p>Link your account to import your character info, stats, and gear.</p>
-                                    <p>Then come back and try searching for your name again.</p>
-                                    <p className="orDivider">OR</p>
-                                    <p>Enter your character information manually.</p>
-                                </div>
-                                : ''
-                            }
-
-                            {searchStatus ? <div className="characterPreview"> <CharacterDetails char={charData} /> </div> : ''}
-
-                        </div>
-
+                        </form>
 
                     </div>
 
+                    <div className="charDisplay">
 
-                    <div className="footer">
-                        <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
-                        <button onClick={updateCharacter}>Submit</button>
+                        {!jsonData && searchStatus &&
+                            <div className="leaderboardLink">
+                                <h3>Import Character</h3>
+                                <p>Link your account to import your character info, stats, and gear.</p>
+                                <p>Then come back and try searching for your name again.</p>
+                                <p className="orDivider">OR</p>
+                                <p>Enter your character information manually.</p>
+                            </div>
+                        }
+
+                        <div className="characterPreview"> <CharacterDetails char={charData} /> </div>
+
                     </div>
-                </form>
+
+                </div>
+
             </div>
-        </div >
+
+        </div>
 
     );
 }
 
-export default editCharModal;
+export default EditCharModal;
