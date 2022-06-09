@@ -52,6 +52,9 @@ function Group({ user, sendNoti, setBackground }) {
 
     // //user is a member 
     const groupMember = () => {
+        if (!user?.logged_in) {
+            return false;
+        }
         if (group?.member_char.some(char => {
             if (char.owner_id === user.id) {
                 return true
@@ -147,7 +150,6 @@ function Group({ user, sendNoti, setBackground }) {
         e.preventDefault();
         try {
             const token = localStorage.getItem('foundArkJwt');
-            console.log(token)
             const res = await axios.delete(`https://found-ark-backend.herokuapp.com/api/groupmembers/${groupId}`, {
                 headers: {
                     'Authorization': `token ${token}`
@@ -174,7 +176,7 @@ function Group({ user, sendNoti, setBackground }) {
                                 <h2>{group.app_char[i].char_name}</h2>
                                 <button value={group.app_char[i].id} onClick={approve}>Approve</button>
                                 <button value={group.app_char[i].id} onClick={decline}>Decline</button>
-                                <CharacterDetails jsonData={group.app_char[i].json_data} />
+                                <CharacterDetails char={group.app_char[i]} />
                             </div>
                         )
                     }
@@ -339,6 +341,7 @@ function Group({ user, sendNoti, setBackground }) {
 
                         {groupMembers?.map(char =>
                             <div key={char.id} className="groupMemberCard">
+                                {group?.creator?.owner_id === user?.id && char?.owner_id!=user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
                                 <CharacterDetails char={char} />
                             </div>
                         )}
