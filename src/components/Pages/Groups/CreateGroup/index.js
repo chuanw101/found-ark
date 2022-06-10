@@ -3,9 +3,10 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 // import TimezoneSelect from 'react-timezone-select'
 import './style.css';
+import userEvent from '@testing-library/user-event';
 
 
-function CreateGroup() {
+function CreateGroup(props) {
 
     // form data
     // const [selectedTimezone, setSelectedTimezone] = useState({});
@@ -132,6 +133,15 @@ function CreateGroup() {
 
     useEffect(() => {
         getAllChars();
+        // set default time zone based on users time zone pulled on login/signup
+        if (props?.user?.offset) {
+            for (const t of timeZones) {
+                if(props.user.offset === t.substring(4, 10)){
+                    setTimeZone(t);
+                    return;
+                }
+            }
+        }
         // eslint-disable-next-line
     }, []);
 
@@ -233,7 +243,7 @@ function CreateGroup() {
 
                     <div className="formItem">
                         <label className="" htmlFor="timezone">Time Zone</label>
-                        <select name="timezone" required onChange={handleInputChange}>
+                        <select name="timezone" value={timeZone} required onChange={handleInputChange}>
 
                             {timeZones.map((zone, index) => {
                                 return (
