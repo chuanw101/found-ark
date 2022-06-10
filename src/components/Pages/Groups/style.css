@@ -51,3 +51,26 @@
     cursor: pointer;
     background-color: var(--accent75);
 }
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    .savedTags{
+        justify-content: center;
+        }
+}
+
+/* phones */
+@media screen and (max-width: 480px) {
+    .searchTagsArea{
+        width: 100%;
+    }
+    .filterSearch{
+        width: 100%;
+    }
+}

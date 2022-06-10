@@ -22,7 +22,7 @@ function Navigation({ user, logout, notis, setNotis }) {
 
             {user?.logged_in ? (
                 <>
-                    <li className="navItem">
+                    <li id="notIcon" className="navItem">
                         <div className="notificationContainer">
                             <img src="/assets/icons/notification-bell.png" alt="notifications" className="notificationIcon"></img>
                             {count && <span className="notificationAlert"></span>}
