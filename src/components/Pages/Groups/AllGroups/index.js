@@ -14,7 +14,6 @@ function AllGroups({ user, activeTags }) {
 
     // get all groups
     const getAllGroups = async () => {
-
         try {
 
             if (token) {
@@ -83,10 +82,10 @@ function AllGroups({ user, activeTags }) {
     }
 
     const formatTime = (time) => {
-        if(!time) {
+        if (!time) {
             return
         }
-        return(moment(time).format('dddd h:mm a'))
+        return (moment(time).format('dddd h:mm a'))
     }
 
     return (
