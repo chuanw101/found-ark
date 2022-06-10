@@ -37,7 +37,7 @@ function Groups({ user }) {
         }
         for (const t of tags) {
             if (t.tag_name === item.name) {
-                if (!t.active){
+                if (!t.active) {
                     t.active = true;
                     setActiveTags([...activeTags, item.name]);
                 }
@@ -203,7 +203,7 @@ function Groups({ user }) {
 
             <div className="tabHeader">
                 <div className="searchTagsArea">
-                    {currentTab != "CreateGroup" && <div style={{ height: 60}}>
+                    {currentTab != "CreateGroup" && <div style={{ height: 60 }}>
                         <ReactSearchAutocomplete
                             items={autoCompleteTags}
                             onSearch={handleOnSearch}
@@ -216,6 +216,7 @@ function Groups({ user }) {
                             formatResult={formatResult}
                         />
                     </div>}
+
                     {currentTab != "CreateGroup" && <div className="savedTags">
                         {tags.map((tag, index) =>
                             <p className={tag.active ? ("savedTagsActive") : ("savedTagsInactive")} key={index} value={index} onClick={handleTagClick}>{tag.tag_name}</p>)}

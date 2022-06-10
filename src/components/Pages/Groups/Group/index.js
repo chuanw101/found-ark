@@ -356,7 +356,7 @@ function Group({ user, sendNoti, setBackground }) {
 
                         <div className="allCharacters">
                             {groupMembers?.map(char =>
-                                <div key={char.id} className="groupMemberCard">
+                                <div key={char.id} className={discordInfo?.length == 3 ? "wrapCharCard groupMemberCard": "groupMemberCard"}>
                                     {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
                                     <CharacterDetails char={char} />
                                 </div>
@@ -374,7 +374,7 @@ function Group({ user, sendNoti, setBackground }) {
                                         server={discordInfo[1]}
                                         channel={discordInfo[2]}
 
-                                        height="80vh" width="50vw"
+                                        height="50vh" width="100vw"
                                     />
                                 </>
                             ) : (
@@ -383,7 +383,7 @@ function Group({ user, sendNoti, setBackground }) {
                                         server={defaultDiscord[1]}
                                         channel={defaultDiscord[2]}
 
-                                        height="80vh" width="50vw"
+                                        height="50vh" width="100vw"
                                     />
                                 </>
                             )}

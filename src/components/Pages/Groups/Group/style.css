@@ -83,7 +83,7 @@
 .allCharacters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     border-radius: var(--tiny);
     width: 100%;
 }
@@ -93,15 +93,20 @@
 }
 
 .groupMemberCard {
-    max-width: 50%;
+    width: 50%;
     padding-right: var(--medium);
     margin-bottom: var(--medium);
+}
+
+.wrapCharCard{
+    min-width: fit-content;
 }
 
 .discordWidget {
     display: flex;
     height: fit-content;
-    width: 50%;
+    width: auto;
+    max-width: 50%;
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
     margin-right: var(--medium);
@@ -138,3 +143,51 @@
     background: var(--red);
     color: var(--light);
 }
+
+/* x-large screens */
+@media screen and (max-width: 1460px) {
+    .groupBody {
+        flex-direction: column-reverse;
+    }
+    .discordWidget{
+        max-width: none;
+    }
+}
+
+/* large screens */
+@media screen and (max-width: 1200px) {
+
+}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    .deleteGroupBtn{
+        right: 30px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .groupOwnerBtns {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .deleteGroupBtn{
+        right:0;
+        position: static;
+        margin-bottom: 0;
+    }
+    .groupOwnerBtns button{
+        margin-right: auto;
+        margin-bottom: var(--tiny);
+    }
+}
+
+
+/* phones */
+@media screen and (max-width: 480px) {
+
+}
+
