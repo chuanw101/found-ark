@@ -23,7 +23,7 @@ function getItemBg(grade) {
     }
 }
 
-function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar }) {
+function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar, applicant, approve, decline }) {
 
     const [statsActive, setStatsActive] = useState(false);
 
@@ -146,7 +146,7 @@ function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar })
 
     return (
 
-        <div className={"charCard " + (statsActive ? "" : "collapsed")}>
+        <div onClick={checkStatus} className={"charCard " + (statsActive ? "" : "collapsed")}>
 
             <div className={"charHeadline " + char?.class.toLowerCase()}>
 
@@ -198,16 +198,35 @@ function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar })
 
                     </div>
 
-                    {advCharData ? <h4 onClick={checkStatus} className="collapsible">Full Stats & Gear<span className={"carrot " + (statsActive ? "open" : "closed")}></span></h4> : ''}
+                    {advCharData ? <h4 className="collapsible">Full Stats & Gear<span className={"carrot " + (statsActive ? "open" : "closed")}></span></h4> : ''}
 
                 </div>
 
-                <div className="editCharacterContainer">
+                {editChar ? <div className="editCharacterContainer">
 
-                    {editChar && <img src="/assets/icons/refresh-icon.png" alt="refresh icon" className="updateCharBtn" onClick={() => { updateChar(); }}></img>}
-                    {editChar && <button className="editCharBtn" onClick={() => { setCharModalOpen(true); setSelectedChar(char); }}>Edit</button>}
+                    <img src="/assets/icons/refresh-icon.png" alt="refresh icon" className="updateCharBtn" onClick={() => { updateChar(); }}></img>
+                    <button className="editCharBtn" onClick={() => { setCharModalOpen(true); setSelectedChar(char); }}>Edit</button>
 
-                </div>
+                </div> : applicant ? <div className="applicantContainer">
+
+                    <div className="appUser">
+                        <h3 className="appUsername">{char.owner.user_name}</h3>
+                        <p className="appIntro">{char.owner.introduction}</p>
+                    </div>
+
+                    <div className="appBtns">
+                        <button className="appDeclineBtn" value={char.id} onClick={decline}>Decline</button>
+                        <button className="appApproveBtn" value={char.id} onClick={approve}>Approve</button>
+                    </div>
+
+                </div> : <div className="applicantContainer">
+
+                    <div className="appUser invisibleHover">
+                        <h3 className="appUsername">{char.owner.user_name}</h3>
+                        <p className="appIntro">{char.owner.introduction}</p>
+                    </div>
+
+                </div>}
 
             </div>
 

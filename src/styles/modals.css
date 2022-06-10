@@ -1,6 +1,6 @@
 .modalBackground {
     width: 100vw;
-    height: 100vh;
+    height: 101vh;
     background-color: var(--opdarkgray);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
@@ -10,10 +10,10 @@
     align-items: center;
     margin-top: -150px;
     animation: fade-in 0.5s;
+    z-index: 99;
 }
 
 .modalContainer {
-    min-width: 800px;
     height: fit-content;
     max-height: 90vh;
     max-width: 90vw;
@@ -35,6 +35,7 @@
 
 .footer {
     display: flex;
+    justify-content: flex-end;
     width: 100%;
 }
 
@@ -97,4 +98,18 @@
 
 .charEditSpecs {
     width: 100%;
+}
+
+.cancelDeleteBtn {
+    margin: var(--small) var(--small) 0 0;
+}
+
+.confirmDeleteBtn {
+    width: fit-content;
+    color: var(--red);
+}
+
+.confirmDeleteBtn:hover {
+    color: var(--light);
+    background: var(--red);
 }

@@ -27,7 +27,7 @@ function SignUp({ handleSignupSubmit, nameTaken }) {
     const handleFormSubmit = (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
-        if (userReg.test(username) == false || passReg.test(password) == false) {
+        if (userReg.test(username) === false || passReg.test(password) === false) {
             return
         } else {
             const signupData = { username, password, region, introduction };
@@ -50,9 +50,9 @@ function SignUp({ handleSignupSubmit, nameTaken }) {
                         <label htmlFor="username"><b>Username</b></label>
                         <div id="userVal">
                             <input type="text" id="username" placeholder="Enter Username" name="username" pattern='[a-zA-Z0-9]{4,}' value={username} onChange={handleInputChange} required></input>
-                            <span className="validity"></span>
+                            {username !== "" && <span className="validity"></span>}
                         </div>
-                        <div className={username === "" || userReg.test(username) == true ? "invisible inputErrP" : "visible inputErrP"}>
+                        <div className={username === "" || userReg.test(username) ? "inputErr invisible" : "inputErr visible"}>
                             <p>Must include at least 4 letters/numbers, no special characters</p>
                         </div>
 
@@ -60,9 +60,9 @@ function SignUp({ handleSignupSubmit, nameTaken }) {
                         <label className='userInput tintyMargin' htmlFor="password"><b>Password</b></label>
                         <div id="passVal">
                             <input type="password" id='password' placeholder="Enter Password" name="password" pattern='.{8,}' value={password} onChange={handleInputChange} required />
-                            <span className="validity passValid"></span>
+                            {password !== "" && <span className="validity passValid"></span>}
                         </div>
-                        <div className={password === "" || passReg.test(password) == true ? "invisible inputErrP" : "visible inputErrP"}>
+                        <div className={password === "" || passReg.test(password) ? "inputErr invisible" : "inputErr visible"}>
                             <p>Please enter a password with at least 8 characters</p>
                         </div>
 

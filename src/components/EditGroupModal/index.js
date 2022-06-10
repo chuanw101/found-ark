@@ -195,21 +195,21 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                     <label htmlFor="groupName">Group Name</label>
                     <input type="text" placeholder="Enter Group Name" name="groupName" value={groupName} onChange={handleInputChange} required />
 
-                    <label htmlFor="description">Description</label>
-                    <input type="text" placeholder="Description" name="description" value={description} onChange={handleInputChange} required />
-                    <label htmlFor="dayofweek">Day</label>
-                    <select name="dayofweek" required onChange={handleInputChange} value={day}>
-                        <option value="2022-06-06">Monday</option>
-                        <option value="2022-06-07">Tuesday</option>
-                        <option value="2022-06-08">Wednesday</option>
-                        <option value="2022-06-09">Thursday</option>
-                        <option value="2022-06-10">Friday</option>
-                        <option value="2022-06-11">Saturday</option>
-                        <option value="2022-06-12">Sunday</option>
-                    </select>
+                        <label className="userInput" htmlFor="description">Description</label>
+                        <input type="text" placeholder="Description" name="description" value={description} onChange={handleInputChange} required />
+                        <label className="userInput" htmlFor="dayofweek">Day</label>
+                        <select name="dayofweek" required onChange={handleInputChange}>
+                            <option value="2022-06-06">Monday</option>
+                            <option value="2022-06-07">Tuesday</option>
+                            <option value="2022-06-08">Wednesday</option>
+                            <option value="2022-06-09">Thursday</option>
+                            <option value="2022-06-10">Friday</option>
+                            <option value="2022-06-11">Saturday</option>
+                            <option value="2022-06-12">Sunday</option>
+                        </select>
 
-                    <label htmlFor="timezone">Time Zone</label>
-                    <select name="timezone" required value={timeZone} onChange={handleInputChange}>
+                        <label className="userInput" htmlFor="timezone">Time Zone</label>
+                        <select name="timezone" required onChange={handleInputChange}>
 
                         {timeZones.map((zone, index) => {
                             return (
@@ -219,36 +219,36 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
 
                     </select>
 
-                    <label htmlFor="time">Time</label>
-                    <input type="time" placeholder="Time" name="time" value={time} onChange={handleInputChange} required />
+                        <label className="userInput" htmlFor="time">Time</label>
+                        <input type="time" placeholder="Time" name="time" value={time} onChange={handleInputChange} required />
 
                     <div className="addTags">
 
-                        <label htmlFor="tags">Group Tags</label>
+                            <label className="userInput" htmlFor="tags">Group Tags</label>
 
                         <div className="tagInput">
 
-                            <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                            <span className="validity"></span>
-                            <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
+                                <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
+                                <span className="validity"></span>
+                                <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
+
+                            </div>
+
+                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+
+                            <div className="chosenTags">
+                                {tags.map((tag, index) =>
+                                    <p key={index} onClick={removeTag}>{tag}</p>)}
+                            </div>
 
                         </div>
-
-                        <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
-
-                        <div className="chosenTags">
-                            {tags.map((tag, index) =>
-                                <p key={index} onClick={removeTag}>{tag}</p>)}
+                        <div className="footer">
+                            <button onClick={() => setOpenModal(false)} className="cancelBtn">Cancel</button>
+                            <button onClick={submitNewGroupInfo} className="submitBtn">Submit</button>
                         </div>
-
-                    </div>
-                    <div className="footer">
-                        <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
-                        <button onClick={submitNewGroupInfo}>Submit</button>
-                    </div>
-                </form>
-
+                    </form>
             </div>
+
         </div>
     );
 }
