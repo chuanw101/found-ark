@@ -13,8 +13,6 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
     const [newTag, setTag] = useState("");
     const [tags, addNewTag] = useState([]);
 
-    console.log(group)
-
     // time zone array
     const timeZones = [
         '(GMT+00:00) Greenwich Mean Time',
@@ -104,7 +102,8 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
         };
     };
 
-    const submitNewGroupInfo = async () => {
+    const submitNewGroupInfo = async (e) => {
+        e.preventDefault();
         try {
             let timeInfo;
             if (time) {
@@ -144,6 +143,8 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
     }
 
     useEffect(() => {
+        const curTags = group.tag.map(t=>t.tag_name);
+        addNewTag(curTags);
         console.log(group.time)
         // deconstruct time
         const localTime = moment(group.time).local();
@@ -178,8 +179,6 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                 return;
             }
         }
-        console.log(offsetString)
-        //console.log(moment(group.time).local().parseZone())
     }, []);
 
     return (
@@ -209,7 +208,7 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                         </select>
 
                         <label className="userInput" htmlFor="timezone">Time Zone</label>
-                        <select name="timezone" required onChange={handleInputChange}>
+                        <select name="timezone" value={timeZone} required onChange={handleInputChange}>
 
                         {timeZones.map((zone, index) => {
                             return (
@@ -229,12 +228,11 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                         <div className="tagInput">
 
                                 <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                                <span className="validity"></span>
                                 <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
 
                             </div>
 
-                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Tags can only include letters, numbers, and + - _</p>
 
                             <div className="chosenTags">
                                 {tags.map((tag, index) =>
