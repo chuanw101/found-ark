@@ -112,11 +112,11 @@ function AllGroups({ user, activeTags }) {
 
                             <div>
                                 <h4>Members</h4>
-                                <p>
+                                <div  className="groupMemDis">
                                     {group.member_char.map((character) => {
-                                        return (<span key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)} {character.char_name} ({character.item_lvl}) </span>)
+                                        return (<p key={character.id}>{character.groupmember.is_owner ? (<>🟡</>) : (<></>)} {character.char_name} ({character.item_lvl}) </p>)
                                     })}
-                                </p>
+                                </div>
                             </div>
 
                         </div>

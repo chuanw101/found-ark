@@ -2,3 +2,20 @@
     margin: var(--medium) 0 var(--small) 0;
     text-transform: capitalize;
 }
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    .myGroupsCharName:first-of-type {
+        margin: var(--tiny) 0 var(--small) 0;
+        text-transform: capitalize;
+    }
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

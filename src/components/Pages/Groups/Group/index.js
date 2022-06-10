@@ -293,50 +293,50 @@ function Group({ user, sendNoti, setBackground }) {
         <div className="page">
 
             <div className="groupBanner">
+                <div className="groupHeadline">
+                    <div className="groupTitle">
+                        <h1>{group?.group_name}</h1>
+                        <p>{group?.description}</p>
+                        <p>{formatTime(group?.time)}</p>
 
-                <div className="groupTitle">
-                    <h1>{group?.group_name}</h1>
-                    <p>{group?.description}</p>
-                    <p>{formatTime(group?.time)}</p>
+                        {displayDiscord()}
+                    </div>
 
-                    {displayDiscord()}
+                    <div className="groupDetails">
+                        <h4>Created by</h4>
+                        <p>{group?.creator.char_name} ({group?.creator.owner.user_name})</p>
 
-                    {group?.creator?.owner_id === user?.id ? (
-                        <div className="groupOwnerBtns">
-                            <button className="editDiscordBtn"
-                                onClick={() => {
-                                    setModalOpen(true);
-                                }}
-                            >
-                                Embed A Different Discord
-                            </button>
-                            <button className="editGroupBtn"
-                                onClick={() => {
-                                    setGroupModalOpen(true);
-                                }}
-                            >
-                                Edit Group Information
-                            </button>
-                            <button className="deleteGroupBtn"
-                                onClick={() => {
-                                    setDelGroupModalOpen(true);
-                                }}
-                            >
-                                Delete Group
-                            </button>
-                        </div>
-                    ) : (<></>)}
-                </div>
+                        <h4>Region</h4>
+                        <p>{group?.region}</p>
 
-                <div className="groupDetails">
-                    <h4>Created by</h4>
-                    <p>{group?.creator.char_name} ({group?.creator.owner.user_name})</p>
-
-                    <h4>Region</h4>
-                    <p>{group?.region}</p>
-
+                    </div>
 
                 </div>
+                {group?.creator?.owner_id === user?.id ? (
+                    <div className="groupOwnerBtns">
+                        <button className="editDiscordBtn"
+                            onClick={() => {
+                                setModalOpen(true);
+                            }}
+                        >
+                            Embed A Different Discord
+                        </button>
+                        <button className="editGroupBtn"
+                            onClick={() => {
+                                setGroupModalOpen(true);
+                            }}
+                        >
+                            Edit Group Information
+                        </button>
+                        <button className="deleteGroupBtn"
+                            onClick={() => {
+                                setDelGroupModalOpen(true);
+                            }}
+                        >
+                            Delete Group
+                        </button>
+                    </div>
+                ) : (<></>)}
 
             </div>
 
@@ -356,7 +356,7 @@ function Group({ user, sendNoti, setBackground }) {
 
                         <div className="allCharacters">
                             {groupMembers?.map(char =>
-                                <div key={char.id} className={discordInfo?.length == 3 ? "wrapCharCard groupMemberCard": "groupMemberCard"}>
+                                <div key={char.id} className={isGroupMember ? "wrapCharCard groupMemberCard" : "groupMemberCard"}>
                                     {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
                                     <CharacterDetails char={char} />
                                 </div>

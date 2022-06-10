@@ -308,13 +308,16 @@ h1 {
         margin-bottom: var(--medium);
         align-items: flex-start;
     }
+
     .tabLabel {
         padding: 10px var(--small);
         margin: 0px 0px var(--tiny) 0px;
     }
+
     .tabLabel:last-of-type {
         margin: 0px;
     }
+
     .tabDivider {
         margin: 0px var(--tiny);
     }
@@ -322,6 +325,10 @@ h1 {
 
 /* tablets */
 @media screen and (max-width: 768px) {
+    .App {
+        font-size: 14px;
+    }
+
     form {
         min-width: 100% !important;
     }
@@ -339,9 +346,11 @@ h1 {
         padding: var(--small);
         width: 100%;
     }
-    .darkContainer{
+
+    .darkContainer {
         padding: var(--small);
     }
+
     .tabHeader {
         padding: var(--small);
         height: fit-content;
@@ -349,30 +358,32 @@ h1 {
         flex-direction: column-reverse;
         align-items: center;
     }
+
     .tabLabel {
         padding: 10px var(--small);
         margin: 0px;
     }
+
     .tabLabel:last-of-type {
         margin: 0px;
     }
+
     .tabDivider {
         margin: 0px var(--tiny);
     }
+
     .tabs {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         margin: 0 0 var(--small) 0;
     }
-    .filterSearch{
-        margin: 0;
-    }
 
+    h1 {
+        margin-bottom: var(--small);
+    }
 }
 
 
 /* phones */
-@media screen and (max-width: 480px) {
-
-}
+@media screen and (max-width: 480px) {}

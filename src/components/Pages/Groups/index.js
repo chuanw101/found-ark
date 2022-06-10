@@ -9,6 +9,7 @@ import AllGroups from './AllGroups';
 import './style.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
+
 function Groups({ user }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
@@ -203,7 +204,7 @@ function Groups({ user }) {
 
             <div className="tabHeader">
                 <div className="searchTagsArea">
-                    {currentTab != "CreateGroup" && <div style={{ height: 60 }}>
+                    {currentTab != "CreateGroup" && <div style={{ height: 45 }}>
                         <ReactSearchAutocomplete
                             items={autoCompleteTags}
                             onSearch={handleOnSearch}
@@ -211,6 +212,24 @@ function Groups({ user }) {
                             onSelect={handleOnSelect}
                             onFocus={handleOnFocus}
                             onClear={handleOnClear}
+                            styling={
+                                {
+                                  position: "static",
+                                  height: "15px",
+                                  border: "1px solid #dfe1e5",
+                                  borderRadius: "24px",
+                                  backgroundColor: "white",
+                                  boxShadow: "rgba(32, 33, 36, 0.28) 0px 1px 6px 0px",
+                                  hoverBackgroundColor: "#eee",
+                                  color: "#212121",
+                                  fontSize: "16px",
+                                  fontFamily: "Cardo",
+                                  iconColor: "grey",
+                                  lineColor: "rgb(232, 234, 237)",
+                                  placeholderColor: "grey",
+                                  clearIconMargin: '3px 14px 0 0',
+                                  searchIconMargin: '0 0 0 16px'
+                                }}
                             inputSearchString={newTag}
                             autoFocus
                             formatResult={formatResult}
