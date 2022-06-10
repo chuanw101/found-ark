@@ -262,7 +262,7 @@ function CreateGroup() {
 
                             </div>
 
-                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErr' : 'visible inputErr'}>Must only include letters, numbers, and _ + -</p>
 
                             <div className="chosenTags">
                                 {tags.map((tag, index) =>

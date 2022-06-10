@@ -101,15 +101,15 @@ function Groups({ user }) {
 
     };
 
-    const handleInvalidTags = () => {
-        newTag === "" || newTag === [] || tagReg.test(newTag)
-        ? setInvalidTagsError('')
-        : setTimeout(() => setInvalidTagsError(<p className='inputErr'>Must only include letters, numbers, and _ + -</p>), 3000)
-    };
+    // const handleInvalidTags = () => {
+    //     newTag === "" || newTag === [] || tagReg.test(newTag)
+    //     ? setInvalidTagsError('')
+    //     : setTimeout(() => setInvalidTagsError(<p className='inputErr'>Must only include letters, numbers, and _ + -</p>), 3000)
+    // };
 
-    useEffect(() => {
-        handleInvalidTags()
-    },[newTag]);
+    // useEffect(() => {
+    //     handleInvalidTags()
+    // },[newTag]);
 
     return (
 
@@ -118,8 +118,8 @@ function Groups({ user }) {
             <div className="tabHeader">
                 <div className="searchTagsArea">
                 {currentTab != "CreateGroup" && <input onChange={handleInputChange} className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onKeyDown={handleKeyDown}></input>}
-                {invalidTagsError}
-                {/* <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Must only include letters, numbers, and _ + -</p> */}
+                {/* {invalidTagsError} */}
+                <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErr' : 'inputErr'}>Must only include letters, numbers, and _ + -</p>
     
                 {currentTab != "CreateGroup" && <div className="savedTags">
                     {tags.map((tag, index) =>
