@@ -9,6 +9,13 @@
     margin-bottom: var(--medium);
 }
 
+.groupMemDis{
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: var(--small);
+    max-width: 100%;
+}
+
 .groupPreview:hover {
     cursor: pointer;
 }
@@ -22,6 +29,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    width: fit-content;
 }
 
 .groupPreviewColumnRight {
@@ -29,7 +37,7 @@
     flex-direction: column;
     align-items: flex-end;
     text-align: right;
-    width: 30%;
+    width: fit-content;
 }
 
 .groupTagsPreview {
@@ -41,3 +49,23 @@
     width: 150px;
     margin: auto 0px 0px 0px
 }
+
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    .groupPreview {
+        margin-bottom: var(--small);
+        padding: var(--small);
+    }
+
+
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

@@ -1,11 +1,3 @@
-.filterSearch {
-    border: none;
-    border-radius: var(--tiny);
-    padding: var(--tiny) var(--small);
-    width: 350px;
-    overflow: scroll;
-}
-
 .searchTagsArea{
     display: flex;
     flex-direction: column;
@@ -52,6 +44,10 @@
     background-color: var(--accent75);
 }
 
+.bROWDV input{
+    height: 30px;
+}
+
 /* large screens */
 @media screen and (max-width: 1200px) {}
 
@@ -68,9 +64,6 @@
 /* phones */
 @media screen and (max-width: 480px) {
     .searchTagsArea{
-        width: 100%;
-    }
-    .filterSearch{
         width: 100%;
     }
 }
