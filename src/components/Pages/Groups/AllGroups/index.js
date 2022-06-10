@@ -14,7 +14,6 @@ function AllGroups({ user, activeTags }) {
 
     // get all groups
     const getAllGroups = async () => {
-
         try {
 
             if (token) {
@@ -33,6 +32,19 @@ function AllGroups({ user, activeTags }) {
                 filterGroups(res.data);
             };
 
+        } catch (err) {
+            console.log(err);
+        };
+
+    };
+
+    // get all tags
+    const getAllTags = async () => {
+        try {
+            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/tags`);
+            //setAllGroups(res.data);
+            console.log("============tags==============")
+            console.log(res.data)
         } catch (err) {
             console.log(err);
         };
@@ -63,6 +75,7 @@ function AllGroups({ user, activeTags }) {
 
     useEffect(() => {
         getAllGroups();
+        getAllTags();
     }, []);
 
     useEffect(() => {
@@ -83,10 +96,10 @@ function AllGroups({ user, activeTags }) {
     }
 
     const formatTime = (time) => {
-        if(!time) {
+        if (!time) {
             return
         }
-        return(moment(time).format('dddd h:mm a'))
+        return (moment(time).format('dddd h:mm a'))
     }
 
     return (
