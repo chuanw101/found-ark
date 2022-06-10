@@ -7,7 +7,7 @@ import CreateGroup from './CreateGroup';
 import MyGroups from './MyGroups';
 import AllGroups from './AllGroups';
 import './style.css';
-import { act } from 'react-dom/test-utils';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 function Groups({ user }) {
 
@@ -17,6 +17,55 @@ function Groups({ user }) {
     const [activeTags, setActiveTags] = useState([]);
     const [invalidTagsError, setInvalidTagsError] = useState('');
     const [autoCompleteTags, setAutoCompleteTags] = useState([]);
+
+    const handleOnSearch = (string, results) => {
+        // onSearch will have as the first callback parameter
+        // the string searched and for the second the results.
+        setTag(string)
+        console.log(string, results)
+    }
+
+    const handleOnHover = (result) => {
+        // the item hovered
+        console.log(result)
+    }
+
+    const handleOnSelect = (item) => {
+        // add filter
+        if (item.name === '') {
+            return;
+        }
+        for (const t of tags) {
+            if (t.tag_name === item.name) {
+                if (!t.active){
+                    t.active = true;
+                    setActiveTags([...activeTags, item.name]);
+                }
+                setTag('');
+                return;
+            }
+        }
+        setAllTags([...tags, { tag_name: item.name, active: true }]);
+        setActiveTags([...activeTags, item.name]);
+        setTag('');
+
+    }
+
+    const handleOnFocus = () => {
+        console.log('Focused')
+    }
+
+    const handleOnClear = () => {
+        console.log('Cleared')
+    }
+
+    const formatResult = (item) => {
+        return (
+            <>
+                <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+            </>
+        )
+    }
 
     // handle input change
     const handleInputChange = (e) => {
@@ -105,31 +154,31 @@ function Groups({ user }) {
 
     const handleInvalidTags = () => {
         newTag === "" || newTag === [] || tagReg.test(newTag)
-        ? setInvalidTagsError('')
-        : setTimeout(() => setInvalidTagsError(<p className='inputErr'>Must only include letters, numbers, and _ + -</p>), 3000)
+            ? setInvalidTagsError('')
+            : setTimeout(() => setInvalidTagsError(<p className='inputErr'>Must only include letters, numbers, and _ + -</p>), 3000)
     };
 
-    
+
     // get all tags
     const getAllTags = async () => {
         try {
             const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/tags`);
             let sortedTags = res.data;
             // remove tags with no groups
-            for (let i=0; i<sortedTags.length; i++) {
+            for (let i = 0; i < sortedTags.length; i++) {
                 if (sortedTags[i].groups.length === 0) {
-                    sortedTags.splice(i,1);
+                    sortedTags.splice(i, 1);
                 }
             }
             // sort
-            sortedTags.sort((a,b)=> {
+            sortedTags.sort((a, b) => {
                 return b.groups.length - a.groups.length
             })
-            const allAutoTags = sortedTags.map(tag=>tag.tag_name);
+            const allAutoTags = sortedTags.map((tag, index) => ({ id: index, name: tag.tag_name }));
             setAutoCompleteTags(allAutoTags)
             // default tags shown are top 4 most used tags by all groups
             if (sortedTags.length > 4) {
-                sortedTags.splice(3, sortedTags.length-4);
+                sortedTags.splice(3, sortedTags.length - 4);
             }
             const defaultTags = sortedTags.map(tag => ({ tag_name: tag.tag_name, active: false }));
             setAllTags(defaultTags)
@@ -146,7 +195,7 @@ function Groups({ user }) {
 
     useEffect(() => {
         handleInvalidTags()
-    },[newTag]);
+    }, [newTag]);
 
     return (
 
@@ -154,14 +203,23 @@ function Groups({ user }) {
 
             <div className="tabHeader">
                 <div className="searchTagsArea">
-                {currentTab != "CreateGroup" && <input onChange={handleInputChange} className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onKeyDown={handleKeyDown}></input>}
-                {invalidTagsError}
-                {/* <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Must only include letters, numbers, and _ + -</p> */}
-    
-                {currentTab != "CreateGroup" && <div className="savedTags">
-                    {tags.map((tag, index) =>
-                        <p className={tag.active ? ("savedTagsActive") : ("savedTagsInactive")} key={index} value={index} onClick={handleTagClick}>{tag.tag_name}</p>)}
-                </div>}
+                    {currentTab != "CreateGroup" && <div style={{ height: 60}}>
+                        <ReactSearchAutocomplete
+                            items={autoCompleteTags}
+                            onSearch={handleOnSearch}
+                            onHover={handleOnHover}
+                            onSelect={handleOnSelect}
+                            onFocus={handleOnFocus}
+                            onClear={handleOnClear}
+                            inputSearchString={newTag}
+                            autoFocus
+                            formatResult={formatResult}
+                        />
+                    </div>}
+                    {currentTab != "CreateGroup" && <div className="savedTags">
+                        {tags.map((tag, index) =>
+                            <p className={tag.active ? ("savedTagsActive") : ("savedTagsInactive")} key={index} value={index} onClick={handleTagClick}>{tag.tag_name}</p>)}
+                    </div>}
                 </div>
 
                 {user?.logged_in ? (
