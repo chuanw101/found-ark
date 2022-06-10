@@ -1,6 +1,7 @@
 // import components
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import Group from './Group';
 import CreateGroup from './CreateGroup';
 import MyGroups from './MyGroups';
@@ -12,9 +13,10 @@ function Groups({ user }) {
 
     const [currentTab, setCurrentTab] = useState('AllGroups');
     const [newTag, setTag] = useState("");
-    const [tags, setAllTags] = useState([{ tag_name: "valtan", active: false }, { tag_name: "maps", active: false }, { tag_name: "vykas", active: false }, { tag_name: "argos", active: false }]);
+    const [tags, setAllTags] = useState([]);
     const [activeTags, setActiveTags] = useState([]);
     const [invalidTagsError, setInvalidTagsError] = useState('');
+    const [autoCompleteTags, setAutoCompleteTags] = useState([]);
 
     // handle input change
     const handleInputChange = (e) => {
@@ -106,6 +108,41 @@ function Groups({ user }) {
         ? setInvalidTagsError('')
         : setTimeout(() => setInvalidTagsError(<p className='inputErr'>Must only include letters, numbers, and _ + -</p>), 3000)
     };
+
+    
+    // get all tags
+    const getAllTags = async () => {
+        try {
+            const res = await axios.get(`https://found-ark-backend.herokuapp.com/api/tags`);
+            let sortedTags = res.data;
+            // remove tags with no groups
+            for (let i=0; i<sortedTags.length; i++) {
+                if (sortedTags[i].groups.length === 0) {
+                    sortedTags.splice(i,1);
+                }
+            }
+            // sort
+            sortedTags.sort((a,b)=> {
+                return b.groups.length - a.groups.length
+            })
+            const allAutoTags = sortedTags.map(tag=>tag.tag_name);
+            setAutoCompleteTags(allAutoTags)
+            // default tags shown are top 4 most used tags by all groups
+            if (sortedTags.length > 4) {
+                sortedTags.splice(3, sortedTags.length-4);
+            }
+            const defaultTags = sortedTags.map(tag => ({ tag_name: tag.tag_name, active: false }));
+            setAllTags(defaultTags)
+
+        } catch (err) {
+            console.log(err);
+        };
+
+    };
+
+    useEffect(() => {
+        getAllTags();
+    }, []);
 
     useEffect(() => {
         handleInvalidTags()
