@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import moment from 'moment';
 import "../../styles/modals.css";
 
 
 function EditGroupModal({ setOpenModal, setGroup, group }) {
-    const [groupName, setGroupName] = useState("");
-    const [description, setDescription] = useState("");
+    const [groupName, setGroupName] = useState(group?.group_name);
+    const [description, setDescription] = useState(group?.description);
     const [day, setDay] = useState("2022-06-06");
     const [timeZone, setTimeZone] = useState("(GMT+00:00) Greenwich Mean Time");
     const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
     const [tags, addNewTag] = useState([]);
+
+    console.log(group)
 
     // time zone array
     const timeZones = [
@@ -140,6 +143,45 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
         };
     }
 
+    useEffect(() => {
+        console.log(group.time)
+        // deconstruct time
+        const localTime = moment(group.time).local();
+        let day = localTime.format('YYYY-MM-DD');
+        console.log(day)
+        setDay(day)
+        let time = localTime.format('hh:mm')
+        console.log(time)
+        setTime(time)
+        let offset = new Date(group.time).getTimezoneOffset();
+        offset /= -60;
+        let offsetString = '';
+        if (offset < 0) {
+            offsetString += '-';
+            offset = offset * -1;
+        } else {
+            offsetString += '+';
+        }
+        if (offset < 10) {
+            offsetString += '0'
+        }
+        if (offset % 1 == 0) {
+            offsetString += offset;
+            offsetString += ':00'
+        } else {
+            offsetString += Math.floor(offset);
+            offsetString += ':30'
+        }
+        for (const t of timeZones) {
+            if(offsetString === t.substring(4, 10)){
+                setTimeZone(t);
+                return;
+            }
+        }
+        console.log(offsetString)
+        //console.log(moment(group.time).local().parseZone())
+    }, []);
+
     return (
         <div className="modalBackground" onClick={() => setOpenModal(false)}>
             <div className="modalContainer" onClick={e => e.stopPropagation()}>
@@ -147,67 +189,67 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                     <h1>Edit Group Information</h1>
                 </div>
 
-                    <form method="post" className="createGroup">
+                <form method="post" className="createGroup">
 
 
-                        <label htmlFor="groupName">Group Name</label>
-                        <input type="text" placeholder="Enter Group Name" name="groupName" onChange={handleInputChange} required />
+                    <label htmlFor="groupName">Group Name</label>
+                    <input type="text" placeholder="Enter Group Name" name="groupName" value={groupName} onChange={handleInputChange} required />
 
-                        <label htmlFor="description">Description</label>
-                        <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
-                        <label htmlFor="dayofweek">Day</label>
-                        <select name="dayofweek" required onChange={handleInputChange}>
-                            <option value="2022-06-06">Monday</option>
-                            <option value="2022-06-07">Tuesday</option>
-                            <option value="2022-06-08">Wednesday</option>
-                            <option value="2022-06-09">Thursday</option>
-                            <option value="2022-06-10">Friday</option>
-                            <option value="2022-06-11">Saturday</option>
-                            <option value="2022-06-12">Sunday</option>
-                        </select>
+                    <label htmlFor="description">Description</label>
+                    <input type="text" placeholder="Description" name="description" value={description} onChange={handleInputChange} required />
+                    <label htmlFor="dayofweek">Day</label>
+                    <select name="dayofweek" required onChange={handleInputChange} value={day}>
+                        <option value="2022-06-06">Monday</option>
+                        <option value="2022-06-07">Tuesday</option>
+                        <option value="2022-06-08">Wednesday</option>
+                        <option value="2022-06-09">Thursday</option>
+                        <option value="2022-06-10">Friday</option>
+                        <option value="2022-06-11">Saturday</option>
+                        <option value="2022-06-12">Sunday</option>
+                    </select>
 
-                        <label htmlFor="timezone">Time Zone</label>
-                        <select name="timezone" required onChange={handleInputChange}>
+                    <label htmlFor="timezone">Time Zone</label>
+                    <select name="timezone" required value={timeZone} onChange={handleInputChange}>
 
-                            {timeZones.map((zone, index) => {
-                                return (
-                                    <option key={index} value={zone}>{zone}</option>
-                                )
-                            })}
+                        {timeZones.map((zone, index) => {
+                            return (
+                                <option key={index} value={zone}>{zone}</option>
+                            )
+                        })}
 
-                        </select>
+                    </select>
 
-                        <label htmlFor="time">Time</label>
-                        <input type="time" placeholder="Time" name="time" onChange={handleInputChange} required />
+                    <label htmlFor="time">Time</label>
+                    <input type="time" placeholder="Time" name="time" value={time} onChange={handleInputChange} required />
 
-                        <div className="addTags">
+                    <div className="addTags">
 
-                            <label htmlFor="tags">Group Tags</label>
+                        <label htmlFor="tags">Group Tags</label>
 
-                            <div className="tagInput">
+                        <div className="tagInput">
 
-                                <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                                <span className="validity"></span>
-                                <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
-
-                            </div>
-
-                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
-
-                            <div className="chosenTags">
-                                {tags.map((tag, index) =>
-                                    <p key={index} onClick={removeTag}>{tag}</p>)}
-                            </div>
+                            <input type="search" id="tags" name="tags" pattern='[+-_a-zA-Z0-9]{2,}' value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
+                            <span className="validity"></span>
+                            <button onClick={addTag} id="tagBtn" type="button">Add Tag</button>
 
                         </div>
-                        <div className="footer">
-                            <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
-                            <button onClick={submitNewGroupInfo}>Submit</button>
-                        </div>
-                    </form>
 
-                </div>
+                        <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+
+                        <div className="chosenTags">
+                            {tags.map((tag, index) =>
+                                <p key={index} onClick={removeTag}>{tag}</p>)}
+                        </div>
+
+                    </div>
+                    <div className="footer">
+                        <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
+                        <button onClick={submitNewGroupInfo}>Submit</button>
+                    </div>
+                </form>
+
             </div>
+        </div>
     );
 }
 
