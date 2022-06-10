@@ -13,8 +13,6 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
     const [newTag, setTag] = useState("");
     const [tags, addNewTag] = useState([]);
 
-    console.log(group)
-
     // time zone array
     const timeZones = [
         '(GMT+00:00) Greenwich Mean Time',
