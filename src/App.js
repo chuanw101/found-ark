@@ -127,7 +127,30 @@ function App() {
 
     useEffect(() => {
         if (token) {
-            setUser(jwtDecode(token))
+            //get time zone offset
+            const date = new Date();
+            let offset = date.getTimezoneOffset();
+            offset /= -60;
+            let offsetString = '';
+            if (offset < 0) {
+                offsetString += '-';
+                offset = offset*-1;
+            } else {
+                offsetString += '+';
+            }
+            if (offset < 10) {
+                offsetString += '0'
+            }
+            if (offset % 1 == 0) {
+                offsetString += offset;
+                offsetString += ':00'
+            } else {
+                offsetString += Math.floor(offset);
+                offsetString += ':30'
+            }
+            let tempUser = jwtDecode(token);
+            tempUser.offset = offsetString;
+            setUser(tempUser);
         } else {
             setUser(null);
         }
