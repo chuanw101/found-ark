@@ -165,6 +165,40 @@
     animation: spin 1.5s infinite linear;
 }
 
+.applicantContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 50%;
+}
+
+.appUser {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    color: var(--light);
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    padding: var(--medium);
+    text-shadow: 0px 0px 20px var(--dark);
+}
+
+.appBtns {
+    display: flex;
+}
+
+.appDeclineBtn {
+    color: var(--red);
+    margin-right: var(--small);
+}
+
+.appDeclineBtn:hover {
+    background: var(--red);
+    color: var(--light);
+}
+
 /* character class backgrounds */
 .berserker {
     background: linear-gradient(45deg, hsla(0, 0%, 5%, 0.75) 10%, hsla(0, 0%, 5%, 0)), url('../../../public/assets/images/classes/berserker.jpg');

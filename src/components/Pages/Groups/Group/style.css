@@ -1,3 +1,14 @@
+.groupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--medium) 0px 0px var(--medium);
+}
+
 .groupBanner {
     display: flex;
     justify-content: space-between;
@@ -42,20 +53,39 @@
 
 .applicationSection {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    border: 1px solid var(--accent);
-    border-radius: var(--tiny);
     height: auto;
-    padding: var(--small);
-    margin-right: var(--medium);
     margin-bottom: var(--medium);
+    margin-right: var(--medium);
+}
+
+.appSectionRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.appSectionBtn {
+    margin: auto 0px auto var(--small);
+}
+
+.appCharSelect {
+    justify-self: flex-end;
+    max-width: 400px;
+    margin-left: auto;
 }
 
 .groupMemberSection {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    width: 50%;
+}
+
+.allCharacters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: var(--tiny);
+    width: 100%;
 }
 
 .groupMemberSection h2 {
@@ -63,12 +93,9 @@
 }
 
 .groupMemberCard {
-    margin-right: var(--medium);
+    max-width: 50%;
+    padding-right: var(--medium);
     margin-bottom: var(--medium);
-}
-
-.groupMemberCard:last-of-type {
-    margin-bottom: 0px;
 }
 
 .discordWidget {
@@ -77,6 +104,8 @@
     width: 50%;
     border: 1px solid var(--accent);
     border-radius: var(--tiny);
+    margin-right: var(--medium);
+    margin-bottom: var(--medium);
 }
 
 .discordBtn {
@@ -85,11 +114,27 @@
     margin: var(--tiny);
 }
 
-.btns {
-    height: 50px;
-    width: 250px;
-    margin: var(--tiny);
-}
 .defaultSpan{
     margin-left: var(--tiny);
+}
+
+.groupOwnerBtns {
+    display: flex;
+    margin-top: var(--medium);
+}
+
+.groupOwnerBtns button {
+    width: fit-content;
+    margin-right: var(--small);
+}
+
+.deleteGroupBtn {
+    position: absolute;
+    right: 70px;
+    color: var(--red);
+}
+
+.deleteGroupBtn:hover {
+    background: var(--red);
+    color: var(--light);
 }

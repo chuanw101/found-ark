@@ -176,12 +176,7 @@ function Group({ user, sendNoti, setBackground }) {
                     for (let i = 0; i < group?.app_char?.length; i++) {
                         appsEL.push(
                             <div key={i}>
-                                <h2>{group.app_char[i].char_name}</h2>
-                                <button value={group.app_char[i].id} onClick={approve}>Approve</button>
-                                <button value={group.app_char[i].id} onClick={decline}>Decline</button>
-                                <p>User: {group.app_char[i].owner.user_name}</p>
-                                <p>{group.app_char[i].owner.introduction}</p>
-                                <CharacterDetails char={group.app_char[i]} />
+                                <CharacterDetails applicant={true} approve={approve} decline={decline} char={group.app_char[i]} />
                             </div>
                         )
                     }
@@ -189,7 +184,7 @@ function Group({ user, sendNoti, setBackground }) {
                 // user is creator of this group
                 return (
                     <div className="applicationSection">
-                        <h1>Applicants: </h1>
+                        <h2>Applicants</h2>
                         {appsEL}
                     </div>
                 )
@@ -203,8 +198,10 @@ function Group({ user, sendNoti, setBackground }) {
                 // user is a member of this group
                 return (
                     <div className="applicationSection">
-                        <h2>You are a member of this group!</h2>
-                        <button value={targetCharId} onClick={cancelApp}>Leave Group</button>
+                        <div className="appSectionRow">
+                            <h2>You are a member of this group!</h2>
+                            <button value={targetCharId} onClick={cancelApp}>Leave Group</button>
+                        </div>
                     </div>
                 )
             } else if (group?.app_char.some(char => {
@@ -217,8 +214,10 @@ function Group({ user, sendNoti, setBackground }) {
                 // user already applied but not accepted yet
                 return (
                     <div className="applicationSection">
-                        <h2>You already applied to this group</h2>
-                        <button value={targetCharId} onClick={cancelApp}>Cancel Application</button>
+                        <div className="appSectionRow">
+                            <h2>You already applied to this group</h2>
+                            <button className="appSectionBtn" value={targetCharId} onClick={cancelApp}>Withdraw</button>
+                        </div>
                     </div>
                 )
             } else {
@@ -231,14 +230,16 @@ function Group({ user, sendNoti, setBackground }) {
                 }
                 return (
                     <div className="applicationSection">
-                        <select name="characters" required onChange={handleInputChange}>
-                            {allChars?.map((char) => {
-                                return (
-                                    <option key={char.id} value={char.id}>{char.char_name}</option>
-                                )
-                            })}
-                        </select>
-                        <button onClick={apply}>Apply</button>
+                        <div className="appSectionRow">
+                            <select name="characters" required onChange={handleInputChange} className="appCharSelect">
+                                {allChars?.map((char) => {
+                                    return (
+                                        <option key={char.id} value={char.id}>{char.char_name}</option>
+                                    )
+                                })}
+                            </select>
+                            <button className="appSectionBtn" onClick={apply}>Apply</button>
+                        </div>
                     </div>
                 )
             }
@@ -301,29 +302,29 @@ function Group({ user, sendNoti, setBackground }) {
                     {displayDiscord()}
 
                     {group?.creator?.owner_id === user?.id ? (
-                        <>
-                            <button className="discordBtn"
+                        <div className="groupOwnerBtns">
+                            <button className="editDiscordBtn"
                                 onClick={() => {
                                     setModalOpen(true);
                                 }}
                             >
                                 Embed A Different Discord
                             </button>
-                            <button className="btns"
+                            <button className="editGroupBtn"
                                 onClick={() => {
                                     setGroupModalOpen(true);
                                 }}
                             >
                                 Edit Group Information
                             </button>
-                            <button className="btns"
+                            <button className="deleteGroupBtn"
                                 onClick={() => {
                                     setDelGroupModalOpen(true);
                                 }}
                             >
                                 Delete Group
                             </button>
-                        </>
+                        </div>
                     ) : (<></>)}
                 </div>
 
@@ -343,7 +344,7 @@ function Group({ user, sendNoti, setBackground }) {
             {delGroupModalOpen && <DelGroupModal setDelGroupModalOpen={setDelGroupModalOpen} group={group} sendNoti={sendNoti} />}
             {modalOpen && <DiscordHelpModal setOpenModal={setModalOpen} setGroup={setGroup} group={group} />}
 
-            <div className="darkContainer">
+            <div className="groupContainer">
 
                 <div className="groupBody">
 
@@ -353,12 +354,15 @@ function Group({ user, sendNoti, setBackground }) {
 
                         <h2>Members</h2>
 
-                        {groupMembers?.map(char =>
-                            <div key={char.id} className="groupMemberCard">
-                                {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
-                                <CharacterDetails char={char} />
-                            </div>
-                        )}
+                        <div className="allCharacters">
+                            {groupMembers?.map(char =>
+                                <div key={char.id} className="groupMemberCard">
+                                    {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
+                                    <CharacterDetails char={char} />
+                                </div>
+                            )}
+
+                        </div>
 
                     </div>
                     {

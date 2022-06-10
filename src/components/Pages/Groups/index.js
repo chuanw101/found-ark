@@ -1,5 +1,5 @@
 // import components
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Group from './Group';
 import CreateGroup from './CreateGroup';
@@ -14,6 +14,15 @@ function Groups({ user }) {
     const [newTag, setTag] = useState("");
     const [tags, setAllTags] = useState([{ tag_name: "valtan", active: false }, { tag_name: "maps", active: false }, { tag_name: "vykas", active: false }, { tag_name: "argos", active: false }]);
     const [activeTags, setActiveTags] = useState([]);
+    const [invalidTagsError, setInvalidTagsError] = useState('');
+
+    // handle input change
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'tag') {
+            setTag(value);
+        };
+    };
 
     const handleTabSelect = () => {
 
@@ -27,14 +36,6 @@ function Groups({ user }) {
             setCurrentTab('CreateGroup')
         };
 
-    };
-
-    // handle input change
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (name === 'tag') {
-            setTag(value);
-        };
     };
 
     // validate tag input
@@ -100,14 +101,25 @@ function Groups({ user }) {
 
     };
 
+    const handleInvalidTags = () => {
+        newTag === "" || newTag === [] || tagReg.test(newTag)
+        ? setInvalidTagsError('')
+        : setTimeout(() => setInvalidTagsError(<p className='inputErr'>Must only include letters, numbers, and _ + -</p>), 3000)
+    };
+
+    useEffect(() => {
+        handleInvalidTags()
+    },[newTag]);
+
     return (
 
         <div className="page">
 
             <div className="tabHeader">
                 <div className="searchTagsArea">
-                {currentTab != "CreateGroup" && <input className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onChange={handleInputChange} onKeyDown={handleKeyDown}></input>}
-                <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+                {currentTab != "CreateGroup" && <input onChange={handleInputChange} className="filterSearch" type="search" id="tag" placeholder="Search tags..." name="tag" value={newTag} onKeyDown={handleKeyDown}></input>}
+                {invalidTagsError}
+                {/* <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Must only include letters, numbers, and _ + -</p> */}
     
                 {currentTab != "CreateGroup" && <div className="savedTags">
                     {tags.map((tag, index) =>
