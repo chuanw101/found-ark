@@ -153,9 +153,9 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                         <label htmlFor="groupName">Group Name</label>
                         <input type="text" placeholder="Enter Group Name" name="groupName" onChange={handleInputChange} required />
 
-                        <label htmlFor="description">Description</label>
+                        <label className="userInput" htmlFor="description">Description</label>
                         <input type="text" placeholder="Description" name="description" onChange={handleInputChange} required />
-                        <label htmlFor="dayofweek">Day</label>
+                        <label className="userInput" htmlFor="dayofweek">Day</label>
                         <select name="dayofweek" required onChange={handleInputChange}>
                             <option value="2022-06-06">Monday</option>
                             <option value="2022-06-07">Tuesday</option>
@@ -166,7 +166,7 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                             <option value="2022-06-12">Sunday</option>
                         </select>
 
-                        <label htmlFor="timezone">Time Zone</label>
+                        <label className="userInput" htmlFor="timezone">Time Zone</label>
                         <select name="timezone" required onChange={handleInputChange}>
 
                             {timeZones.map((zone, index) => {
@@ -177,12 +177,12 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
 
                         </select>
 
-                        <label htmlFor="time">Time</label>
+                        <label className="userInput" htmlFor="time">Time</label>
                         <input type="time" placeholder="Time" name="time" onChange={handleInputChange} required />
 
                         <div className="addTags">
 
-                            <label htmlFor="tags">Group Tags</label>
+                            <label className="userInput" htmlFor="tags">Group Tags</label>
 
                             <div className="tagInput">
 
@@ -192,7 +192,7 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
 
                             </div>
 
-                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden' : 'visible'}>Tags can only include letters, numbers, and these special characters: + - _</p>
+                            <p className={newTag === "" || newTag === [] || tagReg.test(newTag) ? 'hidden inputErrP' : 'inputErrP'}>Tags can only include letters, numbers, and these special characters: + - _</p>
 
                             <div className="chosenTags">
                                 {tags.map((tag, index) =>
@@ -201,8 +201,8 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
 
                         </div>
                         <div className="footer">
-                            <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
-                            <button onClick={submitNewGroupInfo}>Submit</button>
+                            <button onClick={() => setOpenModal(false)} className="cancelBtn">Cancel</button>
+                            <button onClick={submitNewGroupInfo} className="submitBtn">Submit</button>
                         </div>
                     </form>
 

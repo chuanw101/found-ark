@@ -58,8 +58,8 @@ function DiscordHelpModal({ setOpenModal, setGroup, group }) {
                     <div className="body">
                         <ul>
                             <li className="subTitle">Before Embedding Discord Channel:</li>
-                            <li>Add WidgetBot to your discord server using <a href='https://add.widgetbot.io/' target='_blank' rel='noopener noreferer'>this link</a>.</li>
-                            <li>Type '/setup' in your discord channel and follow the prompts.</li>
+                            <li>Add WidgetBot to your Discord server using <a href='https://add.widgetbot.io/' target='_blank' rel='noopener noreferer'>this link</a>.</li>
+                            <li>Type '/setup' in your Discord channel to get started.</li>
                             <br></br>
                             <li className="subTitle">After WidgetBot Setup:</li>
                         </ul>
@@ -67,13 +67,13 @@ function DiscordHelpModal({ setOpenModal, setGroup, group }) {
                     <div className="footerDis">
                         <label htmlFor="discordLink">Discord Link</label>
                         <input type="text" placeholder="https://discord.gg/aaaa" name="discordLink" value={link} onChange={handleInputChange} />
-                        <label htmlFor="discordServer">Discord Server</label>
+                        <label className="userInput" htmlFor="discordServer">Discord Server</label>
                         <input type="text" placeholder="983439059089240064" name="discordServer" value={server} onChange={handleInputChange} />
-                        <label htmlFor="discordChannel">Discord Channel</label>
+                        <label className="userInput" htmlFor="discordChannel">Discord Channel</label>
                         <input type="text" placeholder="983439059542233140" name="discordChannel" value={channel} onChange={handleInputChange} />
                         <div className="footer">
-                            <button onClick={() => setOpenModal(false)} className="cxlBtn">Cancel</button>
-                            <button onClick={submitDiscord}>Submit</button>
+                            <button onClick={() => setOpenModal(false)} className="cancelBtn">Cancel</button>
+                            <button onClick={submitDiscord} className="submitBtn">Submit</button>
                         </div>
                     </div>
                 </form>

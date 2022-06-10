@@ -48,7 +48,7 @@ function DelGroupModal({ setDelGroupModalOpen, group, sendNoti }) {
 
                 <form>
                     <div className="title">
-                        <h1>Are you sure you want to delete this group PERMANENTLY?</h1>
+                        <h1>Are you sure you want to delete <span style={{color: 'white'}}>{group.group_name}</span> PERMANENTLY?</h1>
                     </div>
 
                     <div className="body">
@@ -57,12 +57,12 @@ function DelGroupModal({ setDelGroupModalOpen, group, sendNoti }) {
                         </ul>
                     </div>
                     <div className="footerDis">
-                        <label htmlFor="groupName">Enter Group Name to Confirm Delete: {group.group_name})</label>
+                        <label htmlFor="groupName">Enter Group Name</label>
                         <input type="text" placeholder={group.group_name} name="groupName" value={groupName} onChange={handleInputChange} />
-                        {groupName!==group.group_name && <p>Group name does not match</p>}
+                        {groupName!==group.group_name || groupName === "" && <p>Group name does not match</p>}
                         <div className="footer">
-                            {groupName===group.group_name && <button onClick={confirmDelete}>Confirm Delete</button>}
-                            <button onClick={() => setDelGroupModalOpen(false)} className="cxlBtn">Cancel</button>
+                            <button onClick={() => setDelGroupModalOpen(false)} className={groupName===group.group_name ? "cancelDeleteBtn" : "submitBtn"}>Cancel</button>
+                            {groupName===group.group_name && <button className="confirmDeleteBtn" onClick={confirmDelete}>Confirm Delete</button>}
                         </div>
                     </div>
                 </form>
