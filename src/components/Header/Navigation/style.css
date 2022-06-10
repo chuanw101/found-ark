@@ -29,3 +29,12 @@
 .navItem:hover .notifications {
    display: flex;
 }
+
+/* tablets */
+@media screen and (max-width: 768px) {
+   #notIcon{
+      position: absolute;
+      top: 30px;
+      right: 0px;
+   }
+}

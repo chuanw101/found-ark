@@ -50,7 +50,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-width: 500px;
+    min-width: 500px !important;
     max-width: 100%;
     padding: var(--medium);
     border: 1px solid var(--accent);
@@ -242,7 +242,6 @@ h1 {
     align-items: center;
     background: var(--dark75);
     border-radius: var(--tiny);
-    height: 150px;
     width: 100%;
     padding: var(--medium);
     margin-bottom: var(--medium);
@@ -302,10 +301,78 @@ h1 {
 }
 
 /* small screens */
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+    .tabHeader {
+        padding: var(--small);
+        height: fit-content;
+        margin-bottom: var(--medium);
+        align-items: flex-start;
+    }
+    .tabLabel {
+        padding: 10px var(--small);
+        margin: 0px 0px var(--tiny) 0px;
+    }
+    .tabLabel:last-of-type {
+        margin: 0px;
+    }
+    .tabDivider {
+        margin: 0px var(--tiny);
+    }
+}
 
 /* tablets */
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+    form {
+        min-width: 100% !important;
+    }
+
+    .page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: var(--medium) var(--small);
+        margin: 0px 0px auto 0px;
+    }
+
+    .darkContainerWrapped {
+        padding: var(--small);
+        width: 100%;
+    }
+    .darkContainer{
+        padding: var(--small);
+    }
+    .tabHeader {
+        padding: var(--small);
+        height: fit-content;
+        margin-bottom: var(--medium);
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .tabLabel {
+        padding: 10px var(--small);
+        margin: 0px;
+    }
+    .tabLabel:last-of-type {
+        margin: 0px;
+    }
+    .tabDivider {
+        margin: 0px var(--tiny);
+    }
+    .tabs {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0 0 var(--small) 0;
+    }
+    .filterSearch{
+        margin: 0;
+    }
+
+}
+
 
 /* phones */
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+
+}

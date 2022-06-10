@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Profile from './components/Pages/Profile';
 import Login from './components/Pages/Login';
 import SignUp from './components/Pages/SignUp';
+import FAQ from './components/Pages/FAQ'
+import Error from './components/Pages/Error';
 
 import {
     Routes,
@@ -107,6 +109,10 @@ function App() {
             setBackground('bgSky');
         } else if (path === '/profile') {
             setBackground('bgGiant');
+        } else if(path === '/404'){
+            setBackground('bgGiant')
+        } else if(path === '/FAQ'){
+            setBackground('bgSky')
         };
     };
 
@@ -211,6 +217,8 @@ function App() {
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} loginError={loginError} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} nameTaken={nameTaken} />} />
                 <Route path="profile" element={<Profile user={user} />} />
+                <Route path="faq" element={<FAQ/>}/>
+                <Route path="404" element={<Error/>}/>
             </Routes>
             <Footer />
         </div>

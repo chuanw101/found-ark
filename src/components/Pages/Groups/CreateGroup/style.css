@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px;
     padding: 0px;
 }
 
@@ -81,3 +82,29 @@
     justify-self: flex-end;
     margin-top: var(--small);
 }
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {
+
+}
+
+    /* tablets */
+    @media screen and (max-width: 768px) {}
+
+    /* phones */
+    @media screen and (max-width: 480px) {
+        .createGroup {
+            flex-direction: column;
+        }
+
+        .createGroupColumn {
+            width: 100%;
+        }
+
+        .createGroupColumn:last-of-type {
+            padding-top: 0;
+        }
+    }

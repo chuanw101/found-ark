@@ -210,8 +210,8 @@ function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar, a
                 </div> : applicant ? <div className="applicantContainer">
 
                     <div className="appUser">
-                        <h3 className="appUsername">{char.owner.user_name}</h3>
-                        <p className="appIntro">{char.owner.introduction}</p>
+                        <h3 className="appUsername">{char?.owner?.user_name}</h3>
+                        <p className="appIntro">{char?.owner?.introduction}</p>
                     </div>
 
                     <div className="appBtns">
@@ -222,8 +222,8 @@ function CharacterDetails({ char, editChar, setCharModalOpen, setSelectedChar, a
                 </div> : <div className="applicantContainer">
 
                     <div className="appUser invisibleHover">
-                        <h3 className="appUsername">{char.owner.user_name}</h3>
-                        <p className="appIntro">{char.owner.introduction}</p>
+                        <h3 className="appUsername">{char?.owner?.user_name}</h3>
+                        <p className="appIntro">{char?.owner?.introduction}</p>
                     </div>
 
                 </div>}

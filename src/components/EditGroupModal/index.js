@@ -189,7 +189,7 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                     <h1>Edit Group Information</h1>
                 </div>
 
-                <form method="post" className="createGroup">
+                <form method="post">
 
 
                     <label htmlFor="groupName">Group Name</label>

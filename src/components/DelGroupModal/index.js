@@ -46,7 +46,7 @@ function DelGroupModal({ setDelGroupModalOpen, group, sendNoti }) {
         <div className="modalBackground" onClick={() => setDelGroupModalOpen(false)}>
             <div className="modalContainer" onClick={e => e.stopPropagation()}>
 
-                <form>
+                <form className="deleteGroupModal">
                     <div className="title">
                         <h1>Are you sure you want to delete <span style={{color: 'white'}}>{group.group_name}</span> PERMANENTLY?</h1>
                     </div>

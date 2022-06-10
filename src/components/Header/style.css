@@ -10,7 +10,7 @@ header {
 }
 
 .siteTitle h1 {
-    margin: 0px;
+   margin: 0px;
 }
 
 .lostArkIcon {
@@ -18,3 +18,26 @@ header {
    object-fit: contain;
    margin-right: var(--small);
 }
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+   header {
+      padding: var(--medium) var(--medium) var(--small) var(--medium);
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .siteTitle {
+      margin-bottom: var(--medium);
+      margin-right: var(--small);
+   }
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}
