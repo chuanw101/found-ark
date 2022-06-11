@@ -320,13 +320,15 @@
 }
 
 /* large screens */
-@media screen and (max-width: 1200px) {}
+@media screen and (min-width: 1200px) {
+    .charCard {
+        width: 50%;
+        max-width: 100%;
+    }
+}
 
 /* small screens */
-@media screen and (max-width: 1024px) {}
-
-/* tablets */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .charCard {
         display: flex;
         flex-direction: column;
@@ -346,7 +348,6 @@
     .collapsed {
         max-height: 300px;
     }
-
     .charHeadline {
         display: flex;
         justify-content: space-between;
@@ -407,6 +408,11 @@
     .charStats {
         padding: 0px;
     }
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
 }
 
 /* phones */

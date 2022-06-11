@@ -5,6 +5,7 @@
 }
 
 .autoFillForm {
+    width: 100%;
     min-width: 100%;
     display: flex;
     align-items: center;
@@ -20,7 +21,6 @@
 .charDisplay {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .leaderboardLink {
@@ -37,10 +37,26 @@
 }
 
 .characterPreview {
-    max-width: 100%;
+    width: 50%;
     margin-left: var(--medium);
 }
 
 .charSpecsCont {
     width: 100%;
 }
+
+/* large screens */
+@media screen and (max-width: 1200px) {
+ 
+}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

@@ -210,6 +210,7 @@ function App() {
         <div className={"App " + background}>
             <Header user={user} logout={logout} notis={notis} setNotis={setNotis}/>
             <Routes>
+                <Route path="*" element={<Error/>}/>
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
@@ -218,7 +219,6 @@ function App() {
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} nameTaken={nameTaken} />} />
                 <Route path="profile" element={<Profile user={user} />} />
                 <Route path="faq" element={<FAQ/>}/>
-                <Route path="404" element={<Error/>}/>
             </Routes>
             <Footer />
         </div>

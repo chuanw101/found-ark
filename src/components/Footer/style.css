@@ -6,3 +6,7 @@ footer {
    padding: var(--large);
    margin: 0px auto;
 }
+
+footer p:hover{
+   cursor: pointer;
+}

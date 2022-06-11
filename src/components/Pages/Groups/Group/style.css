@@ -100,7 +100,6 @@
 }
 
 .groupMemberCard {
-    width: 50%;
     padding-right: var(--medium);
     margin-bottom: var(--medium);
 }
@@ -151,6 +150,10 @@
     color: var(--light);
 }
 
+#kickMemberBtn{
+    margin-top: var(--tiny);
+}
+
 /* x-large screens */
 @media screen and (max-width: 1460px) {
     .groupBody {
@@ -161,13 +164,11 @@
     }
 }
 
-/* large screens */
-@media screen and (max-width: 1200px) {
-
+@media screen and (min-width: 1400px) {
+    .groupMemberCard {
+        width: 50%;
+    }
 }
-
-/* small screens */
-@media screen and (max-width: 1024px) {}
 
 /* tablets */
 @media screen and (max-width: 768px) {
@@ -216,11 +217,5 @@
         margin-bottom: var(--tiny);
         width: 100%;
     }
-}
-
-
-/* phones */
-@media screen and (max-width: 480px) {
-
 }
 

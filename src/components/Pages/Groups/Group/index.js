@@ -357,8 +357,8 @@ function Group({ user, sendNoti, setBackground }) {
                         <div className="allCharacters">
                             {groupMembers?.map(char =>
                                 <div key={char.id} className={isGroupMember ? "wrapCharCard groupMemberCard" : "groupMemberCard"}>
-                                    {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
-                                    <CharacterDetails char={char} />
+                                    <CharacterDetails char={char}  />
+                                        {group?.creator?.owner_id === user?.id && char?.owner_id != user?.id && <button id="kickMemberBtn" value={char?.id} onClick={decline}>Kick {char?.char_name}</button>}
                                 </div>
                             )}
 
