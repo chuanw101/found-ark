@@ -15,6 +15,8 @@
   - [Deployed Link](#deployed-link)
   - [Screenshots](#screenshots)
   - [Installation](#installation)
+  - [Learn More about React Apps](#learn-more-about-react-apps)
+  - [Reach out to us if you have any questions:](#reach-out-to-us-if-you-have-any-questions)
 
 ## Technologies
 
@@ -33,7 +35,7 @@
 
 ## Description
 
-A web application that ...
+Found Ark is a web application that users can use to find and create groups for raids on the game Lost Ark. We make it easier for players to develop consistent game play groups and discover new ones to join without having to rely on a giant anonymous server where they may never get picked up. Users can import their gameplay characters and use their stats to apply for groups by signing up for Found Ark. Users can also create groups if they don’t find the one the raid they are looking for. Group leaders can reject or accept applications and kick group members out to construct their perfect group! Have fun raiding and farming!
 
 ## Contributors
 
@@ -41,7 +43,7 @@ A web application that ...
 <br>
 [Chuan Wang - Git Administrator](https://github.com/chuanw101)
 <br>
-[Hannah Callison - Team Member](https://github.com/hannahcallison)
+[Hannah Callison - Project Team Member](https://github.com/hannahcallison)
 
 ## User Story
 
@@ -105,3 +107,12 @@ Edit Profile             |  Group View if user does not belong
 ## Installation
 
 The deployed link is active and interactive. If a user wants to run this program on their local host, they need to run the command ``` npm i ``` in their integrated terminal. When the installation is complete they can run the command ``` npm run start ``` to open and run the site in their local host.
+
+## Learn More about React Apps
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+<br>
+
+## Reach out to us if you have any questions:
+ [foundark.groupfinder@gmail.com](mailto:foundark.groupfinder@gmail.com)
