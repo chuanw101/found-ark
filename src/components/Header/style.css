@@ -1,22 +1,22 @@
 header {
-   display: flex;
-   justify-content: space-between;
-   align-items: flex-start;
-   padding: var(--large) var(--large) var(--medium) var(--large);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--large) var(--large) var(--medium) var(--large);
 }
 
 .siteTitle {
-   display: flex;
+    display: flex;
 }
 
 .siteTitle h1 {
-   margin: 0px;
+    margin: 0px;
 }
 
 .lostArkIcon {
-   width: 50px;
-   object-fit: contain;
-   margin-right: var(--small);
+    width: 50px;
+    object-fit: contain;
+    margin-right: var(--small);
 }
 
 /* large screens */
@@ -27,17 +27,26 @@ header {
 
 /* tablets */
 @media screen and (max-width: 768px) {
-   header {
-      padding: var(--medium) var(--medium) var(--small) var(--medium);
-      flex-direction: column;
-      align-items: center;
-   }
 
-   .siteTitle {
-      margin-bottom: var(--medium);
-      margin-right: var(--small);
-   }
+    .lostArkIcon {
+        width: 40px;
+        object-fit: contain;
+        margin-right: var(--small);
+    }
+
+    header {
+        padding: var(--medium) var(--medium) var(--medium) var(--medium);
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
 
 /* phones */
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+
+    .mobileJustifyLogIn {
+        margin: 0px auto 0px 0px
+    }
+    
+}

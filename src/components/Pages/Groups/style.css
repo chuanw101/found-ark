@@ -1,4 +1,4 @@
-.searchTagsArea{
+.searchTagsArea {
     display: flex;
     flex-direction: column;
 }
@@ -18,7 +18,7 @@
     user-select: none;
     line-height: 1;
     padding: 5px 10px;
-    margin: 5px 5px 5px 0px;
+    margin: 5px 5px 0px 0px;
 }
 
 .savedTagsActive {
@@ -44,7 +44,7 @@
     background-color: var(--accent75);
 }
 
-.bROWDV input{
+.bROWDV input {
     height: 30px;
 }
 
@@ -56,14 +56,19 @@
 
 /* tablets */
 @media screen and (max-width: 768px) {
-    .savedTags{
+
+    .searchTagsArea {
+        width: 350px;
+        max-width: 100%;
+    }
+
+    .savedTags {
         justify-content: center;
-        }
+    }
+
 }
 
 /* phones */
 @media screen and (max-width: 480px) {
-    .searchTagsArea{
-        width: 100%;
-    }
+    
 }

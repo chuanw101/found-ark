@@ -87,7 +87,7 @@ function MyGroups({ user, activeTags }) {
                 return (
                     <React.Fragment key={char.id}>
                         <h2 className="myGroupsCharName" >{char.char_name}'s Groups</h2>
-                        {char?.joined?.length ? (<></>) : (<><p>This character doesn't belong to any groups yet!</p></>)}
+                        {char?.joined?.length ? (<></>) : (<p className="noGroupsMsg">This character doesn't belong to any groups yet!</p>)}
                         {char?.joined?.filter(group => group.show).map(group => {
                             return (
 

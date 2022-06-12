@@ -87,6 +87,7 @@ input {
     border: 1px solid #ccc;
     border-radius: var(--tiny);
     box-sizing: border-box;
+    color: var(--dark);
 }
 
 select {
@@ -98,6 +99,7 @@ select {
     border: 1px solid #ccc;
     border-radius: var(--tiny);
     box-sizing: border-box;
+    color: var(--dark);
 }
 
 .userInput {
@@ -128,6 +130,8 @@ input:valid~span:after {
 }
 
 button {
+    display: flex;
+    align-items: center;
     border-radius: var(--tiny);
     width: 150px;
     min-width: fit-content;
@@ -145,6 +149,7 @@ button {
     transition: 500ms;
     font-weight: 700;
     padding: 9px 12px;
+    color: var(--dark);
 }
 
 .submitBtn {
@@ -254,6 +259,13 @@ h1 {
     margin: 0px 0px 0px auto;
 }
 
+.adjustedTabs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0px 0px 0px auto;
+}
+
 .tab {
     display: none;
 }
@@ -289,6 +301,7 @@ h1 {
 
 /* large screens */
 @media screen and (max-width: 1200px) {
+    
     .page {
         display: flex;
         flex-direction: column;
@@ -298,20 +311,39 @@ h1 {
         padding: 0px var(--large);
         margin: 0;
     }
-}
-
-/* small screens */
-@media screen and (max-width: 1024px) {
-    .tabHeader {
-        padding: var(--small);
-        height: fit-content;
-        margin-bottom: var(--medium);
-        align-items: flex-start;
-    }
 
     .tabLabel {
         padding: 10px var(--small);
         margin: 0px 0px var(--tiny) 0px;
+    }
+
+    .tabLabel:last-of-type {
+        margin: 0px;
+    }
+
+}
+
+/* small screens */
+@media screen and (max-width: 1024px) {
+
+    .tabHeader {
+        padding: var(--small);
+        height: fit-content;
+        margin-bottom: var(--medium);
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .tabs {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0 0 var(--small) 0;
+    }
+
+    .tabLabel {
+        padding: 10px var(--small);
+        margin: 0px;
     }
 
     .tabLabel:last-of-type {
@@ -325,6 +357,7 @@ h1 {
 
 /* tablets */
 @media screen and (max-width: 768px) {
+
     .App {
         font-size: 14px;
     }
@@ -338,7 +371,7 @@ h1 {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        padding: var(--medium) var(--small);
+        padding: 0px var(--small);
         margin: 0px 0px auto 0px;
     }
 
@@ -352,11 +385,7 @@ h1 {
     }
 
     .tabHeader {
-        padding: var(--small);
-        height: fit-content;
-        margin-bottom: var(--medium);
-        flex-direction: column-reverse;
-        align-items: center;
+        margin-bottom: var(--small);
     }
 
     .tabLabel {
@@ -372,18 +401,78 @@ h1 {
         margin: 0px var(--tiny);
     }
 
-    .tabs {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin: 0 0 var(--small) 0;
-    }
-
     h1 {
         margin-bottom: var(--small);
     }
+
+    .invisibleHover:hover {
+        opacity: 0;
+    }
+    
+    .validity {
+        position: absolute;
+        transform: translate(65px, -18px);
+    }
+    
+    .passValid {
+        position: absolute;
+        transform: translate(58px, -18px);
+    }
+    
+    .tagValid {
+        position: absolute;
+        transform: translate(75px, -18px);
+    }
+
 }
 
 
 /* phones */
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+
+    .page {
+        padding: 0px var(--small);
+    }
+
+    .darkContainerWrapped {
+        padding: var(--small);
+    }
+
+    .darkContainer {
+        padding: var(--small);
+    }
+
+    .tabHeader {
+        padding: var(--small);
+        margin-bottom: var(--small);
+    }
+
+    .tabs {
+        justify-content: space-evenly;
+        margin: 0 0 var(--small) 0;
+        width: 100%;
+    }
+
+    .adjustedTabs {
+        justify-content: space-evenly;
+        margin: 0 0 0 0;
+        width: 100%;
+    }
+
+    .tabLabel {
+        padding: 5px 10px;
+    }
+
+    .inputErr {
+        font-size: 0.75em;
+        margin-bottom: var(--tiny);
+    }
+
+    button {
+        width: 120px;
+        min-width: fit-content;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+}

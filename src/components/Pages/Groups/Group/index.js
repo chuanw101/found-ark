@@ -181,13 +181,17 @@ function Group({ user, sendNoti, setBackground }) {
                         )
                     }
                 }
+
                 // user is creator of this group
-                return (
-                    <div className="applicationSection">
-                        <h2>Applicants</h2>
-                        {appsEL}
-                    </div>
-                )
+                if (appsEL.length > 0) {
+                    return (
+                        <div className="applicationSection">
+                            <h2>Applicants</h2>
+                            {appsEL}
+                        </div>
+                    )
+                }
+            
             } else if (group?.member_char.some(char => {
                 if (char.owner_id === user.id) {
                     targetCharId = char.id;
@@ -304,11 +308,11 @@ function Group({ user, sendNoti, setBackground }) {
 
                     <div className="groupDetails">
                         <h4>Created by</h4>
-                        <p>{group?.creator.char_name} ({group?.creator.owner.user_name})</p>
+                        <p>{group?.creator.char_name}</p>
+                        <p>({group?.creator.owner.user_name})</p>
 
                         <h4>Region</h4>
                         <p>{group?.region}</p>
-
                     </div>
 
                 </div>

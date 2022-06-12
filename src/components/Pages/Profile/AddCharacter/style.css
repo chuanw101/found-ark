@@ -21,24 +21,26 @@
 .charDisplay {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .leaderboardLink {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     height: 228px;
     padding: var(--small);
     margin-left: var(--medium);
 }
 
 .orDivider {
-    line-height: 2;
+    line-height: 2.5;
 }
 
 .characterPreview {
-    width: 50%;
-    margin-left: var(--medium);
+    width: 100%;
+    padding-left: var(--medium);
 }
 
 .charSpecsCont {
@@ -46,15 +48,69 @@
 }
 
 /* large screens */
-@media screen and (max-width: 1200px) {
- 
+@media screen and (max-width: 1300px) {
+
+    .mobileExpand {
+        width: 100%;
+    }
+
+    .addCharacterSection {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .leaderboardLink {
+        margin-left: 0;
+    }
+
+    .characterPreview {
+        padding-left: 0;
+        margin-bottom: var(--medium);
+    }
+
+    .addCharacterForm {
+        display: flex;
+        width: 100%;
+    }
+
+    .autoFillForm {
+        height: 100%;
+        margin-right: var(--small);
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+    
+    .manualForm {
+        margin-top: 0;
+        margin-left: var(--small);
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+
 }
 
 /* small screens */
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+
+    .addCharacterForm {
+        flex-direction: column;
+    }
+
+    .autoFillForm {
+        margin-right: 0;
+    }
+    
+    .manualForm {
+        margin-top: var(--medium);
+        margin-left: 0;
+    }
+
+}
 
 /* tablets */
 @media screen and (max-width: 768px) {
+
+
 
 }
 

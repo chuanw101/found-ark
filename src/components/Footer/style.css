@@ -10,3 +10,19 @@ footer {
 footer p:hover{
    cursor: pointer;
 }
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    footer {
+        padding: var(--medium);
+     }
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

@@ -1,19 +1,21 @@
 .modalBackground {
     width: 100vw;
-    height: 101vh;
+    height: 100vh;
     background-color: var(--opdarkgray);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     position: fixed;
+    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -150px;
     animation: fade-in 0.5s;
     z-index: 99;
 }
 
 .modalContainer {
+    display: flex;
+    justify-content: center;
     height: fit-content;
     max-height: 90vh;
     max-width: 90vw;
@@ -22,7 +24,7 @@
     background-color: var(--dark50);
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    padding: var(--medium);
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -39,11 +41,11 @@
     width: 100%;
 }
 
-.title  {
+.title {
     text-align: center;
 }
 
-.footerDis{
+.footerDis {
     display: flex;
     flex-direction: column;
 }
@@ -57,7 +59,7 @@
     text-align: center;
 }
 
-.body a{
+.body a {
     color: var(--accent)
 }
 
@@ -73,7 +75,6 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    min-width: 800px;
     max-width: 1800px;
 }
 
@@ -114,21 +115,26 @@
     background: var(--red);
 }
 
-.deleteGroupModal{
+.deleteGroupModal {
     width: 500px;
 }
 
 /* large screens */
-@media screen and (max-width: 1200px) {
-
-}
+@media screen and (max-width: 1200px) {}
 
 /* small screens */
-@media screen and (max-width: 1024px) {
-}
+@media screen and (max-width: 1024px) {}
 
 /* tablets */
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+
+    .modalContainer {
+        max-height: 95vh;
+        width: 100%;
+        padding: var(--small);
+    }
+
+}
 
 /* phones */
 @media screen and (max-width: 480px) {}

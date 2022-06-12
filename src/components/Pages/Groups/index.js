@@ -243,7 +243,7 @@ function Groups({ user }) {
                 </div>
 
                 {user?.logged_in ? (
-                    <div className="tabs" onClick={handleTabSelect}>
+                    <div className={currentTab === 'CreateGroup' ? "adjustedTabs" : "tabs"} onClick={handleTabSelect}>
 
                         <input type="radio" id="allGroupsTab" name="groupTabs" value="allGroupsTab" defaultChecked className="tab"></input>
                         <label htmlFor="allGroupsTab" className={currentTab === 'AllGroups' ? "tabLabel activeTab" : "tabLabel"}>All Groups</label>

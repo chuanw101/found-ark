@@ -6,7 +6,7 @@
     border-radius: var(--tiny);
     height: 100%;
     width: 100%;
-    min-width: 600px;
+    /* min-width: 600px; */
     max-width: 100%;
     max-height: 10000px;
     transition: all 0.5s ease;
@@ -134,7 +134,7 @@
     width: 60px;
     height: 60px;
     padding: var(--tiny);
-    margin: 0px var(--small) var(--small) 0px;
+    margin-bottom: var(--small);
 }
 
 .charGear p {
@@ -320,15 +320,27 @@
 }
 
 /* large screens */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1460px) {
+
     .charCard {
         width: 50%;
         max-width: 100%;
     }
+
+    .characterPreview .charCard {
+        width: 100%;
+    }
+
 }
 
 /* small screens */
 @media screen and (max-width: 1024px) {
+
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
     .charCard {
         display: flex;
         flex-direction: column;
@@ -348,6 +360,7 @@
     .collapsed {
         max-height: 300px;
     }
+
     .charHeadline {
         display: flex;
         justify-content: space-between;
@@ -376,7 +389,7 @@
     }
 
     .charInfo h3 {
-        margin-bottom: var(--tiny)
+        margin-bottom: var(--small)
     }
 
     .appBtns {
@@ -389,8 +402,22 @@
         margin-bottom: var(--small);
     }
 
+    .editCharacterContainer {
+        position: absolute;
+        right: 45px;
+    }
+
+    .updateCharBtn {
+        width: 35px;
+        margin: auto var(--small);
+    }
+
     .fullCharInfo {
         padding: 0px var(--small) var(--tiny) var(--small);
+    }
+
+    .charStats {
+        padding: var(--small) 0;
     }
 
     .charStat {
@@ -398,22 +425,55 @@
     }
 
     .charGears {
-        padding-top: var(--tiny);
+        padding-top: var(--small);
     }
 
     .charGear {
         padding: var(--small) var(--tiny);
     }
 
-    .charStats {
-        padding: 0px;
+    .charGear img {
+        width: 50px;
+        height: 50px;
+        padding: var(--tiny);
     }
-}
-
-/* tablets */
-@media screen and (max-width: 768px) {
 
 }
 
 /* phones */
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+
+    .editCharacterContainer {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        align-self: flex-end;
+        height: fit-content;
+    }
+
+    .updateCharBtn {
+        width: 30px;
+        margin: var(--small) 0;
+    }
+
+    .charStats {
+        justify-content: space-evenly;
+    }
+    
+    .charStat {
+        width: 50%;
+        padding: var(--small);
+    }
+    
+    .charGears {
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: var(--medium);
+    }
+    
+    .charGear {
+        width: 100%;
+        padding: var(--medium) var(--small) 0 var(--small);
+    }
+
+}

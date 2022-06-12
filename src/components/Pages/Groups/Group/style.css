@@ -39,11 +39,13 @@
 }
 
 .groupDetails p {
+    text-align: right;
     margin-bottom: var(--small);
 }
 
+.groupDetails p:first-of-type,
 .groupDetails p:last-of-type {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .groupBody {
@@ -52,7 +54,7 @@
     width: 100%;
 }
 
-.groupHeadline{
+.groupHeadline {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -104,7 +106,7 @@
     margin-bottom: var(--medium);
 }
 
-.wrapCharCard{
+.wrapCharCard {
     min-width: fit-content;
 }
 
@@ -125,7 +127,7 @@
     margin: var(--tiny);
 }
 
-.defaultSpan{
+.defaultSpan {
     margin-left: var(--tiny);
 }
 
@@ -150,55 +152,84 @@
     color: var(--light);
 }
 
-#kickMemberBtn{
+#kickMemberBtn {
     margin-top: var(--tiny);
 }
 
 /* x-large screens */
 @media screen and (max-width: 1460px) {
+
     .groupBody {
         flex-direction: column-reverse;
     }
-    .discordWidget{
+
+    .discordWidget {
         max-width: none;
     }
+
 }
 
 @media screen and (min-width: 1400px) {
+
     .groupMemberCard {
         width: 50%;
     }
+
 }
 
 /* tablets */
 @media screen and (max-width: 768px) {
-    .deleteGroupBtn{
-        right: 30px;
-    }
-    .groupMemberCard {
-        width: 100%;
-    }
-    .groupBanner {
-        padding: var(--small);
-    }
+
     .groupContainer {
         padding: var(--small) 0px 0px var(--small);
     }
+
+    .groupBanner {
+        padding: var(--small);
+        margin-bottom: var(--small);
+    }
+
+    .groupOwnerBtns {
+        margin-top: var(--small);
+    }
+
+    .deleteGroupBtn {
+        right: 10px;
+    }
+
+    .groupMemberCard {
+        width: 100%;
+    }
+
     .applicationSection {
         margin-bottom: var(--small);
+        margin-top: var(--small);
         margin-right: var(--small);
     }
+
+    .groupMemberSection {
+        margin-top: var(--small);
+    }
+
     .discordWidget {
         margin-right: var(--small);
         margin-bottom: var(--small);
     }
+
     .groupMemberCard {
         padding-right: var(--small);
         margin-bottom: var(--small);
     }
+
     .groupMemberSection h2 {
         margin-bottom: var(--tiny);
     }
+
+    .groupDetails {
+        width: 100px;
+        min-width: fit-content;
+    }
+
 }
 
 @media screen and (max-width: 720px) {
@@ -207,15 +238,16 @@
         align-items: flex-start;
         width: 100%;
     }
-    .deleteGroupBtn{
-        right:0;
+
+    .deleteGroupBtn {
+        right: 0;
         position: static;
         margin-bottom: 0;
     }
-    .groupOwnerBtns button{
+
+    .groupOwnerBtns button {
         margin-right: auto;
         margin-bottom: var(--tiny);
         width: 100%;
     }
 }
-

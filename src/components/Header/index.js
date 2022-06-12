@@ -8,7 +8,7 @@ function Header({ user, logout, notis, setNotis }) {
 
         <header>
 
-            <div className="siteTitle">
+            <div className={user?.logged_in ? "siteTitle mobileJustifyLogIn" : "siteTitle"}>
 
                 <img src="/assets/icons/lost-ark-icon.png" alt="lost ark logo" className="lostArkIcon"></img>
                 <a href="/"><h1>Found Ark</h1></a>

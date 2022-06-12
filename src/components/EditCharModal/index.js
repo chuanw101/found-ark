@@ -100,7 +100,7 @@ function EditCharModal({ setOpenModal, char }) {
     return (
 
         <div className="modalBackground" onClick={() => setOpenModal(false)}>
-            
+
             <div className="modalContainer" onClick={e => e.stopPropagation()}>
 
                 <div className="title">
@@ -171,9 +171,10 @@ function EditCharModal({ setOpenModal, char }) {
 
                         {!jsonData && searchStatus &&
                             <div className="leaderboardLink">
-                                <h3>Import Character</h3>
-                                <p>Link your account to import your character info, stats, and gear.</p>
-                                <p>Then come back and try searching for your name again.</p>
+                                <a href={`https://lostark.meta-game.gg/armory?character=${charName}`} target="_blank" rel="noreferrer">
+                                    <p>Follow these instructions to</p>
+                                    <h3>Import Character from {window.innerWidth < 480 && <br></br>} Lost Ark Meta</h3>
+                                </a>
                                 <p className="orDivider">OR</p>
                                 <p>Enter your character information manually.</p>
                             </div>

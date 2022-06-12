@@ -61,25 +61,23 @@ function EditInfo({ user }) {
     }
 
     return (
-        <div className="page">
-            <div className='darkContainerWrapped'>
-                <h1>Edit Profile</h1>
-                <form method="post">
-                    <label htmlFor="region"><b>Region</b></label>
-                    <select name="region" onChange={handleInputChange} value={region}>
-                        <option value="NAE">NAE</option>
-                        <option value="NAW">NAW</option>
-                        <option value="EUW">EUW</option>
-                        <option value="EUC">EUC</option>
-                        <option value="SA">SA</option>
-                    </select>
+        <div className='darkContainerWrapped'>
+            <h1>Edit Profile</h1>
+            <form method="post">
+                <label htmlFor="region"><b>Region</b></label>
+                <select name="region" onChange={handleInputChange} value={region}>
+                    <option value="NAE">NAE</option>
+                    <option value="NAW">NAW</option>
+                    <option value="EUW">EUW</option>
+                    <option value="EUC">EUC</option>
+                    <option value="SA">SA</option>
+                </select>
 
-                    <label className="userInput" htmlFor="introduction"><b>Introduction</b></label>
-                    <input type="text" placeholder="Introduction..." name="introduction" value={introduction} onChange={handleInputChange} />
+                <label className="userInput" htmlFor="introduction"><b>Introduction</b></label>
+                <input type="text" placeholder="Introduction..." name="introduction" value={introduction} onChange={handleInputChange} />
 
-                    <button type="submit" className="submitBtn" onClick={submitNewProfInfo}>Edit</button>
-                </form>
-            </div>
+                <button type="submit" className="submitBtn" onClick={submitNewProfInfo}>Edit</button>
+            </form>
         </div>
 
     )
