@@ -37,6 +37,7 @@ function Notifications(props, {handleNotiOpen}) {
     }
 
     const handleNotiClick = (e) => {
+        e.stopPropagation();
         const todo = e.target.getAttribute('todo');
         console.log(todo)
         let index;
@@ -85,11 +86,11 @@ function Notifications(props, {handleNotiOpen}) {
 
     return (
 
-        <ul className="notifications">
+        <ul className="notifications" onClick={handleNotiOpen}>
             {window.innerWidth < 769 &&
                 <li className="mobileNotiHeader">
                     <h2>Notifications</h2>
-                    <span className="closeNotiWindow" onClick={handleNotiOpen}>X</span>
+                    <span className="closeNotiWindow">X</span>
                 </li>
             }
 
