@@ -1,3 +1,7 @@
+body {
+    background: var(--dark);
+}
+
 .App {
     display: flex;
     flex-direction: column;
@@ -306,7 +310,6 @@ h1 {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         width: 100%;
         padding: 0px var(--large);
         margin: 0;
