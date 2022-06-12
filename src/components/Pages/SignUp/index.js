@@ -38,7 +38,7 @@ function SignUp({ handleSignupSubmit, nameTaken }) {
     return (
         <div className="page">
             <div className="darkContainerWrapped">
-                <h1 className="formTitle">Sign Up</h1>
+                <h1 className="formTitle">Create Account</h1>
                 <div className={nameTaken ? "signupErr" : "invisible signupErr"}>
                     <p>Username Taken!</p>
                 </div>

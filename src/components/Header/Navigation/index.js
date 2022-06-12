@@ -44,7 +44,7 @@ function Navigation({ user, logout, notis, setNotis }) {
                     </li>
 
                     <li className="navItem">
-                        <Link to="signup">Sign Up</Link>
+                        <Link to="signup">Create Account</Link>
                     </li>
                 </>
             )}

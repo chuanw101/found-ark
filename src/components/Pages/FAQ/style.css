@@ -18,3 +18,11 @@
     border-radius: var(--tiny);
     padding: var(--medium);
 }
+
+.FAQ .faqLink {
+    color: var(--accent);
+}
+
+.emailLink {
+    font-weight: bold;
+}
