@@ -5,7 +5,9 @@ import './style.css';
 
 function Navigation({ user, logout, notis, setNotis }) {
 
+    const [windowWidth, setDimensions] = useState(window.innerWidth);
     const [mobileNotiOpen, setMobileNotiOpen] = useState(true);
+
 
     let count = 0;
     for (const n of notis) {
@@ -16,8 +18,8 @@ function Navigation({ user, logout, notis, setNotis }) {
 
     const handleNotiOpen = () => {
 
-        if (window.innerWidth > 768) {
-            return;
+        if (windowWidth > 768) {
+            setMobileNotiOpen(true);
         } else if (mobileNotiOpen) {
             setMobileNotiOpen(false);
             document.body.style.overflow = "auto";
@@ -29,8 +31,33 @@ function Navigation({ user, logout, notis, setNotis }) {
     }
 
     useEffect(() => {
-        handleNotiOpen();
-    }, [window.innerWidth]);
+
+        if (window.innerWidth > 768) {
+            setMobileNotiOpen(true);
+        } else if (window.innerWidth < 769) {
+            setMobileNotiOpen(false);
+        };
+
+        function handleResize() {
+
+            setDimensions(window.innerWidth);
+
+            if (window.innerWidth > 768) {
+                setMobileNotiOpen(true);
+            } else if (window.innerWidth < 769) {
+                setMobileNotiOpen(false);
+            };
+
+        };
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        };
+
+            // eslint-disable-next-line
+        }, []);
 
     return (
 

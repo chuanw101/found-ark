@@ -92,6 +92,13 @@
 /* small screens */
 @media screen and (max-width: 1024px) {
 
+
+
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
     .addCharacterForm {
         flex-direction: column;
     }
@@ -104,13 +111,6 @@
         margin-top: var(--medium);
         margin-left: 0;
     }
-
-}
-
-/* tablets */
-@media screen and (max-width: 768px) {
-
-
 
 }
 
