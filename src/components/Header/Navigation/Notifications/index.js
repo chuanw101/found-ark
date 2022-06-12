@@ -37,7 +37,7 @@ function Notifications(props, {handleNotiOpen}) {
     }
 
     const handleNotiClick = (e) => {
-        e.stopPropagation();
+        console.log(e.target)
         const todo = e.target.getAttribute('todo');
         console.log(todo)
         let index;
@@ -73,8 +73,8 @@ function Notifications(props, {handleNotiOpen}) {
         if (todo !== 'noNav') {
             let curUrl = window.location.href;
             curUrl = curUrl.split('/')
-            console.log(curUrl)
-            if (curUrl[curUrl.length - 2] === 'group' && curUrl[curUrl.length - 1] === props.notis[index].group_id) {
+            if (curUrl[curUrl.length - 2] === 'group' && curUrl[curUrl.length - 1] === String(props.notis[index].group_id)) {
+                console.log("reload")
                 window.location.reload(false);
             } else {
                 navigate(`/group/${props.notis[index].group_id}`)
@@ -104,15 +104,15 @@ function Notifications(props, {handleNotiOpen}) {
                             <>
                                 {groupName ? (
                                     <div className="read">
-                                        <div className="notiBody">
-                                            <p>{message}</p>
+                                        <div className="notiBody" todo='markread'>
+                                            <p todo='nav'>{message}</p>
                                             <p className="groupName" todo='nav'>{groupName}</p>
                                         </div>
                                         <span className="pointer" todo='delete'>X</span>
                                     </div>
                                 ) : (
                                     <div className="read" todo='noNav'>
-                                        <p>{message}</p>
+                                        <p todo='noNav'>{message}</p>
                                         <span className="pointer" todo='delete'>X</span>
                                     </div>
                                 )}
@@ -121,15 +121,15 @@ function Notifications(props, {handleNotiOpen}) {
                             <>
                                 {groupName ? (
                                     <div className="unread" todo='markread'>
-                                        <div className="notiBody">
-                                            <p>{message}</p>
+                                        <div className="notiBody" todo='markread'>
+                                            <p todo='nav'>{message}</p>
                                             <p className="groupName" todo='nav'>{groupName}</p>
                                         </div>
                                         <span className="pointer" todo='delete'>X</span>
                                     </div>
                                 ) : (
                                     <div className="unread" todo='noNav'>
-                                        <p>{message}</p>
+                                        <p todo='noNav'>{message}</p>
                                         <span className="pointer" todo='delete'>X</span>
                                     </div>
                                 )}
