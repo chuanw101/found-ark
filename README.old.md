@@ -11,6 +11,7 @@
   - [Technologies](#technologies)
   - [Description](#description)
   - [Contributors](#contributors)
+  - [Presentation](#presentation)
   - [User Story](#user-story)
   - [Deployed Link](#deployed-link)
   - [Screenshots](#screenshots)
@@ -44,6 +45,10 @@ Found Ark is a web application that users can use to find and create groups for 
 [Chuan Wang - Git Administrator](https://github.com/chuanw101)
 <br>
 [Hannah Callison - Project Team Member](https://github.com/hannahcallison)
+
+## Presentation
+
+[Project 3 Presentation](https://docs.google.com/presentation/d/1NXK11FdoPJut3aMADcWJPN4QUTZq5fXoIUo3dQ_YX0E/edit?usp=sharing)
 
 ## User Story
 
