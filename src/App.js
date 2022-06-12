@@ -38,7 +38,7 @@ function App() {
     const [newNoti, setNewNoti] = useState(null);
     const [socket, setSocket] = useState(null);
     const [loginError, setLogInError] = useState(false)
-    const [nameTaken, setNameTaken]= useState(false)
+    const [nameTaken, setNameTaken] = useState(false)
 
     const getAllNotis = async (receiver_id) => {
         try {
@@ -109,9 +109,9 @@ function App() {
             setBackground('bgSky');
         } else if (path === '/profile') {
             setBackground('bgGiant');
-        } else if(path === '/404'){
+        } else if (path === '/404') {
             setBackground('bgGiant')
-        } else if(path === '/FAQ'){
+        } else if (path === '/FAQ') {
             setBackground('bgSky')
         };
     };
@@ -140,7 +140,7 @@ function App() {
             let offsetString = '';
             if (offset < 0) {
                 offsetString += '-';
-                offset = offset*-1;
+                offset = offset * -1;
             } else {
                 offsetString += '+';
             }
@@ -208,9 +208,9 @@ function App() {
 
     return (
         <div className={"App " + background}>
-            <Header user={user} logout={logout} notis={notis} setNotis={setNotis}/>
+            <Header user={user} logout={logout} notis={notis} setNotis={setNotis} />
             <Routes>
-                <Route path="*" element={<Error/>}/>
+                <Route path="*" element={<Error />} />
                 <Route path="/" element={<Groups user={user} />} />
                 <Route path="creategroup" element={<CreateGroup user={user} />} />
                 <Route path="mygroups" element={<MyGroups user={user} />} />
@@ -218,7 +218,7 @@ function App() {
                 <Route path="login" element={<Login handleLoginSubmit={handleLoginSubmit} loginError={loginError} />} />
                 <Route path="signup" element={<SignUp handleSignupSubmit={handleSignupSubmit} nameTaken={nameTaken} />} />
                 <Route path="profile" element={<Profile user={user} />} />
-                <Route path="faq" element={<FAQ/>}/>
+                <Route path="faq" element={<FAQ />} />
             </Routes>
             <Footer />
         </div>

@@ -190,7 +190,7 @@ function AddCharacter() {
                     {searchStatus && !jsonData ?
                         <div className="leaderboardLink">
                             <h3>Import Character from Lost Ark Meta</h3>
-                            <p>Follow the instructions below:</p>
+                            <p>Follow the instructions below then come back:</p>
                             <a href={`https://lostark.meta-game.gg/armory?character=${charName}`} target="_blank" rel="noreferrer">Link to Instructions</a>
                             <p className="orDivider">OR</p>
                             <p>Enter your character information manually.</p>

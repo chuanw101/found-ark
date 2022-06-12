@@ -24,6 +24,8 @@ function EditInfo({ user }) {
     //     getAllChars();
     // }, []);
 
+    console.log(user)
+
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { name, value } = e.target;

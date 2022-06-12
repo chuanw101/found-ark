@@ -60,6 +60,7 @@ function DiscordHelpModal({ setOpenModal, setGroup, group }) {
                             <li className="subTitle">Before Embedding Discord Channel:</li>
                             <li>Add WidgetBot to your Discord server using <a href='https://add.widgetbot.io/' target='_blank' rel='noopener noreferer'>this link</a>.</li>
                             <li>Type '/setup' in your Discord channel to get started.</li>
+                            <li>Type '/html-embed' after setup to get the Server and Channel ID.</li>
                             <br></br>
                             <li className="subTitle">After WidgetBot Setup:</li>
                         </ul>
@@ -67,9 +68,9 @@ function DiscordHelpModal({ setOpenModal, setGroup, group }) {
                     <div className="footerDis">
                         <label htmlFor="discordLink">Discord Link</label>
                         <input type="text" placeholder="https://discord.gg/aaaa" name="discordLink" value={link} onChange={handleInputChange} />
-                        <label className="userInput" htmlFor="discordServer">Discord Server</label>
+                        <label className="userInput" htmlFor="discordServer">Discord Server ID</label>
                         <input type="text" placeholder="983439059089240064" name="discordServer" value={server} onChange={handleInputChange} />
-                        <label className="userInput" htmlFor="discordChannel">Discord Channel</label>
+                        <label className="userInput" htmlFor="discordChannel">Discord Channel ID</label>
                         <input type="text" placeholder="983439059542233140" name="discordChannel" value={channel} onChange={handleInputChange} />
                         <div className="footer">
                             <button onClick={() => setOpenModal(false)} className="cancelBtn">Cancel</button>
