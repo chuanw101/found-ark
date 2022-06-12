@@ -1,14 +1,27 @@
 footer {
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
-   width: 100%;
+   width: 800px;
+   max-width: 100%;
+   text-align: center;
    padding: var(--large);
    margin: 0px auto;
 }
 
 footer p:hover{
    cursor: pointer;
+}
+
+.FAQLink {
+    color: var(--accent);
+    margin-bottom: var(--small);
+}
+
+.disclaimer {
+    font-size: 0.8em;
+    opacity: 0.75;
 }
 
 /* large screens */
