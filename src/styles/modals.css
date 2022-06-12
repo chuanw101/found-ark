@@ -15,7 +15,7 @@
 
 .modalContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     height: fit-content;
     max-height: 90vh;
     max-width: 90vw;
@@ -120,10 +120,41 @@
 }
 
 /* large screens */
+@media screen and (max-width: 1300px) {
+
+    .editCharacterSection {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .editCharacterForm {
+        display: flex;
+        width: 100%;
+    }
+
+    .autoFillForm {
+        height: 100%;
+        margin-right: var(--small);
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+    
+    .manualForm {
+        margin-top: 0;
+        margin-left: var(--small);
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+
+}
+
+/* large screens */
 @media screen and (max-width: 1200px) {}
 
 /* small screens */
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+
+}
 
 /* tablets */
 @media screen and (max-width: 768px) {
@@ -132,6 +163,19 @@
         max-height: 95vh;
         width: 100%;
         padding: var(--small);
+    }
+
+    .editCharacterForm {
+        flex-direction: column;
+    }
+
+    .autoFillForm {
+        margin-right: 0;
+    }
+    
+    .manualForm {
+        margin-top: var(--medium);
+        margin-left: 0;
     }
 
 }

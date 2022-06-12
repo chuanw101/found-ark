@@ -15,6 +15,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     transition: all 0.5s ease;
+    z-index: 49;
 }
 
 .notifications::-webkit-scrollbar {
@@ -101,13 +102,13 @@
 .mobileNotiHeader {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    padding: 10px 3px var(--small) 3px;
+    align-items: center;
+    padding: 10px 6px var(--small) 6px;
 }
 
 .closeNotiWindow {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 2em;
+    font-size: 1.6em;
 }
 
 .noNotisMsg {

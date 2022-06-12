@@ -101,7 +101,7 @@ function EditCharModal({ setOpenModal, char }) {
 
         <div className="modalBackground" onClick={() => setOpenModal(false)}>
 
-            <div className="modalContainer" onClick={e => e.stopPropagation()}>
+            <div className="modalContainer mobileExpand" onClick={e => e.stopPropagation()}>
 
                 <div className="title">
                     <h1>Edit Character</h1>
