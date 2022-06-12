@@ -5,11 +5,12 @@
 .FAQ{
     width: 100%;
     text-align: left;
-    margin-left: var(--medium);
+    margin: var(--medium);
 }
 
 .FAQMain{
-    width: 50%;
+    width: 800px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,6 +18,10 @@
     background: var(--dark75);
     border-radius: var(--tiny);
     padding: var(--medium);
+}
+
+.FAQMain h1 {
+    margin-bottom: 0;
 }
 
 .FAQ .faqLink {
@@ -27,8 +32,21 @@
     font-weight: bold;
 }
 
-@media screen and (max-width: 1024px) {
-    .FAQMain{
-        width: 80%;
-    }
+/* large screens */
+@media screen and (max-width: 1200px) {
 }
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+    .FAQMain {
+        padding: var(--medium);
+    }
+
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

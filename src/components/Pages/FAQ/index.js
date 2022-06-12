@@ -6,7 +6,6 @@ function FAQ() {
         <div className='page'>
             <div className="FAQMain">
 
-               
                 <h1>FAQ</h1>
                 <div className='FAQ'>
                     <h4>Why can't I search for my character?</h4>

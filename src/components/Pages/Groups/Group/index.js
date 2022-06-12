@@ -299,7 +299,7 @@ function Group({ user, sendNoti, setBackground }) {
             <div className="groupBanner">
                 <div className="groupHeadline">
                     <div className="groupTitle">
-                        <h1>{group?.group_name}</h1>
+                        <h1 className="groupTitleHeading">{group?.group_name}</h1>
                         <p>{group?.description}</p>
                         <p>{formatTime(group?.time)}</p>
 

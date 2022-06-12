@@ -110,6 +110,13 @@
     font-size: 2em;
 }
 
+.noNotisMsg {
+    display: flex;
+    padding: var(--medium);
+    color: var(--light);
+    font-size: 0.8em;
+}
+
 /* large screens */
 @media screen and (max-width: 1200px) {}
 

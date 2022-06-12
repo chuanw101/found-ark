@@ -71,8 +71,8 @@ function Profile({ user }) {
 
                         <div className="allMyCharacters">
 
-                            {allChars.map(char =>
-                                <div key={char.id} className="myCharacterCard">
+                            {allChars.map((char, index) =>
+                                <div key={char.id} className="myCharacterCard" style={{animation: `fade-up 0.5s both ${(index / 4) + 1.5}s`}}>
                                     <CharacterDetails char={char} editChar={true} setCharModalOpen={setCharModalOpen} setSelectedChar={setSelectedChar}/>
                                 </div>
                             )}

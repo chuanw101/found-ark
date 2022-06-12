@@ -88,6 +88,10 @@ function AllGroups({ user, activeTags }) {
         return (moment(time).format('dddd h:mm a'))
     }
 
+    const styles = {
+        animation: `fade-in 1s both 1s`
+    }
+
     return (
 
         <div className="darkContainer">
@@ -100,7 +104,7 @@ function AllGroups({ user, activeTags }) {
                         group.id % 4 === 0 ? 'groupPreview bgTree' :
                             group.id % 3 === 0 ? 'groupPreview bgGiant' :
                                 group.id % 2 === 0 ? 'groupPreview bgCity' : 'groupPreview bgSky'
-                    } onClick={handleGroupClick}>
+                    } onClick={handleGroupClick} style={{animation: `fade-up 0.5s both ${(group.id / 4) + 0.75}s`}}>
 
                         <div className="groupPreviewColumnLeft">
 
