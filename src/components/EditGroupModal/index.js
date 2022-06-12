@@ -197,7 +197,7 @@ function EditGroupModal({ setOpenModal, setGroup, group }) {
                         <label className="userInput" htmlFor="description">Description</label>
                         <input type="text" placeholder="Description" name="description" value={description} onChange={handleInputChange} required />
                         <label className="userInput" htmlFor="dayofweek">Day</label>
-                        <select name="dayofweek" required onChange={handleInputChange}>
+                        <select name="dayofweek" value={day} required onChange={handleInputChange}>
                             <option value="2022-06-06">Monday</option>
                             <option value="2022-06-07">Tuesday</option>
                             <option value="2022-06-08">Wednesday</option>

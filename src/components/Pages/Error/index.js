@@ -4,10 +4,10 @@ function Error() {
 
     return (
         <div className="page login">
-            <div className="darkContainerWrapped">
+            <div className="darkContainerWrapped FourContainer">
 
-                <h1>404 Error!</h1>
-                <div>
+                <h1 className="FourErr">ERROR 404</h1>
+                <div className="FourErrMsg">
                     <p>Ark Not Found!</p>
                 </div>
 

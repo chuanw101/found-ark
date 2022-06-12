@@ -75,14 +75,14 @@
 
     .autoFillForm {
         height: 100%;
-        margin-right: var(--small);
         max-width: 100% !important;
         min-width: 0 !important;
+        margin: 0px auto;
     }
     
     .manualForm {
         margin-top: 0;
-        margin-left: var(--small);
+        margin-left: var(--medium);
         max-width: 100% !important;
         min-width: 0 !important;
     }
@@ -102,14 +102,9 @@
     .addCharacterForm {
         flex-direction: column;
     }
-
-    .autoFillForm {
-        margin-right: 0;
-    }
     
     .manualForm {
-        margin-top: var(--medium);
-        margin-left: 0;
+        margin: var(--medium) auto 0 auto;
     }
 
 }

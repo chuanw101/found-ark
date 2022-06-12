@@ -19,7 +19,7 @@ function CreateGroup(props) {
     const [timeZone, setTimeZone] = useState("(GMT+00:00) Greenwich Mean Time");
     const [time, setTime] = useState("");
     const [newTag, setTag] = useState("");
-    const [tags, addNewTag] = useState(["valtan", "maps", "vykas", "argos"]);
+    const [tags, addNewTag] = useState([]);
 
     // define token
     const token = localStorage.getItem('foundArkJwt');

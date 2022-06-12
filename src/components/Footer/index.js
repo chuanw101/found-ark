@@ -12,7 +12,8 @@ function Footer() {
     return (
         <footer>
 
-            <p onClick={footerOnClick}>Frequently Asked Questions</p>
+            <p className="FAQLink" onClick={footerOnClick}>FAQ</p>
+            <p className="disclaimer">FoundArk isn't endorsed by Amazon Games or Smilegate and doesn't reflect the views or opinions of Amazon Games, Smilegate or anyone officially involved in producing or managing Lost Ark.</p>
 
         </footer>
     );

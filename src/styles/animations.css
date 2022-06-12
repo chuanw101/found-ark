@@ -67,3 +67,46 @@
     }
 
 }
+
+.App {
+    animation: fade-in 0.5s forwards;
+}
+
+.tabHeader,
+.groupBanner,
+.FAQMain,
+.FourContainer {
+    animation: fade-in 0.5s both 0.25s !important;
+}
+
+.tabs,
+.searchTagsArea,
+.groupTitleHeading,
+.FAQMain h1,
+.FourErr {
+    animation: fade-up 0.5s both 0.5s !important;
+}
+
+.groupTitle p,
+.groupDetails,
+.FAQ,
+.FourErrMsg {
+    animation: fade-up 0.5s both 0.75s;
+}
+
+.darkContainer,
+.darkContainerWrapped,
+.groupContainer,
+.FourContainer img {
+    animation: fade-in 0.5s both 1s;
+}
+
+h1 {
+    animation: fade-up 0.5s both 1.25s;
+}
+
+form,
+.groupBody {
+    animation: fade-up 0.5s both 1.5s;
+}
+
