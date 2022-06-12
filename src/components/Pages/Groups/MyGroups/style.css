@@ -1,6 +1,14 @@
 .myGroupsCharName {
-    margin: var(--medium) 0 var(--small) 0;
+    margin: var(--huge) 0 var(--small) 0;
     text-transform: capitalize;
+}
+
+.myGroupsCharName:first-of-type {
+    margin: var(--large) 0 var(--small) 0;
+}
+
+.noGroupsMsg:last-child {
+    margin-bottom: var(--huge);
 }
 
 /* large screens */

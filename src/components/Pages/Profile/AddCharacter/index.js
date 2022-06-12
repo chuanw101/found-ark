@@ -123,7 +123,7 @@ function AddCharacter() {
 
     return (
 
-        <div className="darkContainerWrapped">
+        <div className="darkContainerWrapped mobileExpand">
 
             <h1>Add Character</h1>
 
@@ -189,9 +189,10 @@ function AddCharacter() {
 
                     {searchStatus && !jsonData ?
                         <div className="leaderboardLink">
-                            <h3>Import Character from Lost Ark Meta</h3>
-                            <p>Follow the instructions below then come back:</p>
-                            <a href={`https://lostark.meta-game.gg/armory?character=${charName}`} target="_blank" rel="noreferrer">Link to Instructions</a>
+                            <a href={`https://lostark.meta-game.gg/armory?character=${charName}`} target="_blank" rel="noreferrer">
+                                <p>Follow these instructions to</p>
+                                <h3>Import Character from {window.innerWidth < 480 && <br></br>} Lost Ark Meta</h3>
+                            </a>
                             <p className="orDivider">OR</p>
                             <p>Enter your character information manually.</p>
                         </div>

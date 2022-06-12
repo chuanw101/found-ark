@@ -1,51 +1,193 @@
 .notifications {
-   display: none;
-   flex-direction: column;
-   position: absolute;
-   background: var(--dark75);
-   box-shadow: var(--shadow);
-   transform: translateX(-65px);
-   width: 300px;
-   max-height: 250px;
-   overflow-y: scroll;
-   -ms-overflow-style: none;
-   scrollbar-width: none;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background: var(--dark75);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    box-shadow: 0px 0px 30px var(--dark75);
+    border: 1px solid var(--accent);
+    border-radius: var(--tiny);
+    transform: translateX(-110px);
+    width: 350px;
+    max-height: 400px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    transition: all 0.5s ease;
 }
 
 .notifications::-webkit-scrollbar {
-   display: none;
+    display: none;
 }
 
 .notifications:hover {
-   display: flex;
+    display: flex;
+    transition: all 0.5s ease;
 }
 
 .notificationItem {
-   user-select: none;
-   font-size: 0.8em;
+    color: var(--light);
+    width: 100%;
+    user-select: none;
+    font-size: 0.8em;
+}
+
+.notificationItem:first-of-type {
+    border-top: none;
+    margin-top: 0;
 }
 
 .notificationItem:last-of-type {
-   margin-bottom: 0;
+    margin-bottom: 0;
+}
+
+.notificationItem::after {
+    content: '';
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    width: 95%;
+    height: 1px;
+    background-color: var(--light50);
+}
+
+.notiBody {
+    display: flex;
+    flex-direction: column;
 }
 
 .unread {
-   color: white;
-   cursor: pointer;
-   background-color: var(--light25);
-   padding: var(--small);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    background: var(--light25);
+    padding: 20px var(--small);
+    transition: all 0.2s ease;
 }
 
 .read {
-   cursor: pointer;
-   padding: var(--small);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: var(--medium);
+    transition: all 0.2s ease;
+}
+
+.unread:hover,
+.read:hover {
+    background: var(--light10);
 }
 
 .groupName {
-   color: var(--accent);
-   cursor: pointer;
+    color: var(--accent);
+    cursor: pointer;
 }
 
 .pointer {
-   cursor: pointer;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    color: var(--gray);
+    transition: all 0.2s ease;
+}
+
+.pointer:hover {
+    color: var(--red);
+}
+
+.mobileNotiHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px 3px var(--small) 3px;
+}
+
+.closeNotiWindow {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2em;
+}
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+    .notifications {
+        display: flex;
+        transform: translateX(0px);
+        border: none;
+        border-radius: 0px;
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: var(--small) var(--medium);
+        z-index: 99;
+    }
+
+    .notificationItem {
+        color: var(--light);
+        width: 100%;
+        user-select: none;
+        font-size: 1.2em;
+        padding: var(--tiny) 0;
+    }
+    
+    .notificationItem::after {
+        display: none;
+    }
+
+    .unread {
+        padding: var(--medium);
+        border-radius: var(--tiny);
+    }
+    
+    .read {
+        padding: var(--medium);
+        border-radius: var(--tiny);
+    }
+
+}
+
+/* phones */
+@media screen and (max-width: 480px) {
+
+    .notifications {
+        padding: var(--small);
+    }
+
+    .notificationItem {
+        font-size: 0.9em;
+        padding: var(--tiny) 0;
+    }
+    
+    .notificationItem::after {
+        display: none;
+    }
+
+    .unread {
+        padding: 20px var(--small);
+    }
+    
+    .read {
+        padding: var(--small);
+    }
+
+    .mobileNotiHeader {
+        padding: 8px 18px;
+    }
+
+    .closeNotiWindow {
+        font-size: 1.8em;
+    }
+
 }
