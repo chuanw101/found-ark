@@ -94,7 +94,7 @@ function AllGroups({ user, activeTags }) {
 
     return (
 
-        <div className="darkContainer pushBack">
+        <div className="darkContainer">
             <h1>All Groups</h1>
 
             {allGroups.filter(group => group?.show).map((group, index) => {
