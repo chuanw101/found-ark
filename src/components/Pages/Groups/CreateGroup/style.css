@@ -1,0 +1,110 @@
+.createGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0px;
+}
+
+.createGroupColumn {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: var(--small);
+}
+
+.formItem {
+    padding-top: var(--small);
+}
+
+.formItem:first-of-type {
+    padding-top: 0px;
+}
+
+.tagInput {
+    display: flex;
+}
+
+#tags {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: var(--tiny);
+    box-sizing: border-box;
+    margin: var(--tiny) 0px var(--small) 0px;
+}
+
+#tagBtn {
+    min-width: fit-content;
+    margin: var(--tiny) 0px var(--small) var(--small);
+}
+
+.chosenTags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--small);
+}
+
+.chosenTags p {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    color: var(--dark);
+    background-color: var(--light90);
+    border-radius: 5px;
+    user-select: none;
+    line-height: 1;
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0px;
+}
+
+.chosenTags p:hover {
+    cursor: pointer;
+}
+
+/* remove tag */
+.chosenTags p:after {
+    transition: all 0.3s ease;
+    content: "✕";
+    margin-left: 5px;
+    color: var(--dark50);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.chosenTags p:hover:after {
+    color: var(--dark);
+}
+
+.createGroupSubmitBtn {
+    justify-self: flex-end;
+    margin-top: var(--small);
+}
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {
+
+}
+
+    /* tablets */
+    @media screen and (max-width: 768px) {}
+
+    /* phones */
+    @media screen and (max-width: 480px) {
+        .createGroup {
+            flex-direction: column;
+        }
+
+        .createGroupColumn {
+            width: 100%;
+        }
+
+        .createGroupColumn:last-of-type {
+            padding-top: 0;
+        }
+    }

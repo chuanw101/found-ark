@@ -1,0 +1,41 @@
+footer {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 800px;
+   max-width: 100%;
+   text-align: center;
+   padding: var(--large);
+   margin: 0px auto;
+}
+
+footer p:hover{
+   cursor: pointer;
+}
+
+.FAQLink {
+    color: var(--accent);
+    margin-bottom: var(--small);
+}
+
+.disclaimer {
+    font-size: 0.8em;
+    opacity: 0.75;
+}
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    footer {
+        padding: var(--medium);
+     }
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

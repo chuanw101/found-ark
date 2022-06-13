@@ -1,0 +1,113 @@
+.addCharacterSection {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.autoFillForm {
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.manualForm {
+    width: 100%;
+    margin-top: var(--medium);
+    display: flex;
+    align-items: center;
+}
+
+.charDisplay {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.leaderboardLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 228px;
+    padding: var(--small);
+    margin-left: var(--medium);
+}
+
+.orDivider {
+    line-height: 2.5;
+}
+
+.characterPreview {
+    width: 100%;
+    padding-left: var(--medium);
+}
+
+.charSpecsCont {
+    width: 100%;
+}
+
+/* large screens */
+@media screen and (max-width: 1300px) {
+
+    .mobileExpand {
+        width: 100%;
+    }
+
+    .addCharacterSection {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .leaderboardLink {
+        margin-left: 0;
+    }
+
+    .characterPreview {
+        padding-left: 0;
+        margin-bottom: var(--medium);
+    }
+
+    .addCharacterForm {
+        display: flex;
+        width: 100%;
+    }
+
+    .autoFillForm {
+        height: 100%;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin: 0px auto;
+    }
+    
+    .manualForm {
+        margin-top: 0;
+        margin-left: var(--medium);
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+
+}
+
+/* small screens */
+@media screen and (max-width: 1024px) {
+
+
+
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+    .addCharacterForm {
+        flex-direction: column;
+    }
+    
+    .manualForm {
+        margin: var(--medium) auto 0 auto;
+    }
+
+}
+
+/* phones */
+@media screen and (max-width: 480px) {}

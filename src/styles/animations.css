@@ -1,0 +1,113 @@
+@keyframes fade-in {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+@keyframes fade-up {
+
+    from {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+
+}
+
+/* for character details */
+@keyframes collapse {
+
+    from {
+        height: 450px;
+    }
+
+    to {
+        height: 100%;
+    }
+
+}
+
+/* for refresh icon */
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+
+@keyframes stretch {
+
+    from {
+        width: 50px;
+    }
+
+    50% {
+        width: 60px;
+    }
+
+    to {
+        width: 50px;
+    }
+
+}
+
+.App {
+    animation: fade-in 0.5s forwards;
+}
+
+.tabHeader,
+.groupBanner,
+.FAQMain,
+.FourContainer {
+    animation: fade-in 0.5s both 0.25s !important;
+}
+
+.tabs,
+.searchTagsArea,
+.groupTitleHeading,
+.FAQMain h1,
+.FourErr {
+    animation: fade-up 0.5s both 0.5s !important;
+}
+
+.groupTitle p,
+.groupDetails,
+.FAQ,
+.FourErrMsg {
+    animation: fade-up 0.5s both 0.75s;
+}
+
+.darkContainer,
+.darkContainerWrapped,
+.groupContainer,
+.FourContainer img {
+    animation: fade-in 0.5s both 1s;
+}
+
+h1 {
+    animation: fade-up 0.5s both 1.25s;
+}
+
+form,
+.groupBody,
+.myGroupsCharName {
+    animation: fade-up 0.5s both 1.5s;
+}
+

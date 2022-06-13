@@ -1,0 +1,50 @@
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navItem {
+    cursor: pointer;
+    margin-right: var(--medium);
+}
+
+.navItem:last-of-type {
+    margin-right: 0;
+}
+
+.notificationIcon {
+    width: 30px;
+    padding-bottom: var(--tiny);
+}
+
+.notificationAlert {
+    border-radius: 100%;
+    background: var(--red);
+    position: absolute;
+    transform: translate(-12px, 3px);
+    width: 10px;
+    height: 10px;
+}
+
+.navItem:hover .notifications {
+    display: flex;
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+    .navigation {
+        margin-top: var(--medium);
+    }
+
+    .navItem {
+        font-size: 16px;
+    }
+
+    #notIcon {
+        position: absolute;
+        top: 30px;
+        right: 0px;
+    }
+
+}

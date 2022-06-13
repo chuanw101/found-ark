@@ -1,0 +1,83 @@
+.groupPreview {
+    display: flex;
+    justify-content: space-between;
+    border-radius: var(--tiny);
+    background-attachment: local;
+    height: 250px;
+    width: 100%;
+    padding: var(--medium);
+    margin-bottom: var(--medium);
+}
+
+.groupMemDis {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: var(--small);
+    max-width: 100%;
+}
+
+.groupMemDis p {
+    margin-right: var(--small);
+}
+
+.groupPreview:hover {
+    cursor: pointer;
+}
+
+.groupPreview:last-of-type {
+    margin-bottom: 0;
+}
+
+.groupPreviewColumnLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: fit-content;
+    margin-right: var(--small);
+}
+
+.groupPreviewColumnRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    width: fit-content;
+}
+
+.groupTagsPreview {
+    display: flex;
+    flex-direction: column;
+}
+
+.previewApplyBtn {
+    width: 150px;
+    margin: auto 0px 0px 0px
+}
+
+
+/* large screens */
+@media screen and (max-width: 1200px) {}
+
+/* small screens */
+@media screen and (max-width: 1024px) {}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+    .groupPreview {
+        margin-bottom: var(--small);
+        padding: var(--small);
+    }
+
+}
+
+/* phones */
+@media screen and (max-width: 480px) {
+
+    .previewApplyBtn {
+        width: fit-content;
+        min-width: 110px;
+    }
+
+}

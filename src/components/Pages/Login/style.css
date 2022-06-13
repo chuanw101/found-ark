@@ -1,0 +1,11 @@
+.loginErr {
+    padding-bottom: 15px;
+    transition: all .2s ease;
+}
+
+/* phones */
+@media screen and (max-width: 480px) {
+    .loginErr {
+        padding-bottom: 5px;
+    }
+}

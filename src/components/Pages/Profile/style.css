@@ -1,0 +1,38 @@
+.welcomeMessage {
+    margin-left: var(--small);
+}
+
+.allMyCharacters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: var(--tiny);
+    width: 100%;
+}
+
+.myCharacterCard {
+    width: 100%;
+    padding: var(--small);
+}
+
+
+@media screen and (min-width: 1400px) {
+
+    .myCharacterCard {
+        width: 50%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .myCharacterCard {
+        padding: 0;
+        margin-bottom: var(--small);
+    }
+
+    .myCharacterCard:last-of-type {
+        margin-bottom: 0;
+    }
+
+}

@@ -1,0 +1,253 @@
+.groupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--medium) 0px 0px var(--medium);
+}
+
+.groupBanner {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--dark75);
+    border-radius: var(--tiny);
+    width: 100%;
+    padding: var(--medium);
+    margin-bottom: var(--medium);
+}
+
+.groupTitle {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.groupTitle h1 {
+    margin: -10px auto 0px 0px;
+}
+
+.groupDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 50%;
+}
+
+.groupDetails p {
+    text-align: right;
+    margin-bottom: var(--small);
+}
+
+.groupDetails p:first-of-type,
+.groupDetails p:last-of-type {
+    margin-bottom: 0;
+}
+
+.groupBody {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.groupHeadline {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.applicationSection {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: var(--medium);
+    margin-right: var(--medium);
+}
+
+.appSectionRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.appSectionBtn {
+    margin: auto 0px auto var(--small);
+}
+
+.appCharSelect {
+    justify-self: flex-end;
+    max-width: 400px;
+    margin-left: auto;
+}
+
+.groupMemberSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.allCharacters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-radius: var(--tiny);
+    width: 100%;
+}
+
+.groupMemberSection h2 {
+    margin-bottom: var(--small);
+}
+
+.groupMemberCard {
+    padding-right: var(--medium);
+    margin-bottom: var(--medium);
+}
+
+.wrapCharCard {
+    min-width: fit-content;
+}
+
+.discordWidget {
+    display: flex;
+    height: fit-content;
+    width: auto;
+    max-width: 50%;
+    border: 1px solid var(--accent);
+    border-radius: var(--tiny);
+    margin-right: var(--medium);
+    margin-bottom: var(--medium);
+}
+
+.discordBtn {
+    height: 50px;
+    width: 250px;
+    margin: var(--tiny);
+}
+
+.defaultSpan {
+    margin-left: var(--tiny);
+}
+
+.groupOwnerBtns {
+    display: flex;
+    margin-top: var(--medium);
+}
+
+.groupOwnerBtns button {
+    width: fit-content;
+    margin-right: var(--small);
+}
+
+.deleteGroupBtn {
+    position: absolute;
+    right: 70px;
+    color: var(--red);
+}
+
+.deleteGroupBtn:hover {
+    background: var(--red);
+    color: var(--light);
+}
+
+#kickMemberBtn {
+    margin-top: var(--tiny);
+}
+
+/* x-large screens */
+@media screen and (max-width: 1460px) {
+
+    .groupBody {
+        flex-direction: column-reverse;
+    }
+
+    .discordWidget {
+        max-width: none;
+    }
+
+}
+
+@media screen and (min-width: 1400px) {
+
+    .groupMemberCard {
+        width: 50%;
+    }
+
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+
+    .groupContainer {
+        padding: var(--small) 0px 0px var(--small);
+    }
+
+    .groupBanner {
+        padding: var(--small);
+        margin-bottom: var(--small);
+    }
+
+    .groupOwnerBtns {
+        margin-top: var(--small);
+    }
+
+    .deleteGroupBtn {
+        right: 10px;
+    }
+
+    .groupMemberCard {
+        width: 100%;
+    }
+
+    .applicationSection {
+        margin-bottom: var(--small);
+        margin-top: var(--small);
+        margin-right: var(--small);
+    }
+
+    .groupMemberSection {
+        margin-top: var(--small);
+    }
+
+    .discordWidget {
+        margin-right: var(--small);
+        margin-bottom: var(--small);
+    }
+
+    .groupMemberCard {
+        padding-right: var(--small);
+        margin-bottom: var(--small);
+    }
+
+    .groupMemberSection h2 {
+        margin-bottom: var(--tiny);
+    }
+
+    .groupDetails {
+        width: 100px;
+        min-width: fit-content;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+    .groupOwnerBtns {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .deleteGroupBtn {
+        right: 0;
+        position: static;
+        margin-bottom: 0;
+    }
+
+    .groupOwnerBtns button {
+        margin-right: auto;
+        margin-bottom: var(--tiny);
+        width: 100%;
+    }
+}
