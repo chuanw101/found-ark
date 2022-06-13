@@ -106,7 +106,8 @@ h1 {
 }
 
 form,
-.groupBody {
+.groupBody,
+.myGroupsCharName {
     animation: fade-up 0.5s both 1.5s;
 }
 

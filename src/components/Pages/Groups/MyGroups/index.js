@@ -88,14 +88,14 @@ function MyGroups({ user, activeTags }) {
                     <React.Fragment key={char.id}>
                         <h2 className="myGroupsCharName" >{char.char_name}'s Groups</h2>
                         {char?.joined?.length ? (<></>) : (<p className="noGroupsMsg">This character doesn't belong to any groups yet!</p>)}
-                        {char?.joined?.filter(group => group.show).map(group => {
+                        {char?.joined?.filter(group => group.show).map((group, index) => {
                             return (
 
                                 <div key={group.id} id={group.id} className={
                                     group.id % 4 === 0 ? 'groupPreview bgTree' :
                                         group.id % 3 === 0 ? 'groupPreview bgGiant' :
                                             group.id % 2 === 0 ? 'groupPreview bgCity' : 'groupPreview bgSky'
-                                } onClick={handleGroupClick}>
+                                } onClick={handleGroupClick} style={{animation: `fade-up 0.5s both ${(index / 4) + 1.75}s`}}>
 
                                     <div className="groupPreviewColumnLeft">
 

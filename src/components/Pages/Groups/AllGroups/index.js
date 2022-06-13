@@ -97,14 +97,14 @@ function AllGroups({ user, activeTags }) {
         <div className="darkContainer">
             <h1>All Groups</h1>
 
-            {allGroups.filter(group => group?.show).map((group) => {
+            {allGroups.filter(group => group?.show).map((group, index) => {
                 return (
 
                     <div key={group.id} id={group.id} className={
                         group.id % 4 === 0 ? 'groupPreview bgTree' :
                             group.id % 3 === 0 ? 'groupPreview bgGiant' :
                                 group.id % 2 === 0 ? 'groupPreview bgCity' : 'groupPreview bgSky'
-                    } onClick={handleGroupClick} style={{animation: `fade-up 0.5s both ${(group.id / 4) + 0.75}s`}}>
+                    } onClick={handleGroupClick} style={{animation: `fade-up 0.5s both ${(index / 4) + 1.5}s`}}>
 
                         <div className="groupPreviewColumnLeft">
 
