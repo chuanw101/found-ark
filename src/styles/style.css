@@ -254,6 +254,7 @@ h1 {
     width: 100%;
     padding: var(--medium);
     margin-bottom: var(--medium);
+    z-index: 9;
 }
 
 .tabs {
