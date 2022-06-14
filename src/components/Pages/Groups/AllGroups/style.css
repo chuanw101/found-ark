@@ -66,8 +66,14 @@
 @media screen and (max-width: 768px) {
 
     .groupPreview {
+        line-height: 1.25;
         margin-bottom: var(--small);
         padding: var(--small);
+    }
+
+    .groupPreview h2 {
+        font-size: 1.25em;
+        margin-bottom: var(--tiny);
     }
 
 }
